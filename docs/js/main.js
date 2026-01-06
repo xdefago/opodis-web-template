@@ -91,23 +91,37 @@ jQuery(document).ready(function( $ ) {
   }
 
   // Smooth scroll for the menu and links with .scrollto classes
+  function scrollWithOffset(hash, animate) {
+    var target = $(hash);
+    if (!target.length) return;
+
+    var header = $('#header');
+    var base = header.length ? header.outerHeight() : 0;
+
+    // Per-section fine tuning to land headings cleanly
+    var extra = 0;
+    if (hash === '#subscribe') {
+      extra = -40; // land tighter on Registration hero
+    } else if (hash === '#committees' || hash === '#dates') {
+      extra = 10;
+    } else {
+      extra = 20;
+    }
+
+    var top_space = Math.max(0, base + extra);
+    var scrollTop = target.offset().top - top_space;
+    if (animate) {
+      $('html, body').animate({ scrollTop: scrollTop }, 600, 'easeInOutExpo');
+    } else {
+      $('html, body').scrollTop(scrollTop);
+    }
+  }
+
   $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      if (target.length) {
-        var top_space = 0;
-
-        if ($('#header').length) {
-          top_space = $('#header').outerHeight();
-
-          if( ! $('#header').hasClass('header-fixed') ) {
-            top_space = top_space - 20;
-          }
-        }
-
-        $('html, body').animate({
-          scrollTop: target.offset().top - top_space
-        }, 1500, 'easeInOutExpo');
+      var hash = this.hash;
+      if (hash && $(hash).length) {
+        scrollWithOffset(hash, true);
 
         if ($(this).parents('.nav-menu').length) {
           $('.nav-menu .menu-active').removeClass('menu-active');
@@ -123,6 +137,14 @@ jQuery(document).ready(function( $ ) {
       }
     }
   });
+
+  // Adjust hash on load (direct link / refresh)
+  if (window.location.hash) {
+    var initialHash = window.location.hash;
+    if ($(initialHash).length) {
+      setTimeout(function() { scrollWithOffset(initialHash, false); }, 10);
+    }
+  }
 
   // Gallery carousel (uses the Owl Carousel library)
   $(".gallery-carousel").owlCarousel({

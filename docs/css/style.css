@@ -152,8 +152,8 @@ h6 {
 --------------------------------------------------------------*/
 
 #header {
-  height: 90px;
-  padding: 5px 0;
+  height: 81px;
+  padding: 4px 0;
   position: fixed;
   left: 0;
   top: 0;
@@ -165,16 +165,33 @@ h6 {
 #header.header-scrolled,
 #header.header-fixed {
   background: rgba(6, 12, 34, 0.98);
-  height: 70px;
-  padding: 10px 0;
+  height: 63px;
+  padding: 8px 0;
   transition: all 0.5s;
 }
 
 /* Force solid header on subpages that lack the hero overlay */
 body.subpage #header {
   background: rgba(6, 12, 34, 0.98);
-  height: 70px;
-  padding: 10px 0;
+  height: 63px;
+  padding: 8px 0;
+}
+
+/* Offset anchors so fixed header does not overlap headings */
+body.subpage #cfp,
+body.subpage #dates,
+body.subpage #accepted,
+#intro,
+#speakers,
+#committees,
+#schedule,
+#venue,
+#travel,
+#subscribe,
+#supporters {
+  /* modest fallback; JS handles final positioning */
+  scroll-margin-top: 100px;
+  padding-top: 40px;
 }
 
 #header #logo h1 {
