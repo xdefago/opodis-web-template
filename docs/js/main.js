@@ -31,7 +31,7 @@ jQuery(document).ready(function( $ ) {
     $('#intro').css({ height: $(window).height() });
   }
 
-  // Initiate the wowjs animation library
+  // Initiate the wowjs animation library (needed for content visibility)
   new WOW().init();
 
   // Initialize Venobox
@@ -98,16 +98,8 @@ jQuery(document).ready(function( $ ) {
     var header = $('#header');
     var base = header.length ? header.outerHeight() : 0;
 
-    // Per-section fine tuning to land headings cleanly
-    var extra = 0;
-    if (hash === '#subscribe') {
-      extra = -40; // land tighter on Registration hero
-    } else if (hash === '#committees' || hash === '#dates') {
-      extra = 10;
-    } else {
-      extra = 20;
-    }
-
+    // Uniform offset so all sections land with same spacing as Registration
+    var extra = -30;
     var top_space = Math.max(0, base + extra);
     var scrollTop = target.offset().top - top_space;
     if (animate) {
