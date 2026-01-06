@@ -828,65 +828,84 @@ body.mobile-nav-active #mobile-nav-toggle {
 # Schedule Section
 --------------------------------------------------------------*/
 
-#schedule {
+#schedule,
+.schedule-section {
   padding: 60px 0 60px 0;
 }
 
-#schedule .nav-tabs {
-  text-align: center;
-  margin: auto;
-  display: block;
-  border-bottom: 0;
-  margin-bottom: 30px;
+#schedule .nav-tabs,
+.schedule-section .nav-tabs {
+  border: 0;
+  margin-bottom: 25px;
+  justify-content: center;
 }
 
-#schedule .nav-tabs li {
-  display: inline-block;
-  margin-bottom: 0;
+#schedule .nav-tabs .nav-item,
+.schedule-section .nav-tabs .nav-item {
+  margin: 0 6px 10px;
 }
 
-#schedule .nav-tabs a {
+#schedule .nav-tabs .nav-link,
+.schedule-section .nav-tabs .nav-link {
   border: none;
   border-radius: 50px;
   font-weight: 600;
   background-color: #0e1b4d;
   color: #fff;
   padding: 10px 100px;
+  min-width: 220px;
+  text-align: center;
+  transition: all ease-in-out 0.2s;
 }
 
-#schedule .nav-tabs a.active {
+#schedule .nav-tabs .nav-link.active,
+.schedule-section .nav-tabs .nav-link.active {
   background-color: #f82249;
   color: #fff;
 }
 
-#schedule .sub-heading {
+#schedule .nav-tabs .nav-link:focus,
+#schedule .nav-tabs .nav-link:hover,
+.schedule-section .nav-tabs .nav-link:focus,
+.schedule-section .nav-tabs .nav-link:hover {
+  background-color: #f82249;
+  color: #fff;
+}
+
+#schedule .sub-heading,
+.schedule-section .sub-heading {
   text-align: center;
   font-size: 18px;
   font-style: italic;
   margin: 0 auto 30px auto;
 }
 
-#schedule .tab-pane {
+#schedule .tab-pane,
+.schedule-section .tab-pane {
   transition: ease-in-out .2s;
 }
 
-#schedule .schedule-item {
+#schedule .schedule-item,
+.schedule-section .schedule-item {
   border-bottom: 1px solid #cad4f6;
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background-color ease-in-out 0.3s;
 }
 
-#schedule .schedule-item:hover {
+#schedule .schedule-item:hover,
+.schedule-section .schedule-item:hover {
   background-color: #fff;
 }
 
-#schedule .schedule-item time {
+#schedule .schedule-item time,
+.schedule-section .schedule-item time {
   padding-bottom: 5px;
   display: inline-block;
 }
 
-#schedule .schedule-item .speaker {
+#schedule .schedule-item .speaker,
+.schedule-section .schedule-item .speaker {
   width: 60px;
   height: 60px;
   overflow: hidden;
@@ -895,7 +914,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin: 0 10px 10px 0;
 }
 
-#schedule .schedule-item .speaker img {
+#schedule .schedule-item .speaker img,
+.schedule-section .schedule-item .speaker img {
   height: 100%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
@@ -903,23 +923,37 @@ body.mobile-nav-active #mobile-nav-toggle {
   transition: all ease-in-out 0.3s;
 }
 
-#schedule .schedule-item h4 {
+#schedule .schedule-item h4,
+.schedule-section .schedule-item h4 {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-#schedule .schedule-item h4 span {
+#schedule .schedule-item h4 span,
+.schedule-section .schedule-item h4 span {
   font-style: italic;
   color: #19328e;
   font-weight: normal;
   font-size: 16px;
 }
 
-#schedule .schedule-item p {
+#schedule .schedule-item p,
+.schedule-section .schedule-item p {
   font-style: italic;
   color: #152b79;
   margin-bottom: 0;
+}
+
+#schedule .schedule-item .session-papers,
+.schedule-section .schedule-item .session-papers {
+  margin: 0;
+  padding-left: 28px;
+}
+
+#schedule .schedule-item .session-papers li,
+.schedule-section .schedule-item .session-papers li {
+  margin-bottom: 6px;
 }
 
 /*--------------------------------------------------------------
@@ -1638,16 +1672,20 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .chair {
-  font-size: smaller;
-  font-weight: normal;
-  font-style: oblique;
   display: inline-block;
+  margin-left: 6px;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: italic;
+  color: #19328e;
 }
 
 .paper-number {
   font-size: smaller;
   font-weight: normal;
   display: inline-block;
+  color: #152b79;
+  margin-right: 4px;
 }
 
 .paper-number::before {

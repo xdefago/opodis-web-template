@@ -138,6 +138,42 @@ jQuery(document).ready(function( $ ) {
     }
   }
 
+  // Auto-select program day tab based on local deadlines (e.g., switch after 22:00 JST)
+  (function selectProgramDay() {
+    var $program = $('#detailed-program');
+    if (!$program.length) return;
+
+    var $tabs = $program.find('.nav-tabs a[data-deadline]');
+    if (!$tabs.length) return;
+
+    var now = Date.now();
+    var chosen = null;
+
+    $tabs.each(function() {
+      var dl = $(this).data('deadline');
+      if (!dl) return;
+      var t = Date.parse(dl);
+      if (isNaN(t)) return;
+      if (t > now && (chosen === null || t < chosen.t)) {
+        chosen = { t: t, el: this };
+      }
+    });
+
+    if (!chosen) {
+      chosen = { el: $tabs.first()[0] };
+    }
+
+    var $targetTab = $(chosen.el);
+    if ($targetTab.hasClass('active')) return;
+
+    $program.find('.nav-tabs a').removeClass('active');
+    $targetTab.addClass('active');
+
+    var targetPane = $targetTab.attr('href');
+    $program.find('.tab-pane').removeClass('show active');
+    $program.find(targetPane).addClass('show active');
+  })();
+
   // Gallery carousel (uses the Owl Carousel library)
   $(".gallery-carousel").owlCarousel({
     autoplay: true,

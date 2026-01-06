@@ -33,6 +33,7 @@ schedule:
   days:
     - id: "day-1"
       label: "Wed Dec 6"
+      deadline_local: "2023-12-06T22:00:00+09:00"
       items:
         - time: "08:30"
           label: "Registration"
@@ -61,15 +62,9 @@ schedule:
           chair: "Junya Nakamura"
           papers:
             - number: 21
-              title: "Fault-tolerant computing with unreliable channels"
-              authors: "A. Pastoriza, G. Chockler, A. Gotsman"
               award: "best paper"
             - number: 19
-              title: "Probable Approximate Coordination"
-              authors: "A. Livshits, Y. Moses"
             - number: 9
-              title: "Byzantine Consensus in Abstract MAC Layer"
-              authors: "L. Tseng, C. Sardina"
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -80,17 +75,9 @@ schedule:
           chair: "Roy Friedman"
           papers:
             - number: 8
-              title: "A Fair and Resilient Decentralized Clock Network for Transaction Ordering."
-              authors: "A. Constantinescu, D. Ghinea, L. Heimbach, Z. Wang, R. Wattenhofer"
             - number: 12
-              title: "Eating sandwiches: Modular and lightweight elimination of transaction reordering attacks."
-              authors: "O. Alpos, I. Amores-Sesar, C. Cachin, M. Yeo"
             - number: 31
-              title: "A Tight Bound on Multiple Spending in Decentralized Cryptocurrencies."
-              authors: "J. Bezerra de Araújo, P. Kuznetsov"
             - number: 23
-              title: "A Holistic Approach for Trustworthy Distributed Systems with WebAssembly and TEEs."
-              authors: "J. Ménétrey, A. Grueter, P. Yuhala, J. Oeftiger, P. Felber, M. Pasin, V. Schiavoni"
         - time: "15:05"
           label: "Coffee break"
           type: "break"
@@ -101,14 +88,8 @@ schedule:
           chair: "Sébastien Tixeuil"
           papers:
             - number: 25
-              title: "Silent Programmable Matter: Coating."
-              authors: "A. Navarra, F. Piselli"
             - number: 5
-              title: "O(log n)-time Uniform Circle Formation for Asynchronous Opaque Luminous Robots."
-              authors: "C. Feletti, C. Mereghetti, B. Palano"
             - number: 28
-              title: "On Asynchrony, Memory, and Communication: Separations and Landscapes."
-              authors: "P. Flocchini, N. Santoro, Y. Sudo, K. Wada"
         - time: "16:40"
           label: "Business Meeting"
           type: "info"
@@ -119,6 +100,7 @@ schedule:
 
     - id: "day-2"
       label: "Thu Dec 7"
+      deadline_local: "2023-12-07T22:00:00+09:00"
       items:
         - time: "08:50"
           label: "Registration"
@@ -144,15 +126,9 @@ schedule:
           chair: "Jennifer L. Welch"
           papers:
             - number: 20
-              title: "Flooding with Absorption: An Efficient Protocol for Heterogeneous Bandits over Complex Networks."
-              authors: "J. Lee, L. Schmid, S. Yun"
               award: "best student paper"
             - number: 4
-              title: "The Synchronization Power of Auditable Registers."
-              authors: "H. Attiya, A. Pozzo, A. Milani, U. Pavloff, A. Rapetti"
             - number: 35
-              title: "Atomic Register Abstractions for Byzantine-Prone Distributed Systems."
-              authors: "V. Kowalski, A. Mostéfaoui, M. Perrin"
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -163,17 +139,9 @@ schedule:
           chair: "Fukuhito Ooshita"
           papers:
             - number: 10
-              title: "Discrete Incremental Voting"
-              authors: "C. Cooper, T. Radzik, T. Shiraga"
             - number: 11
-              title: "On the convergence time in graphical games: a locality-sensitive approach."
-              authors: "J. Hirvonen, L. Schmid, K. Chatterjee, S. Schmid"
             - number: 13
-              title: "Improved Distributed Algorithms for Random Colorings."
-              authors: "C. Carlson, E. Vigoda, D. Frishberg"
             - number: 27
-              title: "On Polynomial Time Local Decision."
-              authors: "E. Aldema Tshuva, R. Oshman"
         - time: "15:05"
           label: "Coffee break"
           type: "break"
@@ -184,17 +152,9 @@ schedule:
           chair: "Achour Mostéfaoui"
           papers:
             - number: 15
-              title: "Nova: Safe Off-Heap Memory Allocation and Reclamation."
-              authors: "R. Fakhoury, A. Braginsky, I. Keidar, Y. Zuriel"
             - number: 17
-              title: "A Wait-Free Deque with Polylogarithmic Step Complexity."
-              authors: "S. Asbell, E. Ruppert"
             - number: 34
-              title: "Sketching the Path to Efficiency: Lightweight Learned Cache Replacement."
-              authors: "R. Shahout, R. Friedman"
             - number: 24
-              title: "Recoverable and Detectable Self-Implementations of Swap."
-              authors: "T. Lehman, H. Attiya, D. Hendler"
         - time: "17:05"
           label: "Move to banquet"
           type: "info"
@@ -206,6 +166,7 @@ schedule:
 
     - id: "day-3"
       label: "Fri Dec 8"
+      deadline_local: "2023-12-08T22:00:00+09:00"
       items:
         - time: "08:50"
           label: "Registration"
@@ -231,14 +192,8 @@ schedule:
           chair: "Toshimitsu Masuzawa"
           papers:
             - number: 7
-              title: "Energy-Constrained Programmable Matter Under Unfair Adversaries."
-              authors: "J. Weber, T. Chhabra, A. Richa, J. Daymude"
             - number: 33
-              title: "Black Hole Search in Dynamic Rings: The Scattered Case."
-              authors: "G. Di Luna, P. Flocchini, G. Prencipe, N. Santoro"
             - number: 18
-              title: "Reliable Broadcast despite Mobile Byzantine Faults."
-              authors: "S. Bonomi, G. Farina, S. Tixeuil"
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -249,17 +204,9 @@ schedule:
           chair: "Gregory Chockler"
           papers:
             - number: 14
-              title: "Fever: Optimal Responsive View Synchronisation."
-              authors: "A. Lewis-Pye, I. Abraham"
             - number: 32
-              title: "Bounds on Worst-Case Responsiveness for Agreement Algorithms."
-              authors: "H. Attiya, J. Welch"
             - number: 29
-              title: "On the Round Complexity of Asynchronous Crusader Agreement."
-              authors: "I. Abraham, N. Ben-David, G. Stern, S. Yandamuri"
             - number: 6
-              title: "Multi-Valued Connected Consensus: A New Perspective on Crusader Agreement and Adopt-Commit."
-              authors: "H. Attiya, J. Welch"
         - time: "15:05"
           label: "Coffee break"
           type: "break"
@@ -270,17 +217,9 @@ schedule:
           chair: "Taisuke Izumi"
           papers:
             - number: 16
-              title: "Improved Deterministic Distributed Maximum Weight Independent Set Approximation in Sparse Graphs."
-              authors: "Y. Gil"
             - number: 22
-              title: "Local Problems in the SUPPORTED Model."
-              authors: "A. Agrawal, J. Augustine, D. Peleg, S. Ramachandran"
             - number: 26
-              title: "Tight Bounds on the Message Complexity of Distributed Tree Verification."
-              authors: "S. Kutten, P. Robinson, M. Tan"
             - number: 30
-              title: "Distributed Partial Coloring via Gradual Rounding."
-              authors: "A. Das, P. Fraigniaud, A. Rosen"
         - time: "17:05"
           label: "Closing"
           type: "plenary"

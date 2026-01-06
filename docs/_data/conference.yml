@@ -15,6 +15,7 @@ hero:
       href: "#subscribe"
 locale:
   timezone_note: "(Anywhere on Earth)"
+  timezone: "Asia/Tokyo"
 contacts:
   - label: "OPODIS 2023 Organizing Team"
     email: "opodis23@coord.c.titech.ac.jp"

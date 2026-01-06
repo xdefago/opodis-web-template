@@ -1,64 +1,96 @@
-- authors: "H. Attiya, A. Pozzo, A. Milani, U. Pavloff, A. Rapetti"
+- number: 4
+  authors: "H. Attiya, A. Pozzo, A. Milani, U. Pavloff, A. Rapetti"
   title: "The Synchronization Power of Auditable Registers"
-- authors: "C. Feletti, C. Mereghetti, B. Palano"
+- number: 5
+  authors: "C. Feletti, C. Mereghetti, B. Palano"
   title: "O(log n)-time Uniform Circle Formation for Asynchronous Opaque Luminous Robots"
-- authors: "H. Attiya, J. Welch"
+- number: 6
+  authors: "H. Attiya, J. Welch"
   title: "Multi-Valued Connected Consensus: A New Perspective on Crusader Agreement and Adopt-Commit"
-- authors: "J. Weber, T. Chhabra, A. Richa, J. Daymude"
+- number: 7
+  authors: "J. Weber, T. Chhabra, A. Richa, J. Daymude"
   title: "Energy-Constrained Programmable Matter Under Unfair Adversaries"
-- authors: "A. Constantinescu, D. Ghinea, L. Heimbach, Z. Wang, R. Wattenhofer"
+- number: 8
+  authors: "A. Constantinescu, D. Ghinea, L. Heimbach, Z. Wang, R. Wattenhofer"
   title: "A Fair and Resilient Decentralized Clock Network for Transaction Ordering"
-- authors: "L. Tseng, C. Sardina"
+- number: 9
+  authors: "L. Tseng, C. Sardina"
   title: "Byzantine Consensus in Abstract MAC Layer"
-- authors: "C. Cooper, T. Radzik, T. Shiraga"
+- number: 10
+  authors: "C. Cooper, T. Radzik, T. Shiraga"
   title: "Discrete Incremental Voting"
-- authors: "J. Hirvonen, L. Schmid, K. Chatterjee, S. Schmid"
+- number: 11
+  authors: "J. Hirvonen, L. Schmid, K. Chatterjee, S. Schmid"
   title: "On the convergence time in graphical games: a locality-sensitive approach"
-- authors: "O. Alpos, I. Amores-Sesar, C. Cachin, M. Yeo"
+- number: 12
+  authors: "O. Alpos, I. Amores-Sesar, C. Cachin, M. Yeo"
   title: "Eating sandwiches: Modular and lightweight elimination of transaction reordering attacks"
-- authors: "C. Carlson, E. Vigoda, D. Frishberg"
+- number: 13
+  authors: "C. Carlson, E. Vigoda, D. Frishberg"
   title: "Improved Distributed Algorithms for Random Colorings"
-- authors: "A. Lewis-Pye, I. Abraham"
+- number: 14
+  authors: "A. Lewis-Pye, I. Abraham"
   title: "Fever: Optimal Responsive View Synchronisation"
-- authors: "R. Fakhoury, A. Braginsky, I. Keidar, Y. Zuriel"
+- number: 15
+  authors: "R. Fakhoury, A. Braginsky, I. Keidar, Y. Zuriel"
   title: "Nova: Safe Off-Heap Memory Allocation and Reclamation"
-- authors: "Y. Gil"
+- number: 16
+  authors: "Y. Gil"
   title: "Improved Deterministic Distributed Maximum Weight Independent Set Approximation in Sparse Graphs"
-- authors: "S. Asbell, E. Ruppert"
+- number: 17
+  authors: "S. Asbell, E. Ruppert"
   title: "A Wait-Free Deque with Polylogarithmic Step Complexity"
-- authors: "S. Bonomi, G. Farina, S. Tixeuil"
+- number: 18
+  authors: "S. Bonomi, G. Farina, S. Tixeuil"
   title: "Reliable Broadcast despite Mobile Byzantine Faults"
-- authors: "A. Livshits, Y. Moses"
+- number: 19
+  authors: "A. Livshits, Y. Moses"
   title: "Probable Approximate Coordination"
-- authors: "J. Lee, L. Schmid, S. Yun"
+- number: 20
+  authors: "J. Lee, L. Schmid, S. Yun"
   title: "Flooding with Absorption: An Efficient Protocol for Heterogeneous Bandits over Complex Networks"
-- authors: "A. Pastoriza, G. Chockler, A. Gotsman"
+- number: 21
+  authors: "A. Pastoriza, G. Chockler, A. Gotsman"
   title: "Fault-tolerant computing with unreliable channels"
-- authors: "A. Agrawal, J. Augustine, D. Peleg, S. Ramachandran"
+- number: 22
+  authors: "A. Agrawal, J. Augustine, D. Peleg, S. Ramachandran"
   title: "Local Problems in the SUPPORTED Model"
-- authors: "J. Ménétrey, A. Grueter, P. Yuhala, J. Oeftiger, P. Felber, M. Pasin, V. Schiavoni"
+- number: 23
+  authors: "J. Ménétrey, A. Grueter, P. Yuhala, J. Oeftiger, P. Felber, M. Pasin, V. Schiavoni"
   title: "A Holistic Approach for Trustworthy Distributed Systems with WebAssembly and TEEs"
-- authors: "T. Lehman, H. Attiya, D. Hendler"
+- number: 24
+  authors: "T. Lehman, H. Attiya, D. Hendler"
   title: "Recoverable and Detectable Self-Implementations of Swap"
-- authors: "A. Navarra, F. Piselli"
+- number: 25
+  authors: "A. Navarra, F. Piselli"
   title: "Silent Programmable Matter: Coating"
-- authors: "S. Kutten, P. Robinson, M. Tan"
+- number: 26
+  authors: "S. Kutten, P. Robinson, M. Tan"
   title: "Tight Bounds on the Message Complexity of Distributed Tree Verification"
-- authors: "E. Aldema Tshuva, R. Oshman"
+- number: 27
+  authors: "E. Aldema Tshuva, R. Oshman"
   title: "Polynomial Time Local Decision"
-- authors: "P. Flocchini, N. Santoro, Y. Sudo, K. Wada"
+- number: 28
+  authors: "P. Flocchini, N. Santoro, Y. Sudo, K. Wada"
   title: "On Asynchrony, Memory, and Communication: Separations and Landscapes"
-- authors: "I. Abraham, N. Ben-David, G. Stern, S. Yandamuri"
+- number: 29
+  authors: "I. Abraham, N. Ben-David, G. Stern, S. Yandamuri"
   title: "On the Round Complexity of Asynchronous Crusader Agreement"
-- authors: "A. Das, P. Fraigniaud, A. Rosen"
+- number: 30
+  authors: "A. Das, P. Fraigniaud, A. Rosen"
   title: "Distributed Partial Coloring via Gradual Rounding"
-- authors: "J. Bezerra de Araújo, P. Kuznetsov"
+- number: 31
+  authors: "J. Bezerra de Araújo, P. Kuznetsov"
   title: "A Tight Bound on Multiple Spending in Decentralized Cryptocurrencies"
-- authors: "H. Attiya, J. Welch"
+- number: 32
+  authors: "H. Attiya, J. Welch"
   title: "Bounds on Worst-Case Responsiveness for Agreement Algorithms"
-- authors: "G. Di Luna, P. Flocchini, G. Prencipe, N. Santoro"
+- number: 33
+  authors: "G. Di Luna, P. Flocchini, G. Prencipe, N. Santoro"
   title: "Black Hole Search in Dynamic Rings: The Scattered Case"
-- authors: "R. Shahout, R. Friedman"
+- number: 34
+  authors: "R. Shahout, R. Friedman"
   title: "Sketching the Path to Efficiency: Lightweight Learned Cache Replacement"
-- authors: "V. Kowalski, A. Mostefaoui, M. Perrin"
+- number: 35
+  authors: "V. Kowalski, A. Mostefaoui, M. Perrin"
   title: "Atomic Register Abstractions for Byzantine-Prone Distributed Systems"
