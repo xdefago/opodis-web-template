@@ -1,0 +1,29 @@
+year: 2023
+edition: 27
+city: "Tokyo"
+country: "Japan"
+dates:
+  start: 2023-12-06
+  end: 2023-12-08
+hero:
+  title: "Conference on Principles of Distributed Systems"
+  subtitle: "6-8 December 2023, Tokyo, Japan"
+  buttons:
+    - label: "About OPODIS 2023"
+      href: "#about"
+    - label: "Register"
+      href: "#subscribe"
+locale:
+  timezone_note: "(Anywhere on Earth)"
+contacts:
+  - label: "OPODIS 2023 Organizing Team"
+    email: "opodis23@coord.c.titech.ac.jp"
+  - label: "OPODIS 2023 Technical Program Chairs"
+    email: "opodis_pc_chairs@coord.c.titech.ac.jp"
+satellite_event:
+  enabled: true
+  name: "MAC 23"
+  description: "The research meeting and school on Distributed Computing by Mobile Robots, aka, Moving and Computing (MAC 23) will be organized as a satellite event of OPODIS during the two days following OPODIS 2023."
+  dates: "December 9/10 (Sat/Sun)"
+  building: "West 8E"
+  link: "/mac23"

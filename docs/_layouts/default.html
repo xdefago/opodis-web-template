@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  {% assign year = site.data.conference.year %}
+  {% assign edition = site.data.conference.edition %}
+  <title>{% if page.title %}{{ page.title }} | OPODIS {{ year }}{% else %}OPODIS {{ year }} - The {{ edition }}th International Conference on Principles of Distributed Systems{% endif %}</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <link href="{{ site.data.site.assets.favicon }}" rel="icon">
+  <link href="{{ site.data.site.assets.apple_touch_icon }}" rel="apple-touch-icon">
+
+  <link href="{{ site.data.site.fonts.google }}" rel="stylesheet">
+
+  {% for css in site.data.site.assets.stylesheets %}
+    <link href="{{ css }}" rel="stylesheet">
+  {% endfor %}
+</head>
+
+{% assign is_home = false %}
+{% if page.url == "/" or page.url == "/index.html" %}
+  {% assign is_home = true %}
+{% endif %}
+<body{% unless is_home %} class="subpage"{% endunless %}>
+  {% include header.html %}
+
+  {{ content }}
+
+  {% include footer.html %}
+
+  {% for script in site.data.site.assets.scripts %}
+    <script src="{{ script }}"></script>
+  {% endfor %}
+</body>
+</html>

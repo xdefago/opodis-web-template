@@ -1,0 +1,44 @@
+{% assign venue = site.data.venue.venue %}
+<section id="venue" class="wow fadeInUp">
+  <div class="container-fluid">
+    <div class="section-header">
+      <h2>Venue</h2>
+      <p>Venue location info</p>
+    </div>
+
+    <div class="row no-gutters"></div>
+
+    <div class="row no-gutters">
+      <div class="col-lg-6 venue-map">
+        <iframe src="{{ venue.map_embed_url }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen></iframe>
+      </div>
+
+      <div class="col-lg-6 venue-info">
+        <div class="row justify-content-center">
+          <div class="col-11 col-lg">
+            {% if venue.campus_map_image %}
+            <img src="{{ venue.campus_map_image }}" alt="" class="img-fluid">
+            {% endif %}
+            {% for paragraph in venue.description %}
+            <p>{{ paragraph }}</p>
+            {% endfor %}
+            <p>&nbsp;</p>
+          </div>
+          {% if venue.practical %}
+          <div class="card mb-5 mb-lg-0">
+            <strong>Practical:</strong>
+            <ul>
+              {% for item in venue.practical %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid venue-gallery-container">
+  </div>
+</section>

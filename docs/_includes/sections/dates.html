@@ -1,0 +1,33 @@
+{% assign dates = site.data.dates %}
+<section id="dates">
+  <div class="container">
+    <div class="section-header">
+      <br>
+      <h2>Important Dates</h2>
+      {% if dates.timezone_label %}
+      <p>(all dates are "<a href="https://time.is/Anywhere_on_Earth">{{ dates.timezone_label }}</a>")</p>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="fa-ul">
+          {% for item in dates.items %}
+          {% assign icon = 'fa-hourglass' %}
+          {% if item.status == 'past' %}{% assign icon = 'fa-check-circle' %}{% endif %}
+          {% if item.status == 'upcoming' %}{% assign icon = 'fa-registered' %}{% endif %}
+          <li><span class="fa-li"><i class="fa {{ icon }}"></i></span>
+            {{ item.label }}:
+            {% if item.original and item.updated %}
+              <i><s>{{ item.original }}</s> {{ item.updated }}</i>
+            {% elsif item.date %}
+              <i>{{ item.date }}</i>
+            {% else %}
+              <i>{{ item.updated | default: item.original }}</i>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

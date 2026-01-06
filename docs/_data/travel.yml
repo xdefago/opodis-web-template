@@ -1,0 +1,9 @@
+by_train: |
+  From within Japan, it is easy to reach Tokyo by shinkansen. Google Maps provides reasonably good advice for connections. Coming from Western Japan, the most convenient is to leave the shinkansen at Shin-Yokohama Station and change to the newly opened Tōkyū Shin-yokohama Line.
+by_plane:
+  - name: "Haneda airport (HND)"
+    description: "Haneda is larger and better connected for local transport (e.g., Keikyū line). Most domestic flights and many flights to Europe and Asia land here."
+  - name: "Narita airport (NRT)"
+    description: "Farther away but served by the Narita Express to Musashi-Kosugi, and Keikyu lines to Shinagawa. Most flights from North America land here."
+hotels: |
+  Tokyo offers a large variety of accommodations for all budgets and preferences. We recommend booking near stops on the Meguro, Oimachi, Ikegami, or Toyoko lines. Convenient areas: Oimachi, Meguro, Jiyugaoka, Musashi-Kosugi, Futako-Tamagawa. Other options: Shibuya, Ebisu, Shinagawa, Gotanda, JR Kamata. Top recommendation: Meguro Station (runs against rush hour and near the banquet venue).

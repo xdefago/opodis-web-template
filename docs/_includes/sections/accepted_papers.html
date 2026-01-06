@@ -1,0 +1,14 @@
+<section id="accepted">
+  <div class="container">
+    <div class="section-header">
+      <br>
+      <h2>Accepted Papers</h2>
+    </div>
+    <ul class="fa-ul">
+      {% for paper in site.data.papers %}
+      <li><span class="fa-li"><i class="fa fa-file"></i></span>{{ paper.authors }}.
+        <span class="title"><strong>{{ paper.title }}</strong></span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

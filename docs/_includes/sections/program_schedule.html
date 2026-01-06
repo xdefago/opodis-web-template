@@ -1,0 +1,67 @@
+{% assign schedule = site.data.program.schedule %}
+{% assign section_id = include.id | default: 'detailed-program' %}
+<section id="{{ section_id }}" class="section-with-bg">
+  <div class="container wow fadeInUp">
+    {% if include.anchor_name %}<a name="{{ include.anchor_name }}" class="name_adjust"></a>{% endif %}
+    <div class="section-header">
+      <h2>{{ include.title | default: 'Detailed Program' }}</h2>
+      {% if include.lead %}<p>{{ include.lead }}</p>{% endif %}
+    </div>
+
+    {% if include.preamble %}
+    <div class="tab-content row justify-content-center">
+      <p>{{ include.preamble }}</p>
+    </div>
+    {% endif %}
+
+    <ul class="nav nav-tabs" role="tablist">
+      {% for day in schedule.days %}
+      <li class="nav-item">
+        <a class="nav-link{% if forloop.first %} active{% endif %}" href="#{{ day.id }}" role="tab" data-toggle="tab">{{ day.label }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="tab-content row justify-content-center">
+      {% for day in schedule.days %}
+      <div role="tabpanel" class="col-lg-9 tab-pane fade{% if forloop.first %} show active{% endif %}" id="{{ day.id }}">
+        {% for item in day.items %}
+        <div class="row schedule-item">
+          <div class="col-md-2"><time>{{ item.time }}</time></div>
+          <div class="col-md-10">
+            {% if item.anchor %}<a name="{{ item.anchor }}" class="name_adjust"></a>{% endif %}
+            {% case item.type %}
+            {% when 'keynote' %}
+              <h4><a href="{{ item.speaker.details_url }}">{{ item.title }}</a>:{% if item.chair %} <div class="chair">(chair: {{ item.chair }})</div>{% endif %}</h4>
+              <h4>{{ item.speaker.name }}, <span>{{ item.speaker.affiliation }}</span>
+              <p><div class="paper-number">{{ item.speaker.paper_number }}</div> {{ item.speaker.talk_title }}</p></h4>
+            {% when 'session' %}
+              <h4>{{ item.title }} {% if item.chair %}<div class="chair">(chair: {{ item.chair }})</div>{% endif %}</h4>
+              <ul class="fa-ul">
+                {% for paper in item.papers %}
+                <li><span class="fa-li"><i class="fa fa-file"></i></span>
+                  {% if paper.award %}<em>[**{{ paper.award }}**]</em><br>{% endif %}
+                  <div class="paper-number">{{ paper.number }}</div>
+                  <strong>{{ paper.title }}</strong>
+                  {{ paper.authors }}
+                </li>
+                {% endfor %}
+              </ul>
+            {% when 'break' %}
+              {{ item.label }}
+            {% when 'registration' %}
+              {{ item.label | default: 'Registration' }}
+            {% when 'social' %}
+              <h4>{{ item.label }}</h4>
+              {% if item.location %}<p>{{ item.location }}{% if item.location_url %} (<a href="{{ item.location_url }}" target="_blank">map</a>){% endif %}</p>{% endif %}
+            {% else %}
+              <h4>{{ item.label | default: item.title }}</h4>
+            {% endcase %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

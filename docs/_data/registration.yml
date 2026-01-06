@@ -1,0 +1,45 @@
+status: "closed"
+link: ""
+notes:
+  - "At least one author of each accepted paper must register (regular) and present on-site."
+categories:
+  - name: "Student"
+    subtitle: "(proof of enrollment required)"
+    prices:
+      early: "JPY 25,000.-"
+      late: "JPY 50,000.-"
+      currency_hint: "(ca.US$170/€160 early)"
+      timezone_note: "dates in Japan timezone"
+    perks:
+      - "Conference attendance"
+      - "Conference Kit"
+      - "Proceedings (electr.)"
+      - "Coffee breaks (6-8 Dec)"
+      - "Welcome reception (5 Dec)"
+      - "Banquet (7 Dec)"
+  - name: "Regular"
+    prices:
+      early: "JPY 75,000.-"
+      late: "JPY 95,000.-"
+      currency_hint: "(ca.US$500/€480 early)"
+      timezone_note: "dates in Japan timezone"
+    perks:
+      - "Conference attendance"
+      - "Conference Kit"
+      - "Proceedings (electr.)"
+      - "Coffee breaks (6-8 Dec)"
+      - "Welcome reception (5 Dec)"
+      - "Banquet (7 Dec)"
+  - name: "Author"
+    prices:
+      early: "JPY 75,000.-"
+      late: "N/A"
+      currency_hint: "(ca.US$500/€480 early)"
+      timezone_note: "dates in Japan timezone"
+    perks:
+      - "Conference attendance"
+      - "Conference Kit"
+      - "Proceedings (electr.)"
+      - "Coffee breaks (6-8 Dec)"
+      - "Welcome reception (5 Dec)"
+      - "Banquet (7 Dec)"

@@ -1,0 +1,81 @@
+<section id="committees">
+  <div class="container">
+    <div class="section-header">
+      <br>
+      <h2>Committees</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Organizing Committee</h2>
+        <ul class="fa-ul">
+          <li>General Chairs:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.organizing.general_chairs %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="fa-ul">
+          <li>Publication Chair:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.organizing.publication_chair %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="fa-ul">
+          <li>Organizing Team:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.organizing.organizing_team %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="fa-ul">
+          <li>Steering Committee:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.steering %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }}){% if person.role %} - {{ person.role }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-6">
+        <h2>Program Committee</h2>
+        <ul class="fa-ul">
+          <li>Program Committee Chairs:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.program_chairs %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="fa-ul">
+          <li>Program Committee:</li>
+          <li>
+            <ul class="fa-ul">
+              {% for person in site.data.committees.program_committee %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

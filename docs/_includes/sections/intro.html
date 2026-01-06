@@ -1,0 +1,20 @@
+{% assign hero = site.data.conference.hero | default: site.data.year.hero %}
+{% assign hero_buttons = hero.buttons | default: site.data.year.hero.buttons %}
+{% assign satellite = site.data.conference.satellite_event %}
+<section id="intro">
+  <div class="intro-container wow fadeIn">
+    <h1 class="mb-4 pb-0">{{ hero.title }}</h1>
+    <p class="mb-4 pb-0">{{ hero.subtitle }}</p>
+    {% if hero_buttons %}
+      {% for button in hero_buttons %}
+        <a href="{{ button.href }}" class="about-btn scrollto">{{ button.label }}</a>
+      {% endfor %}
+    {% endif %}
+    {% if satellite and satellite.enabled %}
+      <div class="satellite-note">
+        <h3>Satellite event: {{ satellite.name }}</h3>
+        <p>{{ satellite.description }}<br>{{ satellite.dates }} - {{ satellite.building }}. <a href="{{ satellite.link }}">Details</a></p>
+      </div>
+    {% endif %}
+  </div>
+</section>

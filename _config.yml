@@ -1,0 +1,12 @@
+title: OPODIS Template
+url: https://xdefago.github.io/opodis-template
+baseurl: ""
+source: docs
+markdown: kramdown
+sass:
+  sass_dir: css
+  style: compressed
+# Keep everything under docs/ as the site root for GitHub Pages
+# Default passthrough of existing assets and HTML
+exclude:
+  - orig

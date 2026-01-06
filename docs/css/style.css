@@ -170,6 +170,13 @@ h6 {
   transition: all 0.5s;
 }
 
+/* Force solid header on subpages that lack the hero overlay */
+body.subpage #header {
+  background: rgba(6, 12, 34, 0.98);
+  height: 70px;
+  padding: 10px 0;
+}
+
 #header #logo h1 {
   font-size: 36px;
   margin: 0;
@@ -277,6 +284,8 @@ h6 {
   font-weight: 600;
   font-size: 14px;
   outline: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .nav-menu .menu-active a,
@@ -915,7 +924,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #venue .venue-info {
-  background: url("../img/venue-info-bg.jpg") top center no-repeat;
+  background: url("../img/subscribe-bg.jpg") top center no-repeat;
   background-size: cover;
   position: relative;
   padding-top: 60px;
@@ -1602,6 +1611,35 @@ body.mobile-nav-active #mobile-nav-toggle {
     background-attachment: fixed;
   }
 
+
+/* Program page helpers (moved from inline style) */
+.name_adjust {
+  display: block;
+  padding-top: 100px;
+  margin-top: -100px;
+  font-weight: bold;
+}
+
+.chair {
+  font-size: smaller;
+  font-weight: normal;
+  font-style: oblique;
+  display: inline-block;
+}
+
+.paper-number {
+  font-size: smaller;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.paper-number::before {
+  content: "[#";
+}
+
+.paper-number::after {
+  content: "]";
+}
   #subscribe {
     background-attachment: fixed;
   }

@@ -1,0 +1,51 @@
+{% assign reg = site.data.registration %}
+<section id="subscribe">
+  <div class="container wow fadeInUp">
+    <div class="section-header">
+      <h2>Registration</h2>
+      <p>The conference has ended and registration is now {{ reg.status }}. Details below are left for reference:</p>
+      {% if reg.notes %}
+      <div class="row">
+        <div class="col">
+          <div class="card mb-5 mb-lg-0">
+            <ol>
+              <li>Complete OPODIS'23 registration form (Google form; closed)</li>
+              <li>Open payment link (Stripe) provided on Google form (2nd page)</li>
+              <li>Pay via stripe link</li>
+              <li>Submit google form</li>
+              <li>Contact us for any other requests: ...</li>
+              <li>Proceed to <a href="/mac23/MAC-registration.html">register to MAC'23</a> (if applicable)</li>
+            </ol>
+            <small><em>for MAC-only registrations skip the above steps and read instructions on the <a href="/mac23/MAC-registration.html">MAC registration page</a></em></small>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <p>Attendees requiring an invitation letter for obtaining a <strong>visa</strong> may request one <strong>after</strong> completing their registration (...).</p>
+    </div>
+
+    <div class="row">
+      {% for cat in reg.categories %}
+      <div class="col">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">{{ cat.name }}</h5>
+            {% if cat.subtitle %}<h6 class="card-price text-center"><it><small>{{ cat.subtitle }}</small></it></h6>{% endif %}
+            {% if cat.prices %}
+            <h6 class="card-price text-center">Until 12 Nov 2023: <strong>{{ cat.prices.early }}</strong><br><it><small>{{ cat.prices.currency_hint }}</small></it></h6>
+            <h6 class="card-price text-center">From  13 Nov 2023: <strong>{{ cat.prices.late }}</strong><br><it><small>&nbsp;</small></it></h6>
+            <h6 class="card-price text-center"><it><small>({{ cat.prices.timezone_note }})</small></it></h6>
+            {% endif %}
+            <hr>
+            <ul class="fa-ul" style="font-size: small;">
+              {% for perk in cat.perks %}
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>{{ perk }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

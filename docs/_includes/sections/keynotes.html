@@ -1,0 +1,36 @@
+<section id="speakers" class="wow fadeInUp">
+  <div class="container">
+    <div class="section-header">
+      <h2>Keynote Speakers</h2>
+      <p>We will host the following outstanding speakers.</p>
+    </div>
+
+    <div class="row">
+      {% for pair in site.data.keynotes %}
+        {% assign speaker_id = pair[0] %}
+        {% assign speaker = pair[1] %}
+        {% if speaker %}
+        <div class="col-lg-4 col-md-6">
+          <div class="speaker">
+            {% assign photo = speaker.photo %}
+            {% if photo %}
+            <a href="{{ speaker.url | default: '#' }}">
+              <img src="{{ photo }}" alt="{{ speaker.name | default: speaker_id }}" class="img-fluid">
+            </a>
+            {% endif %}
+            <div class="details">
+              <h3><a href="{{ speaker.url | default: '#' }}">{{ speaker.name | default: speaker_id }}</a></h3>
+              <h3>{{ speaker.affiliation | default: 'Details coming soon' }}</h3>
+              <div class="social">
+                {% for link in speaker.links %}
+                  <a href="{{ link.url }}"><i class="fa {{ link.icon }}"></i></a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

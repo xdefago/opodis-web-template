@@ -1,0 +1,21 @@
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="#main">O<span>P</span>O<span>D</span>I<span>S</span>{{ site.data.conference.year }}</a></h1>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          {% for item in site.data.site.nav %}
+            {% unless item.key and site.data.site.sections[item.key] == false %}
+              <li{% if forloop.first and page.url == "/index.html" %} class="menu-active"{% endif %}><a href="{{ item.href }}">{{ item.label }}</a></li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->

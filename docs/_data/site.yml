@@ -1,0 +1,93 @@
+site_name: "OPODIS"
+site_full_name: "International Conference on Principles of Distributed Systems"
+site_series_url: "https://www.opodis.net"
+default_language: "en"
+
+footer:
+  logo: "img/logo-opodis.png"
+  blurb: "OPODIS'23 is an open forum for the exchange of state-of-the-art knowledge concerning distributed computing and distributed computer systems. All aspects of distributed systems are within the scope of OPODIS, including theory, specification, design, performance, and system building."
+  useful_links:
+    - label: "Tokyo Tech"
+      icon: "fa-university"
+      url: "https://www.titech.ac.jp/english"
+    - label: "OPODIS conference series"
+      icon: "fa-angle-right"
+      url: "https://www.opodis.net"
+
+branding:
+  hero_buttons:
+    register: true
+    about: true
+
+fonts:
+  google: "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+
+assets:
+  favicon: "img/favicon.png"
+  apple_touch_icon: "img/apple-touch-icon.png"
+  stylesheets:
+    - "lib/bootstrap/css/bootstrap.min.css"
+    - "lib/font-awesome/css/font-awesome.min.css"
+    - "lib/animate/animate.min.css"
+    - "lib/venobox/venobox.css"
+    - "lib/owlcarousel/assets/owl.carousel.min.css"
+    - "css/style.css"
+  scripts:
+    - "lib/jquery/jquery.min.js"
+    - "lib/jquery/jquery-migrate.min.js"
+    - "lib/bootstrap/js/bootstrap.bundle.min.js"
+    - "lib/easing/easing.min.js"
+    - "lib/superfish/hoverIntent.js"
+    - "lib/superfish/superfish.min.js"
+    - "lib/wow/wow.min.js"
+    - "lib/venobox/venobox.min.js"
+    - "lib/owlcarousel/owl.carousel.min.js"
+    - "js/main.js"
+
+nav:
+  - label: "Home"
+    href: "#intro"
+    key: "intro"
+  - label: "Keynotes"
+    href: "#speakers"
+    key: "speakers"
+  - label: "CFP"
+    href: "cfp.html"
+    key: "cfp"
+  - label: "Dates"
+    href: "cfp.html#dates"
+    key: "dates"
+  - label: "Committees"
+    href: "#committees"
+    key: "committees"
+  - label: "Papers"
+    href: "accepted-papers.html"
+    key: "papers"
+  - label: "Program"
+    href: "program.html"
+    key: "program"
+  - label: "Venue"
+    href: "#venue"
+    key: "venue"
+  - label: "Travel"
+    href: "#travel"
+    key: "travel"
+  - label: "Registration"
+    href: "#subscribe"
+    key: "registration"
+  - label: "Sponsors"
+    href: "#supporters"
+    key: "sponsors"
+
+sections:
+  intro: true
+  speakers: true
+  cfp: true
+  dates: true
+  committees: true
+  papers: true
+  program: true
+  venue: true
+  travel: true
+  registration: true
+  sponsors: true

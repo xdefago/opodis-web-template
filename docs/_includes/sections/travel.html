@@ -1,0 +1,28 @@
+{% assign travel = site.data.travel %}
+<section id="travel" class="wow fadeInUp">
+  <div class="container-fluid">
+    <div class="section-header">
+      <h2>Travel</h2>
+      <p>Travel and accommodation information for conference attendees.</p>
+    </div>
+
+    <div>
+      <h3><i class="fa fa-train"></i> By train</h3>
+      <p>{{ travel.by_train }}</p>
+    </div>
+
+    <div>
+      <h3><i class="fa fa-plane"></i> By plane</h3>
+      <ul>
+        {% for airport in travel.by_plane %}
+        <li><strong>{{ airport.name }}:</strong> {{ airport.description }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h3><i class="fa fa-angle-right"></i> Hotels</h3>
+      <p>{{ travel.hotels }}</p>
+    </div>
+  </div>
+</section>

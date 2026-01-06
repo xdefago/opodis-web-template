@@ -1,0 +1,34 @@
+year: 2023
+edition: 27
+city: "Tokyo"
+country: "Japan"
+venue:
+  name: "Tokyo Institute of Technology"
+  building: "West 9, Multi-Purpose Digital Hall"
+  address_lines:
+    - "Ookayama 2-12-1"
+    - "152-8550 Meguro-ku, Tokyo"
+    - "Japan"
+  address_localized:
+    - "東京都目黒区大岡山2-12-1, 東京工業大学, 西９号館・ディジタル多目的ホール"
+  map_url: "https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6"
+dates:
+  start: 2023-12-06
+  end: 2023-12-08
+hero:
+  title: "Conference on Principles of Distributed Systems"
+  subtitle: "6-8 December 2023, Tokyo, Japan"
+  buttons:
+    - label: "About OPODIS 2023"
+      href: "#about"
+    - label: "Register"
+      href: "#subscribe"
+locale:
+  timezone_note: "(Anywhere on Earth)"
+satellite_event:
+  enabled: true
+  name: "MAC 23"
+  description: "The research meeting and school on Distributed Computing by Mobile Robots, aka, Moving and Computing (MAC 23) will be organized as a satellite event of OPODIS during the two days following OPODIS 2023."
+  dates: "December 9/10 (Sat/Sun)"
+  building: "West 8E"
+  link: "/mac23"

@@ -1,0 +1,34 @@
+{% assign tiers = site.data.sponsors.tiers %}
+<section id="supporters" class="section-with-bg wow fadeInUp">
+  <div class="container">
+    <div class="section-header">
+      <h2>Sponsors</h2>
+      <p>We are grateful to our sponsors for their support to OPODIS'23.</p>
+    </div>
+
+    {% for tier in tiers %}
+    <div class="row no-gutters supporters-wrap clearfix">
+      {% for sponsor in tier.sponsors %}
+      <div class="col-lg-3 col-md-4 col-xs-6">
+        <div class="supporter-logo">
+          <a href="{{ sponsor.url }}">
+            <img src="{{ sponsor.logo }}" class="img-fluid" alt="{{ sponsor.alt }}">
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="row no-gutters supporters-wrap clearfix">
+      <ul>
+        {% for tier in tiers %}
+          {% for sponsor in tier.sponsors %}
+          <li>{{ sponsor.note }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,45 @@
+{% assign speaker_id = include.speaker_id | default: page.speaker_id %}
+{% assign speaker = site.data.keynotes[speaker_id] %}
+<section id="speakers-details" class="wow fadeIn">
+  <div class="container">
+    {% if speaker %}
+      <div class="section-header">
+        <h2>{{ speaker.name | default: speaker_id }}</h2>
+        <h3>{{ speaker.affiliation | default: '' }}</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          {% assign first_link = speaker.links | first %}
+          {% assign photo = speaker.photo %}
+          {% if photo %}
+            {% if first_link %}<a href="{{ first_link.url }}">{% endif %}
+              <img src="{{ photo }}" alt="{{ speaker.name | default: speaker_id }}, {{ speaker.affiliation | default: '' }}" class="img-fluid">
+            {% if first_link %}</a>{% endif %}
+          {% endif %}
+        </div>
+
+        <div class="col-md-6">
+          <div class="details">
+            {% if speaker.talk_title %}<h2>{{ speaker.talk_title }}</h2>{% endif %}
+
+            {% if speaker.abstract %}
+            <h3>Abstract</h3>
+            <p>{{ speaker.abstract }}</p>
+            {% endif %}
+
+            {% if speaker.bio %}
+            <h3>About the speaker</h3>
+            <p>{{ speaker.bio }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="section-header">
+        <h2>{{ speaker_id }}</h2>
+        <h3>Details coming soon.</h3>
+      </div>
+    {% endif %}
+  </div>
+</section>

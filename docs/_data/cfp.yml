@@ -1,0 +1,39 @@
+call:
+  title: "Call for Papers"
+  description: |
+    OPODIS is an open forum for the exchange of state-of-the-art knowledge on distributed computing and distributed computer systems. OPODIS aims at having a balanced program that combines theory and practice of distributed systems. OPODIS 2023 solicits papers in all aspects of distributed systems, including theory, specification, design, system building, and performance.
+  topics:
+    - "Fault tolerance and consistency, impossibility results"
+    - "Blockchain, theory and practice"
+    - "Cloud, grid, edge computing, IoT, data centers"
+    - "Communication and mobile networks"
+    - "Parallelism, concurrency, multicore systems"
+    - "Shared and transactional memory, memory management"
+    - "Dependable and secure systems"
+    - "Distributed graph algorithms"
+    - "Middleware and operating systems"
+    - "File and storage systems; distributed storage, databases"
+    - "Distributed ML; systems for machine learning"
+    - "Distributed data analytics; big data analytics"
+    - "Mobile agents and robots"
+    - "Self-stabilizing, self-organizing, autonomous systems"
+    - "Game-theory in distributed computing"
+  double_blind: |
+    We use double-blind peer review. Submissions must be anonymous. Authors may disseminate preprints (e.g., arXiv) and present their work, but the submission itself must avoid self-identifying references. For policy questions, contact the PC chairs at opodis_pc_chairs@coord.c.titech.ac.jp.
+  submission:
+    url: "https://opodis2023.hotcrp.com/"
+    requirements:
+      - "English, PDF format"
+      - "LIPIcs LaTeX style (A4)"
+      - "Length: max 15 pages excluding references; unlimited references"
+      - "First-page metadata: title, keywords, abstract, best student paper eligibility"
+      - "Optional clearly marked appendix (reviewer discretion)"
+      - "Ready for double-blind review"
+    notes: |
+      The submission must clearly present the merits, importance, prior work, and key technical ideas. Submissions must report original research not published or under review elsewhere; overlap must be indicated. Program Chairs may desk-reject out-of-scope or guideline-violating submissions.
+  publication: |
+    Post-proceedings are published in LIPIcs (gold open access). Proceedings available online after the conference; preliminary versions available to participants. Camera-ready must match submission format and length.
+  awards: |
+    Awards will be given to the best paper and the best student paper (primarily written by a student). Eligibility for the best student paper award should be indicated on the first page.
+  registration_policy: |
+    At least one author of every accepted paper must register (regular) and present on-site at the conference.

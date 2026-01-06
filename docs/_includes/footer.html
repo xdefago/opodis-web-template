@@ -1,0 +1,44 @@
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <img src="{{ site.data.site.footer.logo }}" alt="OPODIS'{{ site.data.conference.year | slice: -2, 2 }}">
+            <p>{{ site.data.site.footer.blurb }}</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              {% for link in site.data.site.footer.useful_links %}
+                <li><i class="fa {{ link.icon }}"></i> <a href="{{ link.url }}">{{ link.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            {% for contact in site.data.conference.contacts %}
+              <p>
+                {{ contact.label }}<br>
+                <strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a><br>
+              </p>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

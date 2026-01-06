@@ -1,0 +1,52 @@
+##
+## Keynote 1
+##
+keynote1:
+  name: "Vincent Gramoli"
+  affiliation: "University of Sydney and Redbelly Network"
+  photo: "img/speakers/gramoli-640x480.jpg"
+  url: "keynote1-details.html"
+  talk_title: "From Consensus Research to Redbelly Network Pty Ltd"
+  abstract: |
+    In this talk, Vincent Gramoli presents his journey from a student doing research on the consensus problem to an executive director commercialising a blockchain software. The talk covers challenges and successes while integrating innovations published at OPODIS, DISC, PODC, DSN, NDSS, S&P, EuroSys, CACM, and more into a practical solution that improves the security and performance of blockchain systems.
+  bio: |
+    Vincent Gramoli is the Founder and CTO of Redbelly Network. He received a Future Fellowship from the Australian Research Council and leads the Concurrent Systems Research Group at the University of Sydney. He reported vulnerabilities in Ethereum and developed the Redbelly Blockchain that encapsulates DBFT, the first model-checked blockchain consensus protocol. He has been affiliated with INRIA, Cornell, CSIRO and EPFL, and received best paper awards at ICDCS'21, IPDPDS'22 and ICDCS'22. He teaches Blockchain Scalability on Coursera and authored a textbook published by Springer.
+  links:
+    - icon: "fa-university"
+      url: "https://gramoli.github.io"
+    - icon: "fa-industry"
+      url: "https://gramoli.github.io"
+
+##
+## Keynote 2
+##
+keynote2:
+  name: "François Le Gall"
+  affiliation: "Nagoya University"
+  photo: "img/speakers/legall-640x480.jpg"
+  url: "keynote2-details.html"
+  talk_title: "Quantum distributed computing: potential and limitations"
+  abstract: |
+    The talk surveys recent results showing the power of quantum distributed algorithms, then highlights work showing no distributed quantum advantage for approximate graph coloring (arXiv:2307.09444). It concludes with key open questions in quantum distributed computing.
+  bio: |
+    François Le Gall received his PhD from the University of Tokyo in 2006. He worked at the University of Tokyo and Kyoto University, and joined Nagoya University in 2019. His research focuses on algorithms, complexity, and quantum computation, with active work on quantum distributed computing.
+  links:
+    - icon: "fa-university"
+      url: "http://www.francoislegall.com"
+
+##
+## Keynote 3
+##
+keynote3:
+  name: "Roger Wattenhofer"
+  affiliation: "ETH Zurich"
+  photo: "img/speakers/wattenhofer-640x480.jpg"
+  url: "keynote3-details.html"
+  talk_title: "Distributed Algorithms as a Gateway to Deductive Learning"
+  abstract: |
+    The talk discusses how distributed algorithms can help understand deductive reasoning. While machine learning excels at fast pattern recognition, deductive, multi-step reasoning remains elusive. Distributed algorithms break problems into learnable steps, offering a bridge toward reasoning, extrapolation, and other capabilities needed to "think slow." Case studies range from graph generation to origami folding.
+  bio: |
+    Roger Wattenhofer is a full professor in the Information Technology and Electrical Engineering Department at ETH Zurich. He received his doctorate from ETH Zurich and has worked at Microsoft Research, Brown University, and Macquarie University. His interests span distributed systems, positioning systems, wireless networks, mobile systems, social and financial networks, and deep neural networks, with publications across distributed computing, networking/systems, theory, and machine learning venues. He received the Prize for Innovation in Distributed Computing for work in distributed approximation and authored the book "Blockchain Science: Distributed Ledger Technology."
+  links:
+    - icon: "fa-university"
+      url: "https://en.wikipedia.org/wiki/Roger_Wattenhofer"

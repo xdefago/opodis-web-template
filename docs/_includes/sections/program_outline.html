@@ -1,0 +1,52 @@
+{% assign outline = site.data.program.outline %}
+<section id="schedule" class="section-with-bg">
+  <div class="container wow fadeInUp">
+    <div class="section-header">
+      <h2>Program</h2>
+      <p>Program outline</p>
+      <p><a href="program.html">Detailed program here</a></p>
+      <table class="table table-bordered table-sm table-hover">
+        <style>
+          table {
+            table-layout: fixed;
+          }
+          table th.timeCol {
+            width: 60px;
+            text-align: right;
+          }
+        </style>
+        <caption>Social events:
+          <ul>
+            {% for item in outline.social %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </caption>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="timeCol"></th>
+            {% for column in outline.columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in outline.rows %}
+          <tr{% if row.style == "break" %} class="table-secondary"{% endif %}>
+            <th scope="row" class="timeCol">{{ row.time }}</th>
+            {% if row.style == "break" %}
+              {% assign non_empty = row.values | where_exp: 'item', 'item != ""' %}
+              {% assign label = non_empty | join: ' / ' %}
+              <td colspan="{{ outline.columns | size }}" style="text-align:center">{{ label }}</td>
+            {% else %}
+              {% for cell in row.values %}
+              <td{% if row.style == "break" %} class="table-secondary"{% endif %}>{{ cell }}</td>
+              {% endfor %}
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
