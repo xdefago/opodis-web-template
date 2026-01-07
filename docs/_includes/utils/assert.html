@@ -1,0 +1,11 @@
+{% comment %}
+  Simple assertion helper. Fails the build when condition is false.
+  Usage: {% include utils/assert.html condition=bool message="error message" %}
+{% endcomment %}
+{% if include.condition %}
+  {# noop when condition holds #}
+{% else %}
+  {% assign _msg = include.message | default: 'Assertion failed' %}
+  {{ _msg }}
+  {{ 1 | divided_by: 0 }}
+{% endif %}

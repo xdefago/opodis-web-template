@@ -13,24 +13,30 @@ schedule:
   date: 2023-12-06
   # Local flip time (HH:MM) to auto-select active day
   flip_time: "22:00"
+  # Default durations (minutes)
+  durations:
+    paper: 20
+    keynote: 60
+  labels:
+    break: "Coffee break"
+    registration: "Registration"
+    business: "Business meeting"
+    opening: "Opening"
+    closing: "Closing"
   days:
     # Each day references a calendar date; items hold the detailed slots in order
     - date: 2023-12-06
       label: "Wed Dec 6"
       items:
         - time: "08:30"
-          label: "Registration"
           type: "registration"
         - time: "09:00"
-          label: "Opening"
-          type: "plenary"
+          type: "opening"
         - time: "09:10"
           type: "keynote"
           number: 1
           chair: "Xavier Défago"
-        - time: "10:10"
-          label: "Coffee break"
-          type: "break"
+        - type: "break"
         - time: "10:35"
           type: "session"
           number: 1
@@ -41,6 +47,7 @@ schedule:
               award: "best paper"
             - number: 19
             - number: 9
+          duration: 70
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -54,9 +61,8 @@ schedule:
             - number: 12
             - number: 31
             - number: 23
-        - time: "15:05"
-          label: "Coffee break"
-          type: "break"
+          duration: 95
+        - type: "break"
         - time: "15:30"
           type: "session"
           number: 3
@@ -66,9 +72,9 @@ schedule:
             - number: 25
             - number: 5
             - number: 28
-        - time: "16:40"
-          label: "Business Meeting"
-          type: "info"
+          duration: 70
+        - type: "business"
+          duration: 
         - time: "17:30"
           label: "End of Day 1"
           type: "info"
@@ -77,15 +83,12 @@ schedule:
       label: "Thu Dec 7"
       items:
         - time: "08:50"
-          label: "Registration"
           type: "registration"
         - time: "09:10"
           type: "keynote"
           number: 2
           chair: "Koichi Wada"
-        - time: "10:10"
-          label: "Coffee break"
-          type: "break"
+        - type: "break"
         - time: "10:35"
           type: "session"
           number: 4
@@ -96,6 +99,7 @@ schedule:
               award: "best student paper"
             - number: 4
             - number: 35
+          duration: 70
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -109,9 +113,8 @@ schedule:
             - number: 11
             - number: 13
             - number: 27
-        - time: "15:05"
-          label: "Coffee break"
-          type: "break"
+          duration: 95
+        - type: "break"
         - time: "15:30"
           type: "session"
           number: 6
@@ -122,8 +125,8 @@ schedule:
             - number: 17
             - number: 34
             - number: 24
-        - time: "17:05"
-          label: "Move to banquet"
+          duration: 95
+        - label: "Move to banquet"
           type: "info"
         - time: "19:00"
           label: "Banquet (until 21:30)"
@@ -135,15 +138,12 @@ schedule:
       label: "Fri Dec 8"
       items:
         - time: "08:50"
-          label: "Registration"
           type: "registration"
         - time: "09:10"
           type: "keynote"
           number: 3
           chair: "Alysson Bessani"
-        - time: "10:10"
-          label: "Coffee break"
-          type: "break"
+        - type: "break"
         - time: "10:35"
           type: "session"
           number: 7
@@ -153,6 +153,7 @@ schedule:
             - number: 7
             - number: 33
             - number: 18
+          duration: 70
         - time: "11:45"
           label: "LUNCH"
           type: "break"
@@ -166,9 +167,8 @@ schedule:
             - number: 32
             - number: 29
             - number: 6
-        - time: "15:05"
-          label: "Coffee break"
-          type: "break"
+          duration: 95
+        - type: "break"
         - time: "15:30"
           type: "session"
           number: 9
@@ -179,9 +179,8 @@ schedule:
             - number: 22
             - number: 26
             - number: 30
-        - time: "17:05"
-          label: "Closing"
-          type: "plenary"
-        - time: "17:15"
-          label: "End of OPODIS 2023"
+          duration: 95
+        - type: "closing"
+          duration: 10
+        - label: "End of OPODIS 2023"
           type: "info"

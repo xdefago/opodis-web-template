@@ -1,0 +1,10 @@
+{% comment %}
+  Formats an integer number of minutes since 00:00 as HH:MM (24h, zero-padded minutes).
+  Usage: {% include utils/format_minutes.html minutes=total_minutes %}
+{% endcomment %}
+{% assign total = include.minutes | plus: 0 %}
+{% assign hours = total | divided_by: 60 %}
+{% assign mins = total | modulo: 60 %}
+{% assign mins_str = mins %}
+{% if mins < 10 %}{% assign mins_str = '0' | append: mins %}{% endif %}
+{{ hours | append: ':' | append: mins_str }}

@@ -1,33 +1,14 @@
-{% assign schedule = site.data.program.schedule %}
-{% assign days = schedule.days %}
-{% assign day_label_format = "%a %b %-d" %}
-
-{%- comment -%} Collect all start times for relevant items {%- endcomment -%}
-{% assign times = '' | split: '' %}
-{% for day in days %}
-  {% for item in day.items %}
-    {% assign include_item = false %}
-    {% case item.type %}
-      {% when 'registration' %}{% assign include_item = true %}
-      {% when 'break' %}{% assign include_item = true %}
-      {% when 'session' %}{% assign include_item = true %}
-      {% when 'keynote' %}{% assign include_item = true %}
-      {% when 'info' %}
-        {% if item.label and item.label contains 'Business' %}{% assign include_item = true %}{% endif %}
-    {% endcase %}
-    {% if include_item and item.time %}
-      {% assign times = times | push: item.time %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-{% assign times = times | uniq | sort %}
-
 <section id="schedule" class="section-with-bg">
   <div class="container wow fadeInUp">
     <div class="section-header">
-      <h2>Program</h2>
-      <p>Program outline</p>
-      <p><a href="program.html">Detailed program here</a></p>
+      <h2>Program Outline</h2>
+      <p>High-level schedule</p>
+      <p><a href="program.html#detailed-program">Detailed program here</a></p>
+      {% assign grid = site.data.outline_grid %}
+      {% if grid == nil %}
+        <p><em>Program outline data is missing.</em></p>
+      {% else %}
+      {% assign day_count = grid.days | size %}
       <table class="table table-bordered table-sm table-hover">
         <style>
           table {
@@ -49,74 +30,53 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col" class="timeCol"></th>
-            {% for day in days %}
-            {% assign day_label = day.label %}
-            {% if day_label == nil or day_label == '' %}
-              {% assign day_label = day.date | date: day_label_format %}
-            {% endif %}
+            {% for day_label in grid.days %}
             <th scope="col">{{ day_label }}</th>
             {% endfor %}
           </tr>
         </thead>
         <tbody>
-          {% for time in times %}
-          {% assign row_items = '' | split: '' %}
-          {% assign row_is_break = true %}
-          {% for day in days %}
-            {% assign match = nil %}
-            {% for item in day.items %}
-              {% if item.time == time %}
-                {% assign include_item = false %}
-                {% case item.type %}
-                  {% when 'registration' %}{% assign include_item = true %}
-                  {% when 'break' %}{% assign include_item = true %}
-                  {% when 'session' %}{% assign include_item = true %}
-                  {% when 'keynote' %}{% assign include_item = true %}
-                  {% when 'info' %}
-                    {% if item.label and item.label contains 'Business' %}{% assign include_item = true %}{% endif %}
-                {% endcase %}
-                {% if include_item %}
-                  {% assign match = item %}
-                  {% break %}
-                {% endif %}
+          {% for row in grid.rows %}
+          {% if row.break %}
+          <tr class="table-secondary">
+            <th scope="row" class="timeCol">{{ row.time_label }}</th>
+            <td colspan="{{ day_count }}" style="text-align:center">{{ row.label }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <th scope="row" class="timeCol">{{ row.time_label }}</th>
+            {% for cell in row.cells %}
+              {% if cell == null %}
+                <td class="table-secondary"></td>
+              {% elsif cell.kind == 'skip' %}
+                
+              {% else %}
+                <td{% if cell.rowspan %} rowspan="{{ cell.rowspan }}"{% endif %}>
+                  {% case cell.type %}
+                    {% when 'keynote' %}Keynote {{ cell.number }}
+                    {% when 'session' %}
+                      {% assign stitle = 'Session ' | append: cell.number %}
+                      {% if cell.title %}{% assign stitle = stitle | append: ' <small>(' | append: cell.title | append: ')</small>' %}{% endif %}
+                      {% assign talk_count = cell.talk_count | default: 0 %}
+                      {{ stitle }}<br><i><small>({{ talk_count }} talks)</small></i>
+                    {% when 'opening' %}{{ cell.label | default: 'Opening' }}
+                    {% when 'closing' %}{{ cell.label | default: 'Closing' }}
+                    {% when 'business' %}{{ cell.label | default: 'Business meeting' }}
+                    {% when 'registration' %}{{ cell.label | default: 'Registration' }}
+                    {% when 'break' %}{{ cell.label | default: 'Break' }}
+                    {% when 'info' %}{{ cell.label | default: cell.title }}
+                    {% when 'plenary' %}{{ cell.label | default: cell.title }}
+                    {% else %}{{ cell.label | default: cell.title }}
+                  {% endcase %}
+                </td>
               {% endif %}
             {% endfor %}
-            {% if match and match.type != 'break' %}{% assign row_is_break = false %}{% endif %}
-            {% assign row_items = row_items | push: match %}
-          {% endfor %}
-          <tr{% if row_is_break %} class="table-secondary"{% endif %}>
-            <th scope="row" class="timeCol">{{ time }}</th>
-            {% if row_is_break %}
-              {% assign labels = '' | split: '' %}
-              {% for item in row_items %}
-                {% if item and item.label %}{% assign labels = labels | push: item.label %}{% endif %}
-              {% endfor %}
-              {% assign label = labels | uniq | join: ' / ' %}
-              <td colspan="{{ days | size }}" style="text-align:center">{{ label }}</td>
-            {% else %}
-              {% for item in row_items %}
-                <td>
-                  {% if item %}
-                    {% case item.type %}
-                      {% when 'keynote' %}Keynote {{ item.number }}
-                      {% when 'session' %}
-                        {% assign stitle = 'Session ' | append: item.number %}
-                        {% if item.title %}{% assign stitle = stitle | append: ' <small>(' | append: item.title | append: ')</small>' %}{% endif %}
-                        {% assign talk_count = item.papers | size %}
-                        {{ stitle }}<br><i><small>({{ talk_count }} talks)</small></i>
-                      {% when 'registration' %}{{ item.label | default: 'Registration' }}
-                      {% when 'break' %}{{ item.label | default: 'Break' }}
-                      {% when 'info' %}{{ item.label | default: item.title }}
-                      {% else %}{{ item.label | default: item.title }}
-                    {% endcase %}
-                  {% endif %}
-                </td>
-              {% endfor %}
-            {% endif %}
           </tr>
+          {% endif %}
           {% endfor %}
         </tbody>
       </table>
+      {% endif %}
     </div>
   </div>
 </section>

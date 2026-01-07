@@ -1,0 +1,428 @@
+{
+  "days": [
+    "Wed Dec 6",
+    "Thu Dec 7",
+    "Fri Dec 8"
+  ],
+  "rows": [
+    {
+      "time": 510,
+      "time_label": "8:30",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "registration",
+          "label": "Registration",
+          "title": null,
+          "number": null,
+          "rowspan": 2,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "time": 530,
+      "time_label": "8:50",
+      "break": false,
+      "cells": [
+        {
+          "kind": "skip"
+        },
+        {
+          "kind": "cell",
+          "type": "registration",
+          "label": "Registration",
+          "title": null,
+          "number": null,
+          "rowspan": 2,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        },
+        {
+          "kind": "cell",
+          "type": "registration",
+          "label": "Registration",
+          "title": null,
+          "number": null,
+          "rowspan": 2,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        }
+      ]
+    },
+    {
+      "time": 540,
+      "time_label": "9:00",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "opening",
+          "label": "Opening",
+          "title": null,
+          "number": null,
+          "rowspan": 1,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        },
+        {
+          "kind": "skip"
+        },
+        {
+          "kind": "skip"
+        }
+      ]
+    },
+    {
+      "time": 550,
+      "time_label": "9:10",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "keynote",
+          "label": null,
+          "title": null,
+          "number": 1,
+          "rowspan": 1,
+          "talk_count": 0,
+          "papers": null,
+          "chair": "Xavier Défago"
+        },
+        {
+          "kind": "cell",
+          "type": "keynote",
+          "label": null,
+          "title": null,
+          "number": 2,
+          "rowspan": 1,
+          "talk_count": 0,
+          "papers": null,
+          "chair": "Koichi Wada"
+        },
+        {
+          "kind": "cell",
+          "type": "keynote",
+          "label": null,
+          "title": null,
+          "number": 3,
+          "rowspan": 1,
+          "talk_count": 0,
+          "papers": null,
+          "chair": "Alysson Bessani"
+        }
+      ]
+    },
+    {
+      "time": 610,
+      "time_label": "10:10",
+      "break": true,
+      "label": "Coffee break"
+    },
+    {
+      "time": 635,
+      "time_label": "10:35",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Agreement I",
+          "number": 1,
+          "rowspan": 1,
+          "talk_count": 3,
+          "papers": [
+            {
+              "number": 21,
+              "award": "best paper"
+            },
+            {
+              "number": 19
+            },
+            {
+              "number": 9
+            }
+          ],
+          "chair": "Junya Nakamura"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Storage and Machine Learning",
+          "number": 4,
+          "rowspan": 1,
+          "talk_count": 3,
+          "papers": [
+            {
+              "number": 20,
+              "award": "best student paper"
+            },
+            {
+              "number": 4
+            },
+            {
+              "number": 35
+            }
+          ],
+          "chair": "Jennifer L. Welch"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Mobile computing II",
+          "number": 7,
+          "rowspan": 1,
+          "talk_count": 3,
+          "papers": [
+            {
+              "number": 7
+            },
+            {
+              "number": 33
+            },
+            {
+              "number": 18
+            }
+          ],
+          "chair": "Toshimitsu Masuzawa"
+        }
+      ]
+    },
+    {
+      "time": 705,
+      "time_label": "11:45",
+      "break": true,
+      "label": "LUNCH"
+    },
+    {
+      "time": 810,
+      "time_label": "13:30",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Blockchains and Security",
+          "number": 2,
+          "rowspan": 1,
+          "talk_count": 4,
+          "papers": [
+            {
+              "number": 8
+            },
+            {
+              "number": 12
+            },
+            {
+              "number": 31
+            },
+            {
+              "number": 23
+            }
+          ],
+          "chair": "Roy Friedman"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Distributed Graphs I",
+          "number": 5,
+          "rowspan": 1,
+          "talk_count": 4,
+          "papers": [
+            {
+              "number": 10
+            },
+            {
+              "number": 11
+            },
+            {
+              "number": 13
+            },
+            {
+              "number": 27
+            }
+          ],
+          "chair": "Fukuhito Ooshita"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Agreement II",
+          "number": 8,
+          "rowspan": 1,
+          "talk_count": 4,
+          "papers": [
+            {
+              "number": 14
+            },
+            {
+              "number": 32
+            },
+            {
+              "number": 29
+            },
+            {
+              "number": 6
+            }
+          ],
+          "chair": "Gregory Chockler"
+        }
+      ]
+    },
+    {
+      "time": 905,
+      "time_label": "15:05",
+      "break": true,
+      "label": "Coffee break"
+    },
+    {
+      "time": 930,
+      "time_label": "15:30",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Mobile computing I",
+          "number": 3,
+          "rowspan": 1,
+          "talk_count": 3,
+          "papers": [
+            {
+              "number": 25
+            },
+            {
+              "number": 5
+            },
+            {
+              "number": 28
+            }
+          ],
+          "chair": "Sébastien Tixeuil"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Concurrent programming",
+          "number": 6,
+          "rowspan": 2,
+          "talk_count": 4,
+          "papers": [
+            {
+              "number": 15
+            },
+            {
+              "number": 17
+            },
+            {
+              "number": 34
+            },
+            {
+              "number": 24
+            }
+          ],
+          "chair": "Achour Mostéfaoui"
+        },
+        {
+          "kind": "cell",
+          "type": "session",
+          "label": null,
+          "title": "Distributed Graphs II",
+          "number": 9,
+          "rowspan": 2,
+          "talk_count": 4,
+          "papers": [
+            {
+              "number": 16
+            },
+            {
+              "number": 22
+            },
+            {
+              "number": 26
+            },
+            {
+              "number": 30
+            }
+          ],
+          "chair": "Taisuke Izumi"
+        }
+      ]
+    },
+    {
+      "time": 1000,
+      "time_label": "16:40",
+      "break": false,
+      "cells": [
+        {
+          "kind": "cell",
+          "type": "business",
+          "label": "Business meeting",
+          "title": null,
+          "number": null,
+          "rowspan": 3,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        },
+        {
+          "kind": "skip"
+        },
+        {
+          "kind": "skip"
+        }
+      ]
+    },
+    {
+      "time": 1025,
+      "time_label": "17:05",
+      "break": false,
+      "cells": [
+        {
+          "kind": "skip"
+        },
+        null,
+        {
+          "kind": "cell",
+          "type": "closing",
+          "label": "Closing",
+          "title": null,
+          "number": null,
+          "rowspan": 1,
+          "talk_count": 0,
+          "papers": null,
+          "chair": null
+        }
+      ]
+    },
+    {
+      "time": 1035,
+      "time_label": "17:15",
+      "break": false,
+      "cells": [
+        {
+          "kind": "skip"
+        },
+        null,
+        null
+      ]
+    }
+  ]
+}

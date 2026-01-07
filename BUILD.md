@@ -2,33 +2,63 @@
 
 ## Preliminaries
 
-### Install jekyll locally
+### Install Ruby with rbenv (one-time)
+
+```bash
+brew install rbenv ruby-build
+rbenv init - zsh >> ~/.zshrc
+source ~/.zshrc
+rbenv install 3.1.4
+rbenv local 3.1.4
+gem install bundler
+bundle install
+```
+
+### Project prep after cloning / pulling
+
+```bash
+rbenv install 3.1.4
+rbenv local 3.1.4
+bundle install
+```
+
+If you change `docs/_data/program.yml`, regenerate the outline grid:
+```bash
+bundle exec ruby scripts/generate_outline_grid.rb
+```
+Re-run the generator after any change in `docs/_data/program.yml` (times, types, durations, labels, etc.) before building or deploying.
 
 
 ## Build
 
-
 ### Build locally
 
-To build locally, you need to install Jekyll before.
 ```bash
 # build the site to docs/_site
-bundle exec jekyll build --source docs --destination docs/_site 
+bundle exec jekyll build --source docs --destination docs/_site
 # serve the site locally for preview
 bundle exec jekyll serve --source docs --destination docs/_site --livereload --host 0.0.0.0 --port 4000
-# wait, then access at http://localhost:4000 
+# then browse http://localhost:4000
 ```
 
 
 ## Deploy
 
-### Via github pages
+### Via GitHub Pages
 
-Initially, configure the github repository to enable github pages on branch `main` with path `/docs`.
-
-To deploy, commit your changes to main, and then push them to origin (to github).
+1) Configure GitHub Pages to serve from branch `main`, path `/docs`.
+2) If program data changed, regenerate and build:
+```bash
+bundle exec ruby scripts/generate_outline_grid.rb
+bundle exec jekyll build --source docs --destination docs/_site
+```
+3) Commit source changes plus updated `docs/_data/outline_grid.json` (and `docs/_site` if you publish the built site).
+4) Push to `main`; GitHub Pages serves from `docs/`.
 
 ### On another server
 
-* build the site locally with jekyll
-* copy all files under `docs/_site/` to the web server.
+```bash
+bundle exec ruby scripts/generate_outline_grid.rb
+bundle exec jekyll build --source docs --destination docs/_site
+rsync -av docs/_site/ user@server:/path/to/webroot/
+```
