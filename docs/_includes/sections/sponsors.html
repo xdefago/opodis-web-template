@@ -1,9 +1,12 @@
-{% assign tiers = site.data.sponsors.tiers %}
+{% assign sponsors = site.data.sponsors %}
+{% assign tiers = sponsors.tiers %}
+{% assign sponsor_blurb_raw = sponsors.blurb | default: 'We are grateful to our sponsors.' %}
+{% capture sponsor_blurb %}{% include utils/apply_placeholders.html text=sponsor_blurb_raw %}{% endcapture %}
 <section id="supporters" class="section-with-bg wow fadeInUp">
   <div class="container">
     <div class="section-header">
       <h2>Sponsors</h2>
-      <p>We are grateful to our sponsors for their support to OPODIS'23.</p>
+      <p>{{ sponsor_blurb }}</p>
     </div>
 
     {% for tier in tiers %}
@@ -12,7 +15,7 @@
       <div class="col-lg-3 col-md-4 col-xs-6">
         <div class="supporter-logo">
           <a href="{{ sponsor.url }}">
-            <img src="{{ sponsor.logo }}" class="img-fluid" alt="{{ sponsor.alt }}">
+            <img src="{{ sponsor.logo }}" class="img-fluid" alt="{{ sponsor.name }}">
           </a>
         </div>
       </div>

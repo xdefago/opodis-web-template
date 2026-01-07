@@ -1,27 +1,47 @@
 {% assign reg = site.data.registration %}
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
+{% assign acronym = current.acronym | default: general.acronym %}
+{% assign year_full = current.year | default: general.year %}
+{% if year_full %}
+  {% assign year_two = year_full | append: '-01-01' | date: '%y' %}
+{% else %}
+  {% assign year_two = '' %}
+{% endif %}
+{% assign status_label = reg.status_label | default: reg.status %}
+{% assign mac_link = reg.mac_registration_link | default: '/mac23/MAC-registration.html' %}
+
+{% capture intro_text %}{% include utils/apply_placeholders.html text=reg.copy.intro status=status_label mac_link=mac_link %}{% endcapture %}
+{% capture early_label %}{% include utils/apply_placeholders.html text=reg.pricing_labels.early status=status_label mac_link=mac_link %}{% endcapture %}
+{% capture late_label %}{% include utils/apply_placeholders.html text=reg.pricing_labels.late status=status_label mac_link=mac_link %}{% endcapture %}
 <section id="subscribe">
   <div class="container wow fadeInUp">
     <div class="section-header">
       <h2>Registration</h2>
-      <p>The conference has ended and registration is now {{ reg.status }}. Details below are left for reference:</p>
-      {% if reg.notes %}
+      <p>{{ intro_text }}</p>
+      {% if reg.copy.steps %}
       <div class="row">
         <div class="col">
           <div class="card mb-5 mb-lg-0">
             <ol>
-              <li>Complete OPODIS'23 registration form (Google form; closed)</li>
-              <li>Open payment link (Stripe) provided on Google form (2nd page)</li>
-              <li>Pay via stripe link</li>
-              <li>Submit google form</li>
-              <li>Contact us for any other requests: ...</li>
-              <li>Proceed to <a href="/mac23/MAC-registration.html">register to MAC'23</a> (if applicable)</li>
+              {% for step in reg.copy.steps %}
+                {% capture step_text %}{% include utils/apply_placeholders.html text=step status=status_label mac_link=mac_link %}{% endcapture %}
+                <li>{{ step_text }}</li>
+              {% endfor %}
             </ol>
-            <small><em>for MAC-only registrations skip the above steps and read instructions on the <a href="/mac23/MAC-registration.html">MAC registration page</a></em></small>
+            {% if reg.copy.mac_note %}
+            {% capture mac_note %}{% include utils/apply_placeholders.html text=reg.copy.mac_note status=status_label mac_link=mac_link %}{% endcapture %}
+            <small><em>{{ mac_note }}</em></small>
+            {% endif %}
           </div>
         </div>
       </div>
       {% endif %}
-      <p>Attendees requiring an invitation letter for obtaining a <strong>visa</strong> may request one <strong>after</strong> completing their registration (...).</p>
+      {% if reg.copy.visa %}
+      {% capture visa_note %}{% include utils/apply_placeholders.html text=reg.copy.visa status=status_label mac_link=mac_link %}{% endcapture %}
+      <p>{{ visa_note }}</p>
+      {% endif %}
     </div>
 
     <div class="row">
@@ -32,8 +52,8 @@
             <h5 class="card-title text-muted text-uppercase text-center">{{ cat.name }}</h5>
             {% if cat.subtitle %}<h6 class="card-price text-center"><it><small>{{ cat.subtitle }}</small></it></h6>{% endif %}
             {% if cat.prices %}
-            <h6 class="card-price text-center">Until 12 Nov 2023: <strong>{{ cat.prices.early }}</strong><br><it><small>{{ cat.prices.currency_hint }}</small></it></h6>
-            <h6 class="card-price text-center">From  13 Nov 2023: <strong>{{ cat.prices.late }}</strong><br><it><small>&nbsp;</small></it></h6>
+            <h6 class="card-price text-center">{{ early_label }}: <strong>{{ cat.prices.early }}</strong><br><it><small>{{ cat.prices.currency_hint }}</small></it></h6>
+            <h6 class="card-price text-center">{{ late_label }}: <strong>{{ cat.prices.late }}</strong><br><it><small>&nbsp;</small></it></h6>
             <h6 class="card-price text-center"><it><small>({{ cat.prices.timezone_note }})</small></it></h6>
             {% endif %}
             <hr>

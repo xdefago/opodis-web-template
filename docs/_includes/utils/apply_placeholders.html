@@ -1,0 +1,48 @@
+{% comment %}
+  Replaces placeholders in the provided text using conference data and optional extras.
+  Supported built-ins (case-insensitive in placeholders):
+    {ACRONYM}, {FULLNAME}, {NAME}, {SERIES_URL}, {CITY}, {COUNTRY}, {YEAR}, {YEAR:02}
+  Extras: any additional include parameters are replaced as {KEY} with KEY uppercased.
+  Usage:
+    {% capture out %}{% include utils/apply_placeholders.html text=source status="closed" %}{% endcapture %}
+{% endcomment %}
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
+
+{% assign text = include.text | default: '' %}
+
+{% assign year_full = current.year | default: general.year | default: '' %}
+{% if year_full %}
+  {% assign year_two = year_full | append: '-01-01' | date: '%y' %}
+{% else %}
+  {% assign year_two = '' %}
+{% endif %}
+
+{% assign acr = current.acronym | default: general.acronym | default: '' %}
+{% assign fullname = current.fullname | default: general.fullname | default: '' %}
+{% assign name = current.name | default: general.name | default: '' %}
+{% assign series_url = current.series_url | default: general.series_url | default: '' %}
+{% assign city = current.city | default: general.city | default: '' %}
+{% assign country = current.country | default: general.country | default: '' %}
+
+{% assign text = text | replace: '{YEAR:02}', year_two %}
+{% assign text = text | replace: '{YEAR}', year_full %}
+{% assign text = text | replace: '{ACRONYM}', acr %}
+{% assign text = text | replace: '{FULLNAME}', fullname %}
+{% assign text = text | replace: '{NAME}', name %}
+{% assign text = text | replace: '{SERIES_URL}', series_url %}
+{% assign text = text | replace: '{CITY}', city %}
+{% assign text = text | replace: '{COUNTRY}', country %}
+
+{% for param in include %}
+  {% assign key = param[0] %}
+  {% assign val = param[1] %}
+  {% assign key_up = key | upcase %}
+  {% if key_up != 'TEXT' %}
+    {% assign token = '{' | append: key_up | append: '}' %}
+    {% assign text = text | replace: token, val %}
+  {% endif %}
+{% endfor %}
+
+{{ text }}

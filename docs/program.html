@@ -1,57 +1,25 @@
 ---
 layout: default
-title: "OPODIS 23 - Program"
+title: "Program"
 ---
 
-  <main id="main" class="main-page">
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
+{% assign acronym = current.acronym | default: general.acronym %}
+{% assign year_full = current.year | default: general.year %}
+{% if year_full %}
+  {% assign year_two = year_full | append: '-01-01' | date: '%y' %}
+{% else %}
+  {% assign year_two = '' %}
+{% endif %}
 
-    
-    <section id="schedule" class="section-with-bg">
-        <div class="container wow fadeInUp">
-          <div class="section-header">
-            <h2>Program Outline</h2>
-            <p><a href="#detailed-program">jump to detailed program</a></p>
-            <table class="table table-bordered table-sm table-hover">
-                <style>
-                    table {
-                        table-layout: fixed;
-                    }
-                    table th.timeCol {
-                        width: 60px;
-                        text-align: right;
-                    }
-                </style>
-                <caption>Social events:
-                    <ul>
-                    <li>Reception (Dec. 5, 18:00-20:00),</li>
-                    <li>Banquet (Dec. 7, 19:00-21:30)</li>
-                    </ul>
-                </caption>
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col" class="timeCol"></th>
-                    <th scope="col">Dec. 6</th>
-                    <th scope="col">Dec. 7</th>
-                    <th scope="col">Dec. 8</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" class="timeCol">9:00</th>
-                    <td>Opening</td>
-                    <td class="table-secondary"></td>
-                    <td class="table-secondary"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="timeCol">9:10</th>
-                    <td>Keynote 1</td>
-                    <td>Keynote 2</td>
-                    <td>Keynote 3</td>
-                  </tr>
-                  <tr  class="table-secondary">
-                    <th scope="row" class="timeCol">10:10</th>
-                    {% include sections/program_outline.html %}
-                    {% capture program_lead %}We had an excellent OPODIS 2023 with many interesting talks and research discussions. The program is left here for nostalgia and bureaucratic reference...<br>All paper presentations are scheduled for max. 20 minutes, plus Q&A and setup.{% endcapture %}
-                    {% capture program_preamble %}<strong>Welcome Reception (Tue Dec. 5)</strong>: 18:00-20:00 <em>(registration from 17:30)</em>, location: <a href="https://www.ssc.titech.ac.jp/amap/home/ookayama/north/ttf/">Tokyo Tech Front</a>, room Royal Blue Hall (<a href="https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6" target="_blank">map</a>){% endcapture %}
-                    {% include sections/program_schedule.html id="detailed-program" anchor_name="detailed-program" title="Detailed Program" lead=program_lead preamble=program_preamble %}
-                    <td>Session 1<br><i>(3 talks)</i></td>
+{% assign program_text = site.data.program.text %}
+{% capture program_lead %}{% include utils/apply_placeholders.html text=program_text.lead %}{% endcapture %}
+{% capture program_preamble %}{% include utils/apply_placeholders.html text=program_text.preamble %}{% endcapture %}
+
+<main id="main" class="main-page">
+  {% include sections/program_outline.html %}
+  {% include sections/program_schedule.html id="detailed-program" anchor_name="detailed-program" title="Detailed Program" lead=program_lead preamble=program_preamble %}
+
+</main>

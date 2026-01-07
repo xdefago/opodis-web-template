@@ -1,18 +1,17 @@
+blurb: "We are grateful to our sponsors for their support to {ACRONYM}'{YEAR:02}."
+
 tiers:
   - name: "Supporters"
     sponsors:
       - name: "NICT"
         url: "https://www.nict.go.jp/en/index.html"
         logo: "img/supporters/NICTfig.png"
-        alt: "NICT"
         note: "Supported by International Exchange Program of National Institute of Information and Communications Technology (NICT)."
       - name: "IEICE"
         url: "https://www.ieice.org/eng_r/index.html"
         logo: "img/supporters/EiC_logo.png"
-        alt: "IEICE"
         note: "Sponsored by the Institute of Electronics, Information and Communication Engineers (IEICE), Japan."
       - name: "IPSJ"
         url: "https://www.ipsj.or.jp/english/index.html"
         logo: "img/supporters/IPSJ_logoC_L.gif"
-        alt: "IPSJ"
         note: "Sponsored by Information Processing Society of Japan (IPSJ)."

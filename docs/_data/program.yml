@@ -4,6 +4,10 @@ outline:
     - "Reception (Dec. 5, 18:00-20:00)"
     - "Banquet (Dec. 7, 19:00-21:30)"
 
+text:
+  lead: "We had an excellent {ACRONYM} {YEAR} with many interesting talks and research discussions. The program is left here for nostalgia and bureaucratic reference...<br>All paper presentations are scheduled for max. 20 minutes, plus Q&A and setup."
+  preamble: "<strong>Welcome Reception (Tue Dec. 5)</strong>: 18:00-20:00 <em>(registration from 17:30)</em>, location: <a href=\"https://www.ssc.titech.ac.jp/amap/home/ookayama/north/ttf/\">Tokyo Tech Front</a>, room Royal Blue Hall (<a href=\"https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6\" target=\"_blank\">map</a>)"
+
 schedule:
   # Base start date for the program; used if individual day.date is absent
   date: 2023-12-06

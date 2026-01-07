@@ -2,6 +2,24 @@ status: "closed"
 link: ""
 notes:
   - "At least one author of each accepted paper must register (regular) and present on-site."
+status_label: "closed"
+copy:
+  intro: "The conference has ended and registration is now {STATUS}. Details below are left for reference:"
+  steps:
+    - "Complete {ACRONYM}'{YEAR:02} registration form (Google form; closed)"
+    - "Open payment link (Stripe) provided on Google form (2nd page)"
+    - "Pay via stripe link"
+    - "Submit google form"
+    - "Contact us for any other requests: ..."
+    - "Proceed to register to MAC'{YEAR:02} (if applicable)"
+  mac_note: "for MAC-only registrations skip the above steps and read instructions on the <a href=\"{MAC_LINK}\">MAC registration page</a>"
+  visa: "Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration (...)"
+
+pricing_labels:
+  early: "Until 12 Nov {YEAR}"
+  late: "From 13 Nov {YEAR}"
+
+mac_registration_link: "/mac23/MAC-registration.html"
 categories:
   - name: "Student"
     subtitle: "(proof of enrollment required)"

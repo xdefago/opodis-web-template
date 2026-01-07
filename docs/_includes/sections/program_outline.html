@@ -2,11 +2,25 @@
 {% assign days = schedule.days %}
 {% assign day_label_format = "%a %b %-d" %}
 
-{% assign max_items = 0 %}
+{%- comment -%} Collect all start times for relevant items {%- endcomment -%}
+{% assign times = '' | split: '' %}
 {% for day in days %}
-  {% assign len = day.items | size %}
-  {% if len > max_items %}{% assign max_items = len %}{% endif %}
+  {% for item in day.items %}
+    {% assign include_item = false %}
+    {% case item.type %}
+      {% when 'registration' %}{% assign include_item = true %}
+      {% when 'break' %}{% assign include_item = true %}
+      {% when 'session' %}{% assign include_item = true %}
+      {% when 'keynote' %}{% assign include_item = true %}
+      {% when 'info' %}
+        {% if item.label and item.label contains 'Business' %}{% assign include_item = true %}{% endif %}
+    {% endcase %}
+    {% if include_item and item.time %}
+      {% assign times = times | push: item.time %}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
+{% assign times = times | uniq | sort %}
 
 <section id="schedule" class="section-with-bg">
   <div class="container wow fadeInUp">
@@ -27,7 +41,8 @@
         <caption>Social events:
           <ul>
             {% for item in site.data.program.outline.social %}
-            <li>{{ item }}</li>
+            {% capture social_entry -%}{% include utils/apply_placeholders.html text=item %}{%- endcapture %}
+            <li>{{ social_entry }}</li>
             {% endfor %}
           </ul>
         </caption>
@@ -35,30 +50,48 @@
           <tr>
             <th scope="col" class="timeCol"></th>
             {% for day in days %}
-            {% assign day_label = day.label | default: day.date | date: day_label_format %}
+            {% assign day_label = day.label %}
+            {% if day_label == nil or day_label == '' %}
+              {% assign day_label = day.date | date: day_label_format %}
+            {% endif %}
             <th scope="col">{{ day_label }}</th>
             {% endfor %}
           </tr>
         </thead>
         <tbody>
-          {% for i in (0..max_items-1) %}
+          {% for time in times %}
           {% assign row_items = '' | split: '' %}
-          {% assign row_time = '' %}
           {% assign row_is_break = true %}
           {% for day in days %}
-            {% assign item = day.items[i] %}
-            {% if item and row_time == '' %}{% assign row_time = item.time %}{% endif %}
-            {% if item and item.type != 'break' %}{% assign row_is_break = false %}{% endif %}
-            {% assign row_items = row_items | push: item %}
+            {% assign match = nil %}
+            {% for item in day.items %}
+              {% if item.time == time %}
+                {% assign include_item = false %}
+                {% case item.type %}
+                  {% when 'registration' %}{% assign include_item = true %}
+                  {% when 'break' %}{% assign include_item = true %}
+                  {% when 'session' %}{% assign include_item = true %}
+                  {% when 'keynote' %}{% assign include_item = true %}
+                  {% when 'info' %}
+                    {% if item.label and item.label contains 'Business' %}{% assign include_item = true %}{% endif %}
+                {% endcase %}
+                {% if include_item %}
+                  {% assign match = item %}
+                  {% break %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% if match and match.type != 'break' %}{% assign row_is_break = false %}{% endif %}
+            {% assign row_items = row_items | push: match %}
           {% endfor %}
           <tr{% if row_is_break %} class="table-secondary"{% endif %}>
-            <th scope="row" class="timeCol">{{ row_time }}</th>
+            <th scope="row" class="timeCol">{{ time }}</th>
             {% if row_is_break %}
               {% assign labels = '' | split: '' %}
               {% for item in row_items %}
                 {% if item and item.label %}{% assign labels = labels | push: item.label %}{% endif %}
               {% endfor %}
-              {% assign label = labels | join: ' / ' %}
+              {% assign label = labels | uniq | join: ' / ' %}
               <td colspan="{{ days | size }}" style="text-align:center">{{ label }}</td>
             {% else %}
               {% for item in row_items %}
@@ -66,8 +99,14 @@
                   {% if item %}
                     {% case item.type %}
                       {% when 'keynote' %}Keynote {{ item.number }}
-                      {% when 'session' %}{% assign stitle = 'Session ' | append: item.number %}{% if item.title %}{% assign stitle = stitle | append: ' ' | append: item.title %}{% endif %}{{ stitle }}
-                      {% when 'break' %}{{ item.label }}
+                      {% when 'session' %}
+                        {% assign stitle = 'Session ' | append: item.number %}
+                        {% if item.title %}{% assign stitle = stitle | append: ' <small>(' | append: item.title | append: ')</small>' %}{% endif %}
+                        {% assign talk_count = item.papers | size %}
+                        {{ stitle }}<br><i><small>({{ talk_count }} talks)</small></i>
+                      {% when 'registration' %}{{ item.label | default: 'Registration' }}
+                      {% when 'break' %}{{ item.label | default: 'Break' }}
+                      {% when 'info' %}{{ item.label | default: item.title }}
                       {% else %}{{ item.label | default: item.title }}
                     {% endcase %}
                   {% endif %}
