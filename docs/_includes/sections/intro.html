@@ -1,20 +1,52 @@
-{% assign hero = site.data.conference.hero | default: site.data.year.hero %}
-{% assign hero_buttons = hero.buttons | default: site.data.year.hero.buttons %}
-{% assign satellite = site.data.conference.satellite_event %}
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
+{% assign hero = current.hero | default: general.hero %}
+{% assign hero_buttons = hero.buttons %}
+{% assign tbd = general.tbd | default: 'TBD' %}
+{% assign satellite = current.satellite_event %}
+
+{% comment %}Hero subtitle fallback{% endcomment %}
+{% assign subtitle = hero.subtitle %}
+{% if subtitle == nil or subtitle == '' %}
+  {% assign start = current.dates.start %}
+  {% assign end = current.dates.end %}
+  {% assign city = current.city | default: tbd %}
+  {% assign country = current.country | default: tbd %}
+  {% assign date_fmt = current.date_format | default: general.date_format | default: "%A, %B %-d, %Y" %}
+  {% assign start_text = start | date: date_fmt %}
+  {% assign end_text = end | date: date_fmt %}
+  {% if start and end %}
+    {% assign subtitle = start_text | append: ' to ' | append: end_text | append: ', ' | append: city | append: ', ' | append: country %}
+  {% elsif start %}
+    {% assign subtitle = start_text | append: ', ' | append: city | append: ', ' | append: country %}
+  {% elsif city != tbd or country != tbd %}
+    {% assign subtitle = city | append: ', ' | append: country %}
+  {% else %}
+    {% assign subtitle = tbd %}
+  {% endif %}
+{% endif %}
 <section id="intro">
   <div class="intro-container wow fadeIn">
     <h1 class="mb-4 pb-0">{{ hero.title }}</h1>
-    <p class="mb-4 pb-0">{{ hero.subtitle }}</p>
+    <p class="mb-4 pb-0">{{ subtitle }}</p>
     {% if hero_buttons %}
       {% for button in hero_buttons %}
         <a href="{{ button.href }}" class="about-btn scrollto">{{ button.label }}</a>
       {% endfor %}
     {% endif %}
-    {% if satellite and satellite.enabled %}
-      <div class="satellite-note">
-        <h3>Satellite event: {{ satellite.name }}</h3>
-        <p>{{ satellite.description }}<br>{{ satellite.dates }} - {{ satellite.building }}. <a href="{{ satellite.link }}">Details</a></p>
-      </div>
+    {% if satellite %}
+      {% if satellite.enabled %}
+        <div class="satellite-note">
+          <h3>Satellite event: {{ satellite.name | default: tbd }}</h3>
+          <p>{{ satellite.description | default: tbd }}<br>{{ satellite.dates | default: tbd }}{% if satellite.building %} - {{ satellite.building }}{% endif %}{% if satellite.link %}. <a href="{{ satellite.link }}">Details</a>{% endif %}</p>
+        </div>
+      {% else %}
+        <div class="satellite-note">
+          <h3>Satellite event</h3>
+          <p>{{ tbd }}</p>
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 </section>

@@ -1,30 +1,48 @@
-year: 2023
-edition: 27
-city: "Tokyo"
-country: "Japan"
-dates:
-  start: 2023-12-06
-  end: 2023-12-08
-hero:
-  title: "Conference on Principles of Distributed Systems"
-  subtitle: "6-8 December 2023, Tokyo, Japan"
-  buttons:
-    - label: "About OPODIS 2023"
-      href: "#about"
-    - label: "Register"
-      href: "#subscribe"
-locale:
-  timezone_note: "(Anywhere on Earth)"
-  timezone: "Asia/Tokyo"
-contacts:
-  - label: "OPODIS 2023 Organizing Team"
-    email: "opodis23@coord.c.titech.ac.jp"
-  - label: "OPODIS 2023 Technical Program Chairs"
-    email: "opodis_pc_chairs@coord.c.titech.ac.jp"
-satellite_event:
-  enabled: true
-  name: "MAC 23"
-  description: "The research meeting and school on Distributed Computing by Mobile Robots, aka, Moving and Computing (MAC 23) will be organized as a satellite event of OPODIS during the two days following OPODIS 2023."
-  dates: "December 9/10 (Sat/Sun)"
-  building: "West 8E"
-  link: "/mac23"
+general:
+  acronym: "OPODIS"
+  date_format: "%A, %B %-d, %Y"
+  tbd: "TBD"
+  locale:
+    timezone_note: "(Anywhere on Earth)"
+  hero:
+    title: "Conference on Principles of Distributed Systems"
+    buttons:
+      - label: "About OPODIS 2023"
+        href: "#about"
+      - label: "Register"
+        href: "#subscribe"
+
+year:
+  year: 2023
+  edition: 27
+  city: "Tokyo"
+  country: "Japan"
+  dates:
+    start: 2023-12-06
+    end: 2023-12-08
+  locale:
+    timezone: "Asia/Tokyo"
+  venue:
+    name: "Tokyo Institute of Technology"
+    building: "West 9, Multi-Purpose Digital Hall"
+    address_lines:
+      - "Ookayama 2-12-1"
+      - "152-8550 Meguro-ku, Tokyo"
+      - "Japan"
+    address_localized:
+      - "東京都目黒区大岡山2-12-1, 東京工業大学, 西９号館・ディジタル多目的ホール"
+    map_url: "https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6"
+  hero:
+    subtitle: "6-8 December 2023, Tokyo, Japan"
+  contacts:
+    - label: "OPODIS 2023 Organizing Team"
+      email: "opodis23@coord.c.titech.ac.jp"
+    - label: "OPODIS 2023 Technical Program Chairs"
+      email: "opodis_pc_chairs@coord.c.titech.ac.jp"
+  satellite_event:
+    enabled: true
+    name: "MAC 23"
+    description: "The research meeting and school on Distributed Computing by Mobile Robots, aka, Moving and Computing (MAC 23) will be organized as a satellite event of OPODIS during the two days following OPODIS 2023."
+    dates: "December 9/10 (Sat/Sun)"
+    building: "West 8E"
+    link: "/mac23"

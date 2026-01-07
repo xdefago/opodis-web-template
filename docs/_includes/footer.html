@@ -7,7 +7,13 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-info">
-            <img src="{{ site.data.site.footer.logo }}" alt="OPODIS'{{ site.data.conference.year | slice: -2, 2 }}">
+            {% assign conf_data = site.data.conference %}
+            {% assign general = conf_data.general %}
+            {% assign current = conf_data.year %}
+            {% assign tbd = general.tbd | default: 'TBD' %}
+            {% assign conf = current.acronym | default: general.acronym | default: tbd %}
+            {% assign year = current.year | default: general.year | default: tbd %}
+            <img src="{{ site.data.site.footer.logo }}" alt="{{ conf }} '{{ year | slice: -2, 2 }}">
             <p>{{ site.data.site.footer.blurb }}</p>
           </div>
 
@@ -22,12 +28,18 @@
 
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contact Us</h4>
-            {% for contact in site.data.conference.contacts %}
+            {% assign contacts = current.contacts | default: general.contacts %}
+            {% if contacts %}
+              {% for contact in contacts %}
               <p>
-                {{ contact.label }}<br>
+                {{ contact.label }}
+                <br>
                 <strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a><br>
               </p>
-            {% endfor %}
+              {% endfor %}
+            {% else %}
+              <p>{{ tbd }}</p>
+            {% endif %}
           </div>
 
         </div>

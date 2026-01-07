@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  {% assign year = site.data.conference.year %}
-  {% assign edition = site.data.conference.edition %}
-  <title>{% if page.title %}{{ page.title }} | OPODIS {{ year }}{% else %}OPODIS {{ year }} - The {{ edition }}th International Conference on Principles of Distributed Systems{% endif %}</title>
+  {% assign conf_data = site.data.conference %}
+  {% assign general = conf_data.general %}
+  {% assign current = conf_data.year %}
+  {% assign tbd = general.tbd | default: 'TBD' %}
+  {% assign conf = current.acronym | default: general.acronym | default: tbd %}
+  {% assign year = current.year | default: general.year | default: tbd %}
+  {% assign edition = current.edition | default: general.edition %}
+  {% if edition == nil and year != tbd and year != blank %}
+    {% assign edition = year | minus: 1996 %}
+  {% endif %}
+  {% if edition == nil %}{% assign edition = '??' %}{% endif %}
+  {% if edition == '??' %}
+    {% assign edition_suffix = 'th' %}
+  {% else %}
+    {% assign edition_mod = edition | modulo: 10 %}
+    {% case edition_mod %}
+      {% when 1 %}{% assign edition_suffix = 'st' %}
+      {% when 2 %}{% assign edition_suffix = 'nd' %}
+      {% when 3 %}{% assign edition_suffix = 'rd' %}
+      {% else %}{% assign edition_suffix = 'th' %}
+    {% endcase %}
+  {% endif %}
+  <title>{% if page.title %}{{ page.title }} | {{ conf }} {{ year }}{% else %}{{ conf }} {{ year }} - The {{ edition }}{{ edition_suffix }} International Conference on Principles of Distributed Systems{% endif %}</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">

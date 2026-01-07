@@ -174,6 +174,79 @@ jQuery(document).ready(function( $ ) {
     $program.find(targetPane).addClass('show active');
   })();
 
+  // Auto-update date statuses based on current time and configured timezone
+  (function updateDateStatuses() {
+    var $items = $('.date-item[data-status-auto="true"]');
+    if (!$items.length) return;
+
+    function parseTime(timeStr) {
+      if (!timeStr) return { h: 23, m: 59 };
+      var parts = String(timeStr).split(':');
+      var h = parseInt(parts[0], 10);
+      var m = parts[1] ? parseInt(parts[1], 10) : 0;
+      return { h: isNaN(h) ? 23 : h, m: isNaN(m) ? 59 : m };
+    }
+
+    function getOffsetMinutes(timeZone, dateForTz) {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: timeZone,
+          hour12: false,
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          timeZoneName: 'shortOffset'
+        });
+        var parts = fmt.formatToParts(dateForTz);
+        var tzName = parts.find(function(p) { return p.type === 'timeZoneName'; });
+        var value = tzName ? tzName.value : 'GMT';
+        var match = value.match(/GMT([+-])(\d{1,2})(?::?(\d{2}))?/i);
+        if (match) {
+          var sign = match[1] === '-' ? -1 : 1;
+          var hours = parseInt(match[2], 10) || 0;
+          var mins = parseInt(match[3], 10) || 0;
+          return sign * (hours * 60 + mins);
+        }
+      } catch (e) {
+        // Fallback below
+      }
+      return 0;
+    }
+
+    function buildDeadline(isoDate, timeZone, timeStr) {
+      if (!isoDate) return null;
+      var parts = String(isoDate).split('-');
+      if (parts.length < 3) return null;
+      var year = parseInt(parts[0], 10);
+      var month = parseInt(parts[1], 10);
+      var day = parseInt(parts[2], 10);
+      if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+      var t = parseTime(timeStr);
+      var baseUtc = Date.UTC(year, month - 1, day, t.h, t.m);
+      var offset = getOffsetMinutes(timeZone || 'UTC', new Date(baseUtc));
+      return baseUtc - offset * 60000;
+    }
+
+    var now = Date.now();
+
+    $items.each(function() {
+      var $item = $(this);
+      var tz = $item.data('timezone') || 'UTC';
+      var iso = $item.data('updated-iso') || $item.data('date-iso');
+      var timeStr = $item.data('time');
+      var deadline = buildDeadline(iso, tz, timeStr);
+      if (!deadline) return;
+
+      var isPast = now > deadline;
+      var icon = $item.find('.fa-li i');
+      var newIcon = isPast ? 'fa-check-circle' : 'fa-registered';
+      icon.removeClass('fa-check-circle fa-hourglass fa-registered').addClass(newIcon);
+    });
+  })();
+
   // Gallery carousel (uses the Owl Carousel library)
   $(".gallery-carousel").owlCarousel({
     autoplay: true,

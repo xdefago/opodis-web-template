@@ -5,7 +5,13 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="/">O<span>P</span>O<span>D</span>I<span>S</span>{{ site.data.conference.year }}</a></h1>
+        {% assign conf_data = site.data.conference %}
+        {% assign general = conf_data.general %}
+        {% assign current = conf_data.year %}
+        {% assign tbd = general.tbd | default: 'TBD' %}
+        {% assign conf = current.acronym | default: general.acronym | default: tbd %}
+        {% assign year = current.year | default: general.year | default: tbd %}
+        <h1><a href="/">{{ conf }} {{ year }}</a></h1>
       </div>
 
       <nav id="nav-menu-container">

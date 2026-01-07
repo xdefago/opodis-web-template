@@ -1,4 +1,10 @@
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
 {% assign dates = site.data.dates %}
+{% assign tbd = general.tbd | default: 'TBD' %}
+{% assign dates_timezone = dates.timezone | default: current.locale.timezone | default: general.locale.timezone | default: 'UTC' %}
+{% assign date_format = current.date_format | default: general.date_format | default: "%A, %B %-d, %Y" %}
 <section id="dates">
   <div class="container">
     <div class="section-header">
@@ -13,16 +19,25 @@
         <ul class="fa-ul">
           {% for item in dates.items %}
           {% assign icon = 'fa-hourglass' %}
+          {% assign is_auto = item.status == 'auto' %}
           {% if item.status == 'past' %}{% assign icon = 'fa-check-circle' %}{% endif %}
           {% if item.status == 'upcoming' %}{% assign icon = 'fa-registered' %}{% endif %}
-          <li><span class="fa-li"><i class="fa {{ icon }}"></i></span>
+          {% assign base_iso = item.date_iso %}
+          {% assign updated_iso = item.updated_iso %}
+          {% assign base_text = base_iso | date: date_format %}
+          {% assign updated_text = updated_iso | date: date_format %}
+          <li class="date-item"
+              {% if is_auto %}data-status-auto="true"{% endif %}
+              {% if dates_timezone %}data-timezone="{{ dates_timezone }}"{% endif %}
+              {% if base_iso %}data-date-iso="{{ base_iso }}"{% endif %}
+              {% if updated_iso %}data-updated-iso="{{ updated_iso }}"{% endif %}
+              {% if item.time %}data-time="{{ item.time }}"{% endif %}
+          ><span class="fa-li"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
             {{ item.label }}:
-            {% if item.original and item.updated %}
-              <i><s>{{ item.original }}</s> {{ item.updated }}</i>
-            {% elsif item.date %}
-              <i>{{ item.date }}</i>
+            {% if updated_iso %}
+              <i><s>{{ base_text }}</s> {{ updated_text }}</i>
             {% else %}
-              <i>{{ item.updated | default: item.original }}</i>
+              <i>{{ base_text }}</i>
             {% endif %}
           </li>
           {% endfor %}
