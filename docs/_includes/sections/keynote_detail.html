@@ -4,7 +4,7 @@
 {% if speaker_id %}
   {% assign num_str = speaker_id | remove: 'keynote' %}
   {% assign idx = num_str | plus: 0 | minus: 1 %}
-  {% assign keynote = site.data.keynotes.keynote | slice: idx, 1 | first %}
+  {% assign keynote = site.data.keynotes.items | slice: idx, 1 | first %}
   {% assign speaker = keynote.speaker %}
 {% endif %}
 <section id="speakers-details" class="wow fadeIn">

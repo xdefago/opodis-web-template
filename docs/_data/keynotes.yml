@@ -1,6 +1,7 @@
 ## Keynotes for the year (numbered by array position; program.yml references numbers)
 welcome: "We will host the following outstanding speakers."
-keynote:
+items:
+
   ## Keynote number: 1
   - title: "From Consensus Research to Redbelly Network Pty Ltd"
     speaker:

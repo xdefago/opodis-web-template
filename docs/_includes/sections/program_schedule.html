@@ -51,7 +51,7 @@
             {% case item.type %}
             {% when 'keynote' %}
               {% assign keynote_idx = item.number | minus: 1 %}
-              {% assign keynote = site.data.keynotes.keynote | slice: keynote_idx, 1 | first %}
+              {% assign keynote = site.data.keynotes.items | slice: keynote_idx, 1 | first %}
               {% assign speaker = keynote.speaker %}
               <h4>Keynote {{ item.number }}{% if item.chair %}: <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
               <p class="speaker-line">{{ speaker.name }}, <span>{{ speaker.affiliation }}</span></p>

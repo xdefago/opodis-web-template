@@ -8,28 +8,32 @@
     </div>
 
     <div class="row">
-      {% assign keynotes = site.data.keynotes.keynote %}
+      {% assign keynotes = site.data.keynotes.items %}
       {% if keynotes %}
         {% for keynote in keynotes %}
         <div class="col-lg-4 col-md-6">
           <div class="speaker">
             {% assign speaker = keynote.speaker %}
             {% assign photo = speaker.photo %}
-            <div>
-              {% if keynote.title %}
-              Keynote {{ forloop.index }}:<br> {{ keynote.title }}
-              {% else %}
-              Keynote {{ forloop.index }}
-              {% endif %}
-            </div>
+            {% assign keynote_detail_url = 'keynote' | append: forloop.index | append: '-details.html'  %}
+
+            {% if keynote.title %}
+              <div>Keynote {{ forloop.index }}:<br> {{ keynote.title }}</div>
+            {% else %}
+              <div>Keynote {{ forloop.index }}</div>
+            {% endif %}
+
             {% if photo %}
               <div class="speaker-img">
               <img src="{{ photo }}" alt="{{ speaker.name | default: forloop.index }}" class="img-fluid">
               </div>
             {% endif %}
             <div class="details">
-              <!--<h3>Keynote {{ forloop.index }}: {{ speaker.name }}</h3>-->
-              <h3>{{ speaker.name }}</h3>
+              {% if keynote_detail_url %}
+                <h3><a href="{{ keynote_detail_url }}">{{ speaker.name }}</a></h3>
+              {% else %}
+                <h3>{{ speaker.name }}</h3>
+              {% endif %}
               <h3>{{ speaker.affiliation | default: 'Details coming soon' }}</h3>
               <!--<h4>{{ keynote.title }}</h4>-->
               <div class="social">
