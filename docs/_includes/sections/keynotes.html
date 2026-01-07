@@ -2,25 +2,36 @@
   <div class="container">
     <div class="section-header">
       <h2>Keynote Speakers</h2>
-      <p>We will host the following outstanding speakers.</p>
+      {% if site.data.keynotes.welcome %}
+      <p>{{ site.data.keynotes.welcome }}</p>
+      {% endif %}
     </div>
 
     <div class="row">
-      {% for pair in site.data.keynotes %}
-        {% assign speaker_id = pair[0] %}
-        {% assign speaker = pair[1] %}
-        {% if speaker %}
+      {% assign keynotes = site.data.keynotes.keynote %}
+      {% if keynotes %}
+        {% for keynote in keynotes %}
         <div class="col-lg-4 col-md-6">
           <div class="speaker">
+            {% assign speaker = keynote.speaker %}
             {% assign photo = speaker.photo %}
+            <div>
+              {% if keynote.title %}
+              Keynote {{ forloop.index }}:<br> {{ keynote.title }}
+              {% else %}
+              Keynote {{ forloop.index }}
+              {% endif %}
+            </div>
             {% if photo %}
-            <a href="{{ speaker.url | default: '#' }}">
-              <img src="{{ photo }}" alt="{{ speaker.name | default: speaker_id }}" class="img-fluid">
-            </a>
+              <div class="speaker-img">
+              <img src="{{ photo }}" alt="{{ speaker.name | default: forloop.index }}" class="img-fluid">
+              </div>
             {% endif %}
             <div class="details">
-              <h3><a href="{{ speaker.url | default: '#' }}">{{ speaker.name | default: speaker_id }}</a></h3>
+              <!--<h3>Keynote {{ forloop.index }}: {{ speaker.name }}</h3>-->
+              <h3>{{ speaker.name }}</h3>
               <h3>{{ speaker.affiliation | default: 'Details coming soon' }}</h3>
+              <!--<h4>{{ keynote.title }}</h4>-->
               <div class="social">
                 {% for link in speaker.links %}
                   <a href="{{ link.url }}"><i class="fa {{ link.icon }}"></i></a>
@@ -29,8 +40,8 @@
             </div>
           </div>
         </div>
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>

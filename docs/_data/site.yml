@@ -1,23 +1,4 @@
-site_name: "OPODIS"
-site_full_name: "International Conference on Principles of Distributed Systems"
-site_series_url: "https://www.opodis.net"
 default_language: "en"
-
-footer:
-  logo: "img/logo-opodis.png"
-  blurb: "OPODIS'23 is an open forum for the exchange of state-of-the-art knowledge concerning distributed computing and distributed computer systems. All aspects of distributed systems are within the scope of OPODIS, including theory, specification, design, performance, and system building."
-  useful_links:
-    - label: "Tokyo Tech"
-      icon: "fa-university"
-      url: "https://www.titech.ac.jp/english"
-    - label: "OPODIS conference series"
-      icon: "fa-angle-right"
-      url: "https://www.opodis.net"
-
-branding:
-  hero_buttons:
-    register: true
-    about: true
 
 fonts:
   google: "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"

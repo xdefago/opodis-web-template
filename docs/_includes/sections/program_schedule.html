@@ -1,4 +1,11 @@
 {% assign schedule = site.data.program.schedule %}
+{% assign conf_data = site.data.conference %}
+{% assign general = conf_data.general %}
+{% assign current = conf_data.year %}
+{% assign tz = current.locale.timezone | default: general.locale.timezone | default: '+00:00' %}
+{% assign flip_time = schedule.flip_time %}
+{% assign day_label_format = "%a %b %-d" %}
+{% assign base_date = schedule.date | default: current.dates.start | default: general.dates.start %}
 {% assign section_id = include.id | default: 'detailed-program' %}
 <section id="{{ section_id }}" class="section-with-bg schedule-section">
   <div class="container wow fadeInUp">
@@ -16,29 +23,45 @@
 
     <ul class="nav nav-tabs" role="tablist">
       {% for day in schedule.days %}
+      {% assign day_date = day.date | default: base_date %}
+      {% assign day_label = day.label | default: day_date | date: day_label_format %}
+      {% assign deadline = nil %}
+      {% if flip_time and day_date and tz %}
+        {% assign raw_dt = day_date | append: ' ' | append: flip_time | append: ':00 ' | append: tz %}
+        {% assign deadline = raw_dt | date: "%Y-%m-%dT%H:%M:%S%:z" %}
+      {% endif %}
       <li class="nav-item">
-        <a class="nav-link{% if forloop.first %} active{% endif %}" href="#{{ day.id }}" role="tab" data-toggle="tab"{% if day.deadline_local %} data-deadline="{{ day.deadline_local }}"{% endif %}>{{ day.label }}</a>
+        <a class="nav-link{% if forloop.first %} active{% endif %}" href="#day-{{ forloop.index }}" role="tab" data-toggle="tab"{% if deadline %} data-deadline="{{ deadline }}"{% endif %}>{{ day_label }}</a>
       </li>
       {% endfor %}
     </ul>
 
     <div class="tab-content row justify-content-center">
       {% for day in schedule.days %}
-      <div role="tabpanel" class="col-lg-9 tab-pane fade{% if forloop.first %} show active{% endif %}" id="{{ day.id }}">
+      {% assign day_date = day.date | default: base_date %}
+      {% assign day_label = day.label | default: day_date | date: day_label_format %}
+      <div role="tabpanel" class="col-lg-9 tab-pane fade{% if forloop.first %} show active{% endif %}" id="day-{{ forloop.index }}">
         {% for item in day.items %}
         <div class="row schedule-item">
           <div class="col-md-2"><time>{{ item.time }}</time></div>
           <div class="col-md-10">
-            {% if item.anchor %}<a name="{{ item.anchor }}" class="name_adjust"></a>{% endif %}
+            {% assign anchor = nil %}
+            {% if item.number %}{% assign anchor = item.type | append: item.number %}{% endif %}
+            {% if anchor %}<a name="{{ anchor }}" class="name_adjust"></a>{% endif %}
             {% case item.type %}
             {% when 'keynote' %}
-              <h4><a href="{{ item.speaker.details_url }}">{{ item.title }}</a>{% if item.chair %}: <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
-              <p class="speaker-line">{{ item.speaker.name }}, <span>{{ item.speaker.affiliation }}</span></p>
-              {% if item.speaker.paper_number or item.speaker.talk_title %}
-              <p>{% if item.speaker.paper_number %}<span class="paper-number">{{ item.speaker.paper_number }}</span>{% endif %} {{ item.speaker.talk_title }}</p>
+              {% assign keynote_idx = item.number | minus: 1 %}
+              {% assign keynote = site.data.keynotes.keynote | slice: keynote_idx, 1 | first %}
+              {% assign speaker = keynote.speaker %}
+              <h4>Keynote {{ item.number }}{% if item.chair %}: <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
+              <p class="speaker-line">{{ speaker.name }}, <span>{{ speaker.affiliation }}</span></p>
+              {% if keynote.title %}
+              <p>{{ keynote.title }}</p>
               {% endif %}
             {% when 'session' %}
-              <h4>{{ item.title }}{% if item.chair %} <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
+              {% assign session_title = 'Session ' | append: item.number %}
+              {% if item.title %}{% assign session_title = session_title | append: ' ' | append: item.title %}{% endif %}
+              <h4>{{ session_title }}{% if item.chair %} <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
               <ul class="fa-ul session-papers">
                 {% for paper in item.papers %}
                 {% assign paper_data = site.data.papers | where: 'number', paper.number | first %}

@@ -1,16 +1,29 @@
 general:
   acronym: "OPODIS"
+  series_url: "https://www.opodis.net"
+  fullname: "International Conference on Principles of Distributed Systems"
+  name: "Conference on Principles of Distributed Systems"
   date_format: "%A, %B %-d, %Y"
   tbd: "TBD"
   locale:
     timezone_note: "(Anywhere on Earth)"
   hero:
-    title: "Conference on Principles of Distributed Systems"
-    buttons:
-      - label: "About OPODIS 2023"
-        href: "#about"
-      - label: "Register"
-        href: "#subscribe"
+    subtitle: "6-8 December 2023, Tokyo, Japan"
+  buttons:
+    - label: "About {ACRONYM} {YEAR:02}"
+      href: "#about"
+    - label: "Register"
+      href: "#subscribe"
+  footer:
+    logo: "img/logo-opodis.png"
+    blurb: "OPODIS'23 is an open forum for the exchange of state-of-the-art knowledge concerning distributed computing and distributed computer systems. All aspects of distributed systems are within the scope of OPODIS, including theory, specification, design, performance, and system building."
+    useful_links:
+      - label: "Tokyo Tech"
+        icon: "fa-university"
+        url: "https://www.titech.ac.jp/english"
+      - label: "OPODIS conference series"
+        icon: "fa-angle-right"
+        url: "https://www.opodis.net"
 
 year:
   year: 2023

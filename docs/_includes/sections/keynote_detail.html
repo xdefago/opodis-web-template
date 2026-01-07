@@ -1,5 +1,12 @@
 {% assign speaker_id = include.speaker_id | default: page.speaker_id %}
-{% assign speaker = site.data.keynotes[speaker_id] %}
+{% assign keynote = nil %}
+{% assign speaker = nil %}
+{% if speaker_id %}
+  {% assign num_str = speaker_id | remove: 'keynote' %}
+  {% assign idx = num_str | plus: 0 | minus: 1 %}
+  {% assign keynote = site.data.keynotes.keynote | slice: idx, 1 | first %}
+  {% assign speaker = keynote.speaker %}
+{% endif %}
 <section id="speakers-details" class="wow fadeIn">
   <div class="container">
     {% if speaker %}
@@ -21,11 +28,11 @@
 
         <div class="col-md-6">
           <div class="details">
-            {% if speaker.talk_title %}<h2>{{ speaker.talk_title }}</h2>{% endif %}
+            {% if keynote.title %}<h2>{{ keynote.title }}</h2>{% endif %}
 
-            {% if speaker.abstract %}
+            {% if keynote.abstract %}
             <h3>Abstract</h3>
-            <p>{{ speaker.abstract }}</p>
+            <p>{{ keynote.abstract }}</p>
             {% endif %}
 
             {% if speaker.bio %}

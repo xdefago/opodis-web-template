@@ -13,14 +13,14 @@
             {% assign tbd = general.tbd | default: 'TBD' %}
             {% assign conf = current.acronym | default: general.acronym | default: tbd %}
             {% assign year = current.year | default: general.year | default: tbd %}
-            <img src="{{ site.data.site.footer.logo }}" alt="{{ conf }} '{{ year | slice: -2, 2 }}">
-            <p>{{ site.data.site.footer.blurb }}</p>
+            <img src="{{ general.footer.logo }}" alt="{{ conf }} '{{ year | slice: -2, 2 }}">
+            <p>{{ general.footer.blurb }}</p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              {% for link in site.data.site.footer.useful_links %}
+              {% for link in general.footer.useful_links %}
                 <li><i class="fa {{ link.icon }}"></i> <a href="{{ link.url }}">{{ link.label }}</a></li>
               {% endfor %}
             </ul>

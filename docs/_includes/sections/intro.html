@@ -1,8 +1,14 @@
 {% assign conf_data = site.data.conference %}
 {% assign general = conf_data.general %}
 {% assign current = conf_data.year %}
+{% assign tbd = general.tbd | default: 'TBD' %}
+{% assign conf = current.acronym | default: general.acronym | default: tbd %}
+{% assign year = current.year | default: general.year | default: tbd %}
+{% assign year_two = year | modulo: 100 %}
+{% assign year_two_padded = year_two %}
+{% if year_two != blank and year_two < 10 %}{% assign year_two_padded = '0' | append: year_two %}{% endif %}
 {% assign hero = current.hero | default: general.hero %}
-{% assign hero_buttons = hero.buttons %}
+{% assign hero_buttons = current.buttons | default: general.buttons %}
 {% assign tbd = general.tbd | default: 'TBD' %}
 {% assign satellite = current.satellite_event %}
 
@@ -28,11 +34,13 @@
 {% endif %}
 <section id="intro">
   <div class="intro-container wow fadeIn">
-    <h1 class="mb-4 pb-0">{{ hero.title }}</h1>
+    {% assign hero_title = current.hero.title | default: general.name | default: tbd %}
+    <h1 class="mb-4 pb-0">{{ hero_title }}</h1>
     <p class="mb-4 pb-0">{{ subtitle }}</p>
     {% if hero_buttons %}
       {% for button in hero_buttons %}
-        <a href="{{ button.href }}" class="about-btn scrollto">{{ button.label }}</a>
+        {% assign label = button.label | replace: '{ACRONYM}', conf | replace: '{YEAR:02}', year_two_padded %}
+        <a href="{{ button.href }}" class="about-btn scrollto">{{ label }}</a>
       {% endfor %}
     {% endif %}
     {% if satellite %}

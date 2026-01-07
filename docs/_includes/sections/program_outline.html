@@ -1,4 +1,13 @@
-{% assign outline = site.data.program.outline %}
+{% assign schedule = site.data.program.schedule %}
+{% assign days = schedule.days %}
+{% assign day_label_format = "%a %b %-d" %}
+
+{% assign max_items = 0 %}
+{% for day in days %}
+  {% assign len = day.items | size %}
+  {% if len > max_items %}{% assign max_items = len %}{% endif %}
+{% endfor %}
+
 <section id="schedule" class="section-with-bg">
   <div class="container wow fadeInUp">
     <div class="section-header">
@@ -17,7 +26,7 @@
         </style>
         <caption>Social events:
           <ul>
-            {% for item in outline.social %}
+            {% for item in site.data.program.outline.social %}
             <li>{{ item }}</li>
             {% endfor %}
           </ul>
@@ -25,22 +34,44 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col" class="timeCol"></th>
-            {% for column in outline.columns %}
-            <th scope="col">{{ column }}</th>
+            {% for day in days %}
+            {% assign day_label = day.label | default: day.date | date: day_label_format %}
+            <th scope="col">{{ day_label }}</th>
             {% endfor %}
           </tr>
         </thead>
         <tbody>
-          {% for row in outline.rows %}
-          <tr{% if row.style == "break" %} class="table-secondary"{% endif %}>
-            <th scope="row" class="timeCol">{{ row.time }}</th>
-            {% if row.style == "break" %}
-              {% assign non_empty = row.values | where_exp: 'item', 'item != ""' %}
-              {% assign label = non_empty | join: ' / ' %}
-              <td colspan="{{ outline.columns | size }}" style="text-align:center">{{ label }}</td>
+          {% for i in (0..max_items-1) %}
+          {% assign row_items = '' | split: '' %}
+          {% assign row_time = '' %}
+          {% assign row_is_break = true %}
+          {% for day in days %}
+            {% assign item = day.items[i] %}
+            {% if item and row_time == '' %}{% assign row_time = item.time %}{% endif %}
+            {% if item and item.type != 'break' %}{% assign row_is_break = false %}{% endif %}
+            {% assign row_items = row_items | push: item %}
+          {% endfor %}
+          <tr{% if row_is_break %} class="table-secondary"{% endif %}>
+            <th scope="row" class="timeCol">{{ row_time }}</th>
+            {% if row_is_break %}
+              {% assign labels = '' | split: '' %}
+              {% for item in row_items %}
+                {% if item and item.label %}{% assign labels = labels | push: item.label %}{% endif %}
+              {% endfor %}
+              {% assign label = labels | join: ' / ' %}
+              <td colspan="{{ days | size }}" style="text-align:center">{{ label }}</td>
             {% else %}
-              {% for cell in row.values %}
-              <td{% if row.style == "break" %} class="table-secondary"{% endif %}>{{ cell }}</td>
+              {% for item in row_items %}
+                <td>
+                  {% if item %}
+                    {% case item.type %}
+                      {% when 'keynote' %}Keynote {{ item.number }}
+                      {% when 'session' %}{% assign stitle = 'Session ' | append: item.number %}{% if item.title %}{% assign stitle = stitle | append: ' ' | append: item.title %}{% endif %}{{ stitle }}
+                      {% when 'break' %}{{ item.label }}
+                      {% else %}{{ item.label | default: item.title }}
+                    {% endcase %}
+                  {% endif %}
+                </td>
               {% endfor %}
             {% endif %}
           </tr>
