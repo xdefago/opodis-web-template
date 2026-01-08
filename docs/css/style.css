@@ -1691,6 +1691,90 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding-left: 5px;
 }
 
+/*--------------------------------------------------------------
+# Committee Section Styling
+--------------------------------------------------------------*/
+
+#committees {
+  padding: 40px 0;
+}
+
+.committee-section {
+  margin-bottom: 30px;
+}
+
+.committee-section h3 {
+  color: #0e1b4d;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #f82249;
+  padding-bottom: 12px;
+}
+
+.committee-section h3 i {
+  margin-right: 10px;
+  color: #f82249;
+}
+
+.committee-subsection {
+  margin-bottom: 25px;
+}
+
+.committee-role {
+  color: #0e1b4d;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f82249;
+  display: inline-block;
+}
+
+.committee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.committee-member {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.member-name {
+  font-weight: 600;
+  color: #0e1b4d;
+  display: block;
+  font-size: 15px;
+}
+
+.member-role {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+
+.member-affiliation {
+  color: #666;
+  font-size: 0.95em;
+  display: block;
+  font-weight: 400;
+  margin-top: 3px;
+}
+
+/* Program Committee balanced columns */
+.program-committee-columns {
+  column-count: 1;
+}
+
+@media (min-width: 992px) {
+  .program-committee-columns {
+    column-count: 2;
+    column-gap: 30px;
+  }
+}
+
 
 
 /*--------------------------------------------------------------

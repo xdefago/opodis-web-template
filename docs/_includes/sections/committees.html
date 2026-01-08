@@ -8,95 +8,58 @@
       <br>
       <h2>Committees</h2>
     </div>
+
     <div class="row">
-      <div class="col-lg-6">
-        <h2>Organizing Committee</h2>
+      <!-- Organizing Committee -->
+      <div class="col-12 col-lg-6 mb-4">
+        <div class="committee-section">
+          <h3><i class="fa fa-institution"></i> Organizing Committee</h3>
         {% if committees.organizing.general_chairs.enabled != false %}
-        <ul class="fa-ul">
-          <li>General Chairs:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign gc_items = committees.organizing.general_chairs.items | default: committees.organizing.general_chairs %}
-              {% for person in gc_items %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
+          {% assign gc_items = committees.organizing.general_chairs.items | default: committees.organizing.general_chairs %}
+          {% include sections/committee_list.html title="General Chairs" items=gc_items show_role=false %}
         {% endif %}
 
         {% if committees.organizing.publication_chair.enabled != false %}
-        <ul class="fa-ul">
-          <li>Publication Chair:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign pub_items = committees.organizing.publication_chair.items | default: committees.organizing.publication_chair %}
-              {% for person in pub_items %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
+          {% assign pub_items = committees.organizing.publication_chair.items | default: committees.organizing.publication_chair %}
+          {% include sections/committee_list.html title="Publication Chair" items=pub_items show_role=false %}
         {% endif %}
 
         {% if committees.organizing.organizing_team.enabled != false %}
-        <ul class="fa-ul">
-          <li>Organizing Team:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign org_team = committees.organizing.organizing_team.items | default: committees.organizing.organizing_team %}
-              {% for person in org_team %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
+          {% assign org_items = committees.organizing.organizing_team.items | default: committees.organizing.organizing_team %}
+          {% include sections/committee_list.html title="Organizing Team" items=org_items show_role=true %}
         {% endif %}
-
-        {% if committees.steering.enabled != false %}
-        <ul class="fa-ul">
-          <li>Steering Committee:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign steering_items = committees.steering.items | default: committees.steering %}
-              {% for person in steering_items %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}{% if person.role %} - {{ person.role }}{% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
-        {% endif %}
+        </div>
       </div>
 
-      <div class="col-lg-6">
-        <h2>Program Committee</h2>
+      <!-- Steering Committee -->
+      <div class="col-12 col-lg-6 mb-4">
+        <div class="committee-section">
+          <h3><i class="fa fa-university"></i> Steering Committee</h3>
+        {% if committees.steering.enabled != false %}
+          {% assign steering_items = committees.steering.items | default: committees.steering %}
+          {% include sections/committee_list.html items=steering_items show_role=true %}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Program Committee -->
+      <div class="col-12 mb-4">
+        <div class="committee-section">
+          <h3><i class="fa fa-graduation-cap"></i> Program Committee</h3>
+          <div class="program-committee-columns">
         {% if committees.program_chairs.enabled != false %}
-        <ul class="fa-ul">
-          <li>Program Committee Chairs:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign pc_chairs = committees.program_chairs.items | default: committees.program_chairs %}
-              {% for person in pc_chairs %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
+          {% assign pc_chairs = committees.program_chairs.items | default: committees.program_chairs %}
+          {% include sections/committee_list.html title="Program Committee Chairs" items=pc_chairs show_role=false %}
         {% endif %}
 
         {% if committees.program_committee.enabled != false %}
-        <ul class="fa-ul">
-          <li>Program Committee:</li>
-          <li>
-            <ul class="fa-ul">
-              {% assign pc_items = committees.program_committee.items | default: committees.program_committee %}
-              {% for person in pc_items %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
+          {% assign pc_items = committees.program_committee.items | default: committees.program_committee %}
+          {% include sections/committee_list.html title="Program Committee Members" items=pc_items show_role=false %}
         {% endif %}
+          </div>
+        </div>
       </div>
     </div>
   </div>

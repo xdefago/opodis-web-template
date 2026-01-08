@@ -4,6 +4,7 @@
 require 'json'
 require 'yaml'
 require 'date'
+require 'set'
 
 ROOT = File.expand_path('..', __dir__)
 PROGRAM_YML = File.join(ROOT, 'docs', '_data', 'program.yml')
@@ -271,6 +272,148 @@ def build_rows(boundaries, days_items)
   rows
 end
 
+# Configuration Validation Functions
+
+def load_papers_yml
+  papers_file = File.join(ROOT, 'docs', '_data', 'papers.yml')
+  return {} unless File.exist?(papers_file)
+  raw = YAML.safe_load(File.read(papers_file), permitted_classes: [Date], aliases: true)
+  raw || {}
+end
+
+def load_committees_yml
+  committees_file = File.join(ROOT, 'docs', '_data', 'committees.yml')
+  return {} unless File.exist?(committees_file)
+  raw = YAML.safe_load(File.read(committees_file), permitted_classes: [Date], aliases: true)
+  raw || {}
+end
+
+def load_keynotes_yml
+  keynotes_file = File.join(ROOT, 'docs', '_data', 'keynotes.yml')
+  return {} unless File.exist?(keynotes_file)
+  raw = YAML.safe_load(File.read(keynotes_file), permitted_classes: [Date], aliases: true)
+  raw || {}
+end
+
+def validate_papers(days_data, papers_data)
+  return if papers_data.empty?
+
+  items = papers_data.fetch('items', [])
+  available_papers = items.map { |p| p['number'] }.compact.to_set
+
+  seen_papers = Set.new
+  errors = []
+
+  days_data.each_with_index do |day, day_idx|
+    day_label = day['label'] || day['date']
+    items_list = day.fetch('items', [])
+
+    items_list.each_with_index do |item, item_idx|
+      next unless item['type'] == 'session'
+      
+      papers = item.fetch('papers', [])
+      papers.each do |paper|
+        paper_num = paper.is_a?(Hash) ? paper['number'] : paper
+        
+        unless available_papers.include?(paper_num)
+          errors << "#{YELLOW}warning[paper-404]: Paper ##{paper_num} referenced in program but not in papers.yml#{RESET}\n" \
+                    "   --> program.yml:#{day_label}, session #{item['number']}\n" \
+                    "    | papers: #{papers.map { |p| p.is_a?(Hash) ? p['number'] : p }.inspect}\n" \
+                    "    | note: Add paper ##{paper_num} to papers.yml or remove from session."
+        end
+
+        if seen_papers.include?(paper_num)
+          errors << "#{YELLOW}warning[paper-duplicate]: Paper ##{paper_num} appears in multiple sessions#{RESET}\n" \
+                    "   --> program.yml:#{day_label}, session #{item['number']}\n" \
+                    "    | papers: #{papers.map { |p| p.is_a?(Hash) ? p['number'] : p }.inspect}\n" \
+                    "    | note: Each paper should appear in exactly one session."
+        end
+        
+        seen_papers.add(paper_num)
+      end
+    end
+  end
+
+  errors.each { |err| $stderr.puts err }
+end
+
+def validate_chairs(days_data, committees_data, keynotes_data)
+  # Build list of known people
+  known_people = Set.new
+  
+  # Add keynote speakers
+  keynotes_items = keynotes_data.fetch('items', [])
+  keynotes_items.each do |kn|
+    speaker = kn.fetch('speaker', {})
+    known_people.add(speaker['name']) if speaker['name']
+  end
+  
+  # Add committee members
+  committees = committees_data.fetch('organizing', {})
+  %w[general_chairs publication_chair organizing_team].each do |role|
+    role_data = committees.fetch(role, {})
+    items = role_data.is_a?(Hash) ? role_data.fetch('items', []) : role_data
+    items.each { |p| known_people.add(p['name']) if p['name'] }
+  end
+
+  steering = committees_data.fetch('steering', {})
+  items = steering.is_a?(Hash) ? steering.fetch('items', []) : steering
+  items.each { |p| known_people.add(p['name']) if p['name'] }
+
+  program_chairs = committees_data.fetch('program_chairs', {})
+  items = program_chairs.is_a?(Hash) ? program_chairs.fetch('items', []) : program_chairs
+  items.each { |p| known_people.add(p['name']) if p['name'] }
+
+  program_committee = committees_data.fetch('program_committee', {})
+  items = program_committee.is_a?(Hash) ? program_committee.fetch('items', []) : program_committee
+  items.each { |p| known_people.add(p['name']) if p['name'] }
+
+  errors = []
+
+  days_data.each_with_index do |day, day_idx|
+    day_label = day['label'] || day['date']
+    items_list = day.fetch('items', [])
+
+    items_list.each_with_index do |item, item_idx|
+      chair = item['chair']
+      next unless chair && chair != 'TBA' && chair != 'TBD' && !chair.empty?
+      
+      unless known_people.include?(chair)
+        errors << "#{YELLOW}warning[chair-unknown]: Session chair not found#{RESET}\n" \
+                  "   --> program.yml:#{day_label}, #{item['type']} #{item['number']}\n" \
+                  "    | chair: \"#{chair}\"\n" \
+                  "    | note: Add \"#{chair}\" to committees.yml or update name."
+      end
+    end
+  end
+
+  errors.each { |err| $stderr.puts err }
+end
+
+def validate_time_format(days_data)
+  errors = []
+
+  days_data.each_with_index do |day, day_idx|
+    day_label = day['label'] || day['date']
+    items_list = day.fetch('items', [])
+
+    items_list.each_with_index do |item, item_idx|
+      time = item['time']
+      next unless time
+
+      unless /^\d{1,2}:\d{2}$/.match?(time.to_s)
+        errors << "#{YELLOW}warning[time-format]: Invalid time format#{RESET}\n" \
+                  "   --> program.yml:#{day_label}, #{item['type']} #{item['number']}\n" \
+                  "    | time: \"#{time}\"\n" \
+                  "    | note: Use HH:MM format (e.g., '09:00' or '9:00')."
+      end
+    end
+  end
+
+  errors.each { |err| $stderr.puts err }
+end
+
+
 begin
   raw = YAML.safe_load(File.read(PROGRAM_YML), permitted_classes: [Date], aliases: true)
   schedule = raw.fetch('schedule')
@@ -280,6 +423,16 @@ begin
   labels_map = schedule['labels'] || {}
 
   days = schedule.fetch('days', [])
+  
+  # Run validations
+  papers_data = load_papers_yml
+  committees_data = load_committees_yml
+  keynotes_data = load_keynotes_yml
+  
+  validate_time_format(days)
+  validate_papers(days, papers_data)
+  validate_chairs(days, committees_data, keynotes_data)
+  
   normalized_days = days.map { |day| normalize_day(day, paper_duration, keynote_duration, labels_map) }
 
   boundaries = build_boundaries(normalized_days)

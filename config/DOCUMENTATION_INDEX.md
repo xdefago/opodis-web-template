@@ -21,27 +21,20 @@ Complete guide to all documentation in this repository.
 
 | Document | Purpose | Time | Audience |
 |----------|---------|------|----------|
-| [README.md](README.md) | Project overview, features, quick links | 5 min | Everyone |
-| [QUICKSTART.md](QUICKSTART.md) | 15-minute setup for new instance | 15 min | Conference organizers |
+| [README.md](/README.md) | Project overview, features, quick links | 5 min | Everyone |
+| [QUICKSTART.md](/QUICKSTART.md) | 15-minute setup for new instance | 15 min | Conference organizers |
 | [CONFIG.md](CONFIG.md) | Detailed configuration by planning stage | 30 min | Configuration managers |
 | [BUILD.md](BUILD.md) | Building and deploying the site | 10 min | Technical staff |
-| [RECOMMENDATIONS.md](RECOMMENDATIONS.md) | Suggested improvements and roadmap | 10 min | Decision makers, developers |
-
-### For Analysis & Reference
-
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [DELIVERABLES.md](DELIVERABLES.md) | Summary of all deliverables | Project managers |
-| [tmp/analysis/similarity.md](tmp/analysis/similarity.md) | Comparative analysis of 3 instances | Developers, architects |
+developers |
 
 ### For Configuration Reference
 
 | File | Purpose | Key Topics |
 |------|---------|------------|
-| [docs/_data/program.yml](docs/_data/program.yml) | Schedule definition | Times, sessions, papers, duration inference |
-| [docs/_data/keynotes.yml](docs/_data/keynotes.yml) | Speaker information | Names, affiliations, photos, bios |
-| [docs/_data/papers.yml](docs/_data/papers.yml) | Accepted papers | Paper numbers, authors, titles, abstracts |
-| [docs/_data/committees.yml](docs/_data/committees.yml) | Committee members | Chairs, roles, affiliations |
+| [docs/_data/program.yml](/docs/_data/program.yml) | Schedule definition | Times, sessions, papers, duration inference |
+| [docs/_data/keynotes.yml](/docs/_data/keynotes.yml) | Speaker information | Names, affiliations, photos, bios |
+| [docs/_data/papers.yml](/docs/_data/papers.yml) | Accepted papers | Paper numbers, authors, titles, abstracts |
+| [docs/_data/committees.yml](/docs/_data/committees.yml) | Committee members | Chairs, roles, affiliations |
 
 ---
 
@@ -79,7 +72,7 @@ Complete guide to all documentation in this repository.
 **Solution:** See [BUILD.md - Troubleshooting](BUILD.md#troubleshooting)
 
 **Problem:** Generator error "Cannot infer end time"  
-**Solution:** See [QUICKSTART.md - Troubleshooting](QUICKSTART.md#troubleshooting)
+**Solution:** See [QUICKSTART.md - Troubleshooting](/QUICKSTART.md#troubleshooting)
 
 ### Configuration Questions
 
@@ -88,14 +81,6 @@ Complete guide to all documentation in this repository.
 
 **Problem:** How to show/hide sections  
 **Solution:** See [CONFIG.md - Configuration Reference](CONFIG.md#configuration-reference)
-
-### Design Questions
-
-**Problem:** Why is schedule structured this way?  
-**Solution:** See [tmp/analysis/similarity.md](tmp/analysis/similarity.md)
-
-**Problem:** What improvements are planned?  
-**Solution:** See [RECOMMENDATIONS.md](RECOMMENDATIONS.md)
 
 ---
 
@@ -146,14 +131,13 @@ bundle exec jekyll build --source docs --destination docs/_site --trace
 1. Open the relevant `docs/_data/*.yml` file
 2. Read the comment header at the top
 3. Check [CONFIG.md](CONFIG.md) for examples
-4. See [tmp/analysis/similarity.md](tmp/analysis/similarity.md) for rationale
 
 ### Troubleshooting Errors
 
 1. Run generator: `bundle exec ruby scripts/generate_outline_grid.rb`
 2. Check error message (it's very descriptive!)
 3. Find the issue in the suggested file and line
-4. Consult [QUICKSTART.md - Troubleshooting](QUICKSTART.md#troubleshooting)
+4. Consult [QUICKSTART.md - Troubleshooting](/QUICKSTART.md#troubleshooting)
 
 ### Planning Timeline
 
@@ -165,8 +149,7 @@ bundle exec jekyll build --source docs --destination docs/_site --trace
 ### Design Questions
 
 1. Check [RECOMMENDATIONS.md](RECOMMENDATIONS.md) for planned features
-2. Review [tmp/analysis/similarity.md](tmp/analysis/similarity.md) for design rationale
-3. Open an issue if you have suggestions
+2. Open an issue if you have suggestions
 
 ---
 
@@ -178,9 +161,6 @@ bundle exec jekyll build --source docs --destination docs/_site --trace
 | QUICKSTART.md | 4.7 KB | 220 | Markdown |
 | CONFIG.md | 22 KB | 900 | Markdown |
 | BUILD.md | 1.6 KB | 80 | Markdown |
-| RECOMMENDATIONS.md | 12 KB | 450 | Markdown |
-| DELIVERABLES.md | 6 KB | 280 | Markdown |
-| tmp/analysis/similarity.md | 17 KB | 650 | Markdown |
 
 **Total Documentation:** ~70 KB, ~3,200 lines
 
@@ -201,9 +181,7 @@ bundle exec jekyll build --source docs --destination docs/_site --trace
 - 🚀 [Quick Start](QUICKSTART.md)
 - ⚙️ [Configuration Guide](CONFIG.md)
 - 🔨 [Build Instructions](BUILD.md)
-- 💡 [Recommendations](RECOMMENDATIONS.md)
-- 📊 [Analysis Report](tmp/analysis/similarity.md)
-- 📦 [Deliverables Summary](DELIVERABLES.md)
+
 
 ---
 
