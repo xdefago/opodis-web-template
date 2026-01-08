@@ -120,7 +120,7 @@ items:
 bundle install
 
 # Generate outline grid (converts program.yml to JSON)
-bundle exec ruby scripts/generate_outline_grid.rb
+bundle exec ruby scripts/validate_and_generate.rb
 
 # Build the site
 bundle exec jekyll build --source docs --destination docs/_site
@@ -142,7 +142,7 @@ For a complete setup, follow the **stages** outlined in [CONFIG.md](config/CONFI
 ### Update Schedule After Changes
 
 ```bash
-bundle exec ruby scripts/generate_outline_grid.rb
+bundle exec ruby scripts/validate_and_generate.rb
 ```
 
 The generator:
@@ -344,7 +344,7 @@ items:
 
 **Solution:**
 ```bash
-bundle exec ruby scripts/generate_outline_grid.rb
+bundle exec ruby scripts/validate_and_generate.rb
 bundle exec jekyll build --source docs --destination docs/_site
 ```
 

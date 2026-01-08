@@ -592,7 +592,9 @@ begin
   }
 
   File.write(OUTPUT_JSON, JSON.pretty_generate(payload))
-  puts "Wrote outline grid to #{OUTPUT_JSON}"
+  
+  relative_path = OUTPUT_JSON.sub("#{ROOT}/", '')
+  puts "Wrote outline grid to #{relative_path}"
 rescue RuntimeError => e
   abort e.message
 rescue OutlineError => e

@@ -134,7 +134,7 @@ bundle exec jekyll build --source docs --destination docs/_site --trace
 
 ### Troubleshooting Errors
 
-1. Run generator: `bundle exec ruby scripts/generate_outline_grid.rb`
+1. Run generator: `bundle exec ruby scripts/validate_and_generate.rb`
 2. Check error message (it's very descriptive!)
 3. Find the issue in the suggested file and line
 4. Consult [QUICKSTART.md - Troubleshooting](/QUICKSTART.md#troubleshooting)

@@ -201,7 +201,7 @@ Then visit `http://localhost:4000`.
 ### Making Changes
 
 1. Edit YAML files in `docs/_data/`
-2. For schedule changes, run: `bundle exec ruby scripts/generate_outline_grid.rb`
+2. For schedule changes, run: `bundle exec ruby scripts/validate_and_generate.rb`
 3. Site rebuilds automatically (with live reload)
 
 ---

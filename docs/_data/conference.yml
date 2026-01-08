@@ -6,9 +6,9 @@ general:
   fullname: "International Conference on Principles of Distributed Systems"
   name: "Conference on Principles of Distributed Systems"
   date_format: "%A, %B %-d, %Y"
-  tbd: "TBD"
   locale:
-    timezone_note: "(Anywhere on Earth)"
+    timezone: "UTC"    # Fallback timezone if none specified in year section
+  tbd: "TBD"
   buttons:
     - label: "About {ACRONYM} {YEAR:02}"
       href: "#about"
@@ -43,7 +43,7 @@ year:
     start: 2025-12-10           # CHANGE: Conference start date (YYYY-MM-DD)
     end: 2025-12-12             # CHANGE: Conference end date (YYYY-MM-DD)
   locale:
-    timezone: "Europe/Zurich"   # CHANGE: Your timezone (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+    timezone: "Europe/Rome"     # CHANGE: Your timezone (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
   venue:
     name: "TBD"                 # CHANGE: Venue name (e.g., "University Name")
     building: "TBD"             # CHANGE: Building/room details

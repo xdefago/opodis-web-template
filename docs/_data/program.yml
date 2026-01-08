@@ -10,12 +10,12 @@
 #   1. Update dates and times for your conference
 #   2. Add session titles and chairs as they're confirmed
 #   3. Assign papers to sessions after acceptance decisions
-#   4. Run `bundle exec ruby scripts/generate_outline_grid.rb` after changes
+#   4. Run `bundle exec ruby scripts/validate_and_generate.rb` after changes
 #
 # For reference, see sample-opodis23 branch (full OPODIS 2023 schedule)
 #
 # Key Points:
-#   - Run `bundle exec ruby scripts/generate_outline_grid.rb` after changes
+#   - Run `bundle exec ruby scripts/validate_and_generate.rb` after changes
 #   - All times must be HH:MM format (24-hour)
 #   - Each item must have a start time or inherit from previous item's end
 #   - Papers are referenced by number from docs/_data/papers.yml
