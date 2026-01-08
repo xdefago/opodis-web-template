@@ -1,8 +1,8 @@
 {
   "days": [
-    "Wed Dec 6",
-    "Thu Dec 7",
-    "Fri Dec 8"
+    "Wed Dec 10",
+    "Thu Dec 11",
+    "Fri Dec 12"
   ],
   "rows": [
     {
@@ -95,7 +95,7 @@
           "rowspan": 1,
           "talk_count": 0,
           "papers": null,
-          "chair": "Xavier Défago"
+          "chair": "TBD"
         },
         {
           "kind": "cell",
@@ -106,7 +106,7 @@
           "rowspan": 1,
           "talk_count": 0,
           "papers": null,
-          "chair": "Koichi Wada"
+          "chair": "TBD"
         },
         {
           "kind": "cell",
@@ -117,7 +117,7 @@
           "rowspan": 1,
           "talk_count": 0,
           "papers": null,
-          "chair": "Alysson Bessani"
+          "chair": "TBD"
         }
       ]
     },
@@ -136,72 +136,46 @@
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Agreement I",
+          "title": "TBD",
           "number": 1,
-          "rowspan": 1,
-          "talk_count": 3,
-          "papers": [
-            {
-              "number": 21,
-              "award": "best paper"
-            },
-            {
-              "number": 19
-            },
-            {
-              "number": 9
-            }
-          ],
-          "chair": "Junya Nakamura"
+          "rowspan": 2,
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Storage and Machine Learning",
+          "title": "TBD",
           "number": 4,
           "rowspan": 1,
-          "talk_count": 3,
-          "papers": [
-            {
-              "number": 20,
-              "award": "best student paper"
-            },
-            {
-              "number": 4
-            },
-            {
-              "number": 35
-            }
-          ],
-          "chair": "Jennifer L. Welch"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Mobile computing II",
+          "title": "TBD",
           "number": 7,
           "rowspan": 1,
-          "talk_count": 3,
-          "papers": [
-            {
-              "number": 7
-            },
-            {
-              "number": 33
-            },
-            {
-              "number": 18
-            }
-          ],
-          "chair": "Toshimitsu Masuzawa"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         }
       ]
     },
     {
       "time": 705,
       "time_label": "11:45",
+      "break": true,
+      "label": "LUNCH"
+    },
+    {
+      "time": 725,
+      "time_label": "12:05",
       "break": true,
       "label": "LUNCH"
     },
@@ -214,73 +188,34 @@
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Blockchains and Security",
+          "title": "TBD",
           "number": 2,
           "rowspan": 1,
-          "talk_count": 4,
-          "papers": [
-            {
-              "number": 8
-            },
-            {
-              "number": 12
-            },
-            {
-              "number": 31
-            },
-            {
-              "number": 23
-            }
-          ],
-          "chair": "Roy Friedman"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Distributed Graphs I",
+          "title": "TBD",
           "number": 5,
           "rowspan": 1,
-          "talk_count": 4,
-          "papers": [
-            {
-              "number": 10
-            },
-            {
-              "number": 11
-            },
-            {
-              "number": 13
-            },
-            {
-              "number": 27
-            }
-          ],
-          "chair": "Fukuhito Ooshita"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Agreement II",
+          "title": "TBD",
           "number": 8,
           "rowspan": 1,
-          "talk_count": 4,
-          "papers": [
-            {
-              "number": 14
-            },
-            {
-              "number": 32
-            },
-            {
-              "number": 29
-            },
-            {
-              "number": 6
-            }
-          ],
-          "chair": "Gregory Chockler"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         }
       ]
     },
@@ -299,70 +234,34 @@
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Mobile computing I",
+          "title": "TBD",
           "number": 3,
           "rowspan": 1,
-          "talk_count": 3,
-          "papers": [
-            {
-              "number": 25
-            },
-            {
-              "number": 5
-            },
-            {
-              "number": 28
-            }
-          ],
-          "chair": "Sébastien Tixeuil"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Concurrent programming",
+          "title": "TBD",
           "number": 6,
           "rowspan": 2,
-          "talk_count": 4,
-          "papers": [
-            {
-              "number": 15
-            },
-            {
-              "number": 17
-            },
-            {
-              "number": 34
-            },
-            {
-              "number": 24
-            }
-          ],
-          "chair": "Achour Mostéfaoui"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         },
         {
           "kind": "cell",
           "type": "session",
           "label": null,
-          "title": "Distributed Graphs II",
+          "title": "TBD",
           "number": 9,
           "rowspan": 2,
-          "talk_count": 4,
-          "papers": [
-            {
-              "number": 16
-            },
-            {
-              "number": 22
-            },
-            {
-              "number": 26
-            },
-            {
-              "number": 30
-            }
-          ],
-          "chair": "Taisuke Izumi"
+          "talk_count": 0,
+          "papers": [],
+          "chair": "TBD"
         }
       ]
     },
@@ -377,7 +276,7 @@
           "label": "Business meeting",
           "title": null,
           "number": null,
-          "rowspan": 3,
+          "rowspan": 2,
           "talk_count": 0,
           "papers": null,
           "chair": null
@@ -405,7 +304,7 @@
           "label": "Closing",
           "title": null,
           "number": null,
-          "rowspan": 1,
+          "rowspan": 2,
           "talk_count": 0,
           "papers": null,
           "chair": null
@@ -413,15 +312,15 @@
       ]
     },
     {
-      "time": 1035,
-      "time_label": "17:15",
+      "time": 1030,
+      "time_label": "17:10",
       "break": false,
       "cells": [
+        null,
+        null,
         {
           "kind": "skip"
-        },
-        null,
-        null
+        }
       ]
     }
   ]

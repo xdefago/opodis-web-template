@@ -1,17 +1,17 @@
 # Important Dates Configuration
 #
-# Visibility: Controlled by show_on_site (set false to hide dates section)
+# TEMPLATE INSTRUCTIONS:
+#   1. Update all dates to match your conference timeline
+#   2. Use format YYYY-MM-DD for single dates
+#   3. Use [original, extended] array format for extended deadlines
+#   4. Keep timezone as AoE unless your conference uses different timezone
+#
+# For reference, see sample-opodis23 branch (OPODIS 2023 example)
 #
 # Date Format:
-#   - Single date: "2024-03-31"
-#   - Updated date: ["2024-03-31", "2024-04-07"] (original, latest)
-#   - With time: "2024-03-31T23:59:59Z"
-#
-# Optional fields for each date:
-#   - status: "auto" (auto-detect past/future), "past", "upcoming"
-#   - label: Custom label override
-#
-# Timezone: All dates interpreted in this timezone unless specified
+#   - Single date: "2025-03-31"
+#   - Extended date: ["2025-03-31", "2025-04-07"] (original, latest)
+#   - With time: "2025-03-31T23:59:59Z"
 #
 # See CONFIG.md for detailed guidance.
 
@@ -24,45 +24,45 @@ timezone: "Etc/GMT+12"
 # Call for Papers dates
 cfp:
   announcement:
-    date: "2023-08-28"
+    date: "2025-08-01"          # CHANGE: When CFP is announced
     label: "CFP announcement"
   
   abstract_registration:
-    date: ["2023-08-28", "2023-09-04"]
+    date: "2025-08-20"          # CHANGE: Abstract deadline (or use ["2025-08-20", "2025-08-25"] if extended)
     label: "Abstract registration"
     status: "auto"
   
   submission_deadline:
-    date: ["2023-09-01", "2023-09-08"]
+    date: "2025-08-25"          # CHANGE: Paper submission deadline
     label: "Submission deadline"
     status: "auto"
   
   notification_deadline:
-    date: "2023-10-29"
+    date: "2025-11-01"          # CHANGE: When authors are notified
     label: "Acceptance notification"
     status: "auto"
   
   camera_ready_deadline:
-    date: "2023-11-09"
+    date: "2025-11-15"          # CHANGE: Final paper deadline
     label: "Final version due"
     status: "auto"
 
 # Registration dates
 registration:
   opens:
-    date: "2023-09-15"
+    date: "2025-09-01"          # CHANGE: When registration opens
     label: "Registration opens"
   
   early_bird_deadline:
-    date: "2023-11-12"
+    date: "2025-11-15"          # CHANGE: Early bird cutoff
     label: "Early bird deadline"
   
   standard_deadline:
-    date: "2023-11-30"
+    date: "2025-12-01"          # CHANGE: Standard registration cutoff
     label: "Standard registration deadline"
   
   on_site:
-    date: "2023-12-06T08:30:00+09:00"
+    date: "2025-12-10T08:30:00+01:00"  # CHANGE: On-site registration time (adjust timezone offset)
     label: "On-site registration"
 
-# Conference dates (start/end in conference.yml year section)
+# Conference dates (start/end configured in conference.yml year section)

@@ -342,6 +342,13 @@ def load_keynotes_yml
   raw || {}
 end
 
+def load_registration_yml
+  reg_file = File.join(ROOT, 'docs', '_data', 'registration.yml')
+  return {} unless File.exist?(reg_file)
+  raw = YAML.safe_load(File.read(reg_file), permitted_classes: [Date], aliases: true)
+  raw || {}
+end
+
 def validate_papers(days_data, papers_data)
   return if papers_data.empty?
 
@@ -488,6 +495,42 @@ def validate_time_format(days_data)
   end
 end
 
+def validate_registration_fees(reg_data)
+  return if reg_data.empty?
+  fees = reg_data['fees'] || {}
+  return if fees.empty?
+
+  currency = fees['currency'] || 'EUR'
+  student = fees['student'] || {}
+  regular = fees['regular'] || {}
+
+  tiers = %w[early_bird late on_site]
+
+  # Rule 1: for all price categories, student <= regular
+  tiers.each do |tier|
+    s_val = student[tier]
+    r_val = regular[tier]
+    next if s_val.nil? || r_val.nil?
+    if s_val.to_f > r_val.to_f
+      warn!("registration-fees: student(#{tier}) > regular(#{tier}) [#{s_val} > #{r_val} #{currency}]")
+    end
+  end
+
+  # Rule 2: monotonicity within each category: early_bird <= late <= on_site
+  [[student, 'student'], [regular, 'regular']].each do |cat, label|
+    eb = cat['early_bird']
+    lt = cat['late']
+    os = cat['on_site']
+    # Only warn when values are present
+    if eb && lt && eb.to_f > lt.to_f
+      warn!("registration-fees: #{label} early_bird > late [#{eb} > #{lt} #{currency}]")
+    end
+    if lt && os && lt.to_f > os.to_f
+      warn!("registration-fees: #{label} late > on_site [#{lt} > #{os} #{currency}]")
+    end
+  end
+end
+
 
 begin
   raw = YAML.safe_load(File.read(PROGRAM_YML), permitted_classes: [Date], aliases: true)
@@ -503,11 +546,13 @@ begin
   papers_data = load_papers_yml
   committees_data = load_committees_yml
   keynotes_data = load_keynotes_yml
+  registration_data = load_registration_yml
   
   validate_time_format(days)
   validate_papers(days, papers_data)
   validate_chairs(days, committees_data, keynotes_data)
   validate_keynotes(days, keynotes_data)
+  validate_registration_fees(registration_data)
   
   normalized_days = days.map { |day| normalize_day(day, paper_duration, keynote_duration, labels_map) }
 

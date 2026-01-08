@@ -1,102 +1,124 @@
-# OPODIS Website Template
+# OPODIS Conference Template
 
-A modular, configuration-driven Jekyll website template for the **OPODIS** (Principles of Distributed Systems) conference, designed for easy adaptation to multiple instances.
+**Create a new OPODIS conference website in 15 minutes.** This template provides everything you need to set up a professional conference website with schedule management, paper listings, and registration.
 
-## Quick Links
+## For New Conference Organizers
 
-For **setting up a new OPODIS instance**, start here:
+### 1. Create Your Repository
 
-- 🚀 **[QUICKSTART.md](QUICKSTART.md)** – 15-minute setup guide
-- ⚙️ **[CONFIG.md](config/CONFIG.md)** – Detailed configuration by planning stage
-- 🔨 **[BUILD.md](config/BUILD.md)** – Building and deployment instructions
+Click the green **"Use this template"** button at the top of this page:
+1. Select **"Create a new repository"**
+2. Name it: `opodis-YYYY` (e.g., `opodis-2025`)
+3. Choose **Public** visibility
+4. Click **"Create repository"**
 
-## About This Template
-
-This repository was refactored from the **OPODIS 2023** website to be **reusable across multiple conference years**. It has been validated against instances from 2022, 2023, and 2025 with a **configurability analysis** in [tmp/analysis/similarity.md](tmp/analysis/similarity.md).
-
-### Key Features
-
-- **Configuration-driven**: All content in YAML files (`docs/_data/*.yml`)
-- **Modular design**: Liquid includes for reusable components
-- **Automated schedule generation**: `scripts/generate_outline_grid.rb` converts program config to presentation-ready JSON
-- **Explicit or inferred durations**: accepts HH:MM start times, HH:MM-HH:MM ranges, or durations with automatic fallback to papers/next item
-- **Progressive disclosure**: Supports TBD/incomplete information at early planning stages
-- **Validation**: Generator validates consistency (times, papers, chairs)
-- **Style**: Bootstrap-based responsive design
-
-### Directory Structure
-
-```
-docs/
-├── _data/                    # Configuration (YAML)
-│   ├── conference.yml        # Year, location, leadership
-│   ├── dates.yml             # Important dates
-│   ├── venue.yml             # Venue and location info
-│   ├── keynotes.yml          # Keynote speakers
-│   ├── program.yml           # Schedule definition
-│   ├── papers.yml            # Accepted papers
-│   ├── committees.yml        # Organizational committees
-│   ├── cfp.yml               # Call for papers
-│   ├── registration.yml      # Registration info
-│   ├── sponsors.yml          # Sponsors
-│   ├── travel.yml            # Travel/accommodation
-│   └── outline_grid.json     # Generated (do not edit)
-│
-├── _includes/               # Template partials
-│   └── sections/             # Reusable page sections
-│       ├── program_outline.html
-│       ├── program_schedule.html
-│       └── ...
-│
-└── index.html               # Home page
-
-scripts/
-└── generate_outline_grid.rb # Schedule generator
-```
-
-## Getting Started
-
-### For a New OPODIS Instance
-
-1. **Read [QUICKSTART.md](QUICKSTART.md)** (5 minutes)
-2. **Update key files** in `docs/_data/`:
-   - `conference.yml` – year, location
-   - `dates.yml` – important dates
-   - `program.yml` – schedule skeleton
-3. **Run generator**: `bundle exec ruby scripts/generate_outline_grid.rb`
-4. **Build site**: `bundle exec jekyll build --source docs`
-
-### For Detailed Configuration Guidance
-
-Follow **[CONFIG.md](config/CONFIG.md)** for a **stage-by-stage approach**:
-
-- **Stage 1** (9-8 months before): Initial setup with skeleton schedule
-- **Stage 2** (7-4 months before): Details, committees, travel info
-- **Stage 3** (3-1 months before): Papers, session assignments
-- **Stage 4** (final weeks): Launch and updates
-
-### For Build and Deployment
-
-See **[BUILD.md](config/BUILD.md)** for:
-- Installation and dependencies
-- Local development with live reload
-- Production deployment
-- Troubleshooting
-
-## Schedule Generation
-
-The `generate_outline_grid.rb` script:
-- Reads `docs/_data/program.yml`
-- Resolves end times by prioritizing time ranges, then explicit `duration`, then computed (papers/keynote), then next start
-- Validates consistency (no overlaps, all papers fit)
-- Generates `docs/_data/outline_grid.json`
-- Provides helpful error messages
-
-**Important:** Run after any `program.yml` changes:
+### 2. Quick Setup
 
 ```bash
-bundle exec ruby scripts/generate_outline_grid.rb
+# Clone your new repository
+git clone https://github.com/YOUR_USERNAME/opodis-YYYY.git
+cd opodis-YYYY
+
+# Install Ruby 3.1.4 (using rbenv)
+brew install rbenv ruby-build
+rbenv install 3.1.4
+rbenv local 3.1.4
+
+# Install dependencies
+gem install bundler
+bundle install
 ```
+
+### 3. Configure Your Conference
+
+Edit files in `docs/_data/` with your conference details:
+
+**Essential files** (update immediately):
+- `conference.yml` - Year, city, dates, contacts
+- `dates.yml` - Submission and registration deadlines
+- `venue.yml` - Conference location
+
+**As planning progresses**:
+- `keynotes.yml` - Invited speakers (use "TBA" initially)
+- `program.yml` - Schedule and sessions
+- `committees.yml` - Organizing and program committees
+- `papers.yml` - Accepted papers (after review)
+- `registration.yml` - Fees and deadlines
+- `cfp.yml` - Call for papers text
+- `travel.yml` - Travel information
+- `sponsors.yml` - Sponsors and supporters
+
+### 4. Build and Preview
+
+```bash
+# Generate schedule grid (run after editing program.yml)
+bundle exec ruby scripts/generate_outline_grid.rb
+
+# Preview locally with live reload
+bundle exec jekyll serve --source docs --destination docs/_site --livereload
+```
+
+Visit `http://localhost:4000` to see your site.
+
+### 5. Deploy to GitHub Pages
+
+1. Go to **Settings** → **Pages**
+2. Set source to **main** branch, `/docs` folder
+3. Commit and push your changes:
+   ```bash
+   git add .
+   git commit -m "Configure OPODIS YYYY"
+   git push origin main
+   ```
+4. Your site will be live at: `https://YOUR_USERNAME.github.io/opodis-YYYY/`
+
+## Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** – Guided 15-minute setup workflow
+- **[config/CONFIG.md](config/CONFIG.md)** – Comprehensive configuration reference
+- **[config/BUILD.md](config/BUILD.md)** – Build system and deployment guide
+- **[config/CHANGES.md](config/CHANGES.md)** – Recent template improvements
+
+## Reference Example
+
+See the `sample-opodis23` branch for a complete working example (OPODIS 2023):
+
+```bash
+git checkout sample-opodis23
+```
+
+## Key Features
+
+- **Configuration-driven**: All content in YAML files
+- **Automated schedule**: Smart time calculation with validation
+- **Progressive disclosure**: Use "TBD" for incomplete information
+- **Responsive design**: Bootstrap-based mobile-friendly layout
+- **Draft support**: TBA badges for unconfirmed speakers/content
+
+## Directory Structure
+
+```
+docs/_data/          # Edit these YAML files for your conference
+  ├── conference.yml  # Core info (year, city, dates)
+  ├── dates.yml       # Important deadlines
+  ├── program.yml     # Schedule definition
+  ├── papers.yml      # Accepted papers
+  └── ...            # Other configuration
+
+docs/_includes/     # Reusable template components
+docs/img/           # Add your logos and photos here
+scripts/            # Helper scripts (schedule generator)
+```
+
+## Support
+
+- **Issues**: [Report bugs or request features](../../issues)
+- **Questions**: See [config/CONFIG.md](config/CONFIG.md)
+- **OPODIS**: Visit [opodis.net](https://www.opodis.net)
+
+---
+
+**Ready to start?** Follow the 5-step guide above or read [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
 
 ## Configuration Features
 

@@ -708,85 +708,56 @@ visa_info: |
 
 **File:** `docs/_data/registration.yml`
 
-Simplified pricing structure.
+Structured pricing with separate currency field and a single early bird limit.
 
 ```yaml
 # Toggle visibility
-enabled: true
 show_on_site: true
 
-title: "Registration"
+# Registration fees (numeric values, currency separate)
+fees:
+  currency: "EUR"               # Change to USD, GBP, JPY, etc. as needed
+  early_limit: "2025-11-15"     # Single early bird limit date (YYYY-MM-DD)
 
-# Status: "open", "closed", "opens_soon"
-status: "open"
+  student:
+    early_bird: 100              # Numeric values only
+    late: 150
+    on_site: 200
 
-# Link to registration system
-registration_link: "https://registration-system.example.com"
-
-# Three simple pricing blocks
-pricing:
-  early_bird:
-    deadline: "2024-10-31"
-    student: "100 EUR"
-    regular: "300 EUR"
-    description: "Early bird discount - register before October 31"
-  
-  standard:
-    deadline: "2024-11-30"
-    student: "150 EUR"
-    regular: "400 EUR"
-    description: "Standard rate - register before November 30"
-  
-  on_site:
-    student: "200 EUR"
-    regular: "500 EUR"
-    description: "On-site registration - limited availability"
+  regular:
+    early_bird: 300
+    late: 400
+    on_site: 500
 
 # What registration includes
 what_is_included:
-  - "Access to all conference sessions"
   - "Conference proceedings (LIPIcs)"
   - "Coffee breaks and lunches"
   - "Welcome reception"
   - "Conference dinner"
 
-# Additional terms and policies (markdown)
-terms: |
-  ### Cancellation Policy
-  
-  - Before November 1: Full refund minus 20 EUR processing fee
-  - After November 1: No refunds
-  
-  ### Visa Support
-  
-  Request invitation letters after completing registration.
-  on_site:
-    student: "200 EUR"
-    regular: "500 EUR"
-    description: "On-site registration"
-
-# What's included
-what_is_included:
-  - "Conference materials and program"
-  - "Coffee and snacks"
-  - "Lunch (Days 1-3)"
-  - "Welcome reception"
-  - "Conference proceedings"
-
-# Terms
+# Registration terms and policies (markdown)
 terms: |
   ## Registration Terms
   
-  - Registrations are non-refundable after [date]
-  - Change of registration type is allowed until [date]
-  - Each paper must have at least one registered author
+  - At least one author per paper must register
+  - Non-refundable after [DATE]
+  - Request visa letters after registering
 ```
 
+**Key Structure:**
+- **`fees.currency`** – Currency code (EUR, USD, GBP, JPY, etc.) displayed next to all prices
+- **`fees.early_limit`** – Single date when Early Bird ends
+- **`fees.student`**, **`fees.regular`** – Each contains `early_bird`, `late`, `on_site` numeric prices
+- **`what_is_included`** – List of what's included in registration
+- **`terms`** – Markdown text for registration policies
+
 **Action Items:**
-- [ ] Determine pricing in EUR/USD
-- [ ] Set early bird deadline
-- [ ] Choose registration platform (Eventbrite, EasyChair, custom)
+- [ ] Determine pricing in your currency
+- [ ] Set early bird limit (optional; can be distinct from dates.yml)
+- [ ] Choose registration platform (Google Forms, Eventbrite, EasyChair, custom)
 - [ ] Confirm what's included in registration
+- [ ] Draft cancellation and visa policies
 
 ### Validation Checklist ✓
 

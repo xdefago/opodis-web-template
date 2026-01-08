@@ -6,6 +6,14 @@
 #   - Stage 2 (Mid): Add session titles, confirm chairs
 #   - Stage 3 (Late): Assign papers to sessions
 #
+# TEMPLATE INSTRUCTIONS:
+#   1. Update dates and times for your conference
+#   2. Add session titles and chairs as they're confirmed
+#   3. Assign papers to sessions after acceptance decisions
+#   4. Run `bundle exec ruby scripts/generate_outline_grid.rb` after changes
+#
+# For reference, see sample-opodis23 branch (full OPODIS 2023 schedule)
+#
 # Key Points:
 #   - Run `bundle exec ruby scripts/generate_outline_grid.rb` after changes
 #   - All times must be HH:MM format (24-hour)
@@ -19,18 +27,17 @@
 show_on_site: true
 
 outline:
-  # Outline is now derived from schedule; legacy structure retained for reference
   social:
-    - "Reception (Dec. 5, 18:00-20:00)"
-    - "Banquet (Dec. 7, 19:00-21:30)"
+    - "Reception (Dec. XX, 18:00-20:00)"
+    - "Banquet (Dec. XX, 19:00-21:30)"
 
 text:
-  lead: "We had an excellent {ACRONYM} {YEAR} with many interesting talks and research discussions. The program is left here for nostalgia and bureaucratic reference...<br>All paper presentations are scheduled for max. 20 minutes, plus Q&A and setup."
-  preamble: "<strong>Welcome Reception (Tue Dec. 5)</strong>: 18:00-20:00 <em>(registration from 17:30)</em>, location: <a href=\"https://www.ssc.titech.ac.jp/amap/home/ookayama/north/ttf/\">Tokyo Tech Front</a>, room Royal Blue Hall (<a href=\"https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6\" target=\"_blank\">map</a>)"
+  lead: "The conference program features keynote talks, technical sessions, and social events."
+  preamble: "<strong>Welcome Reception</strong>: TBD<br><strong>Banquet</strong>: TBD"
 
 schedule:
   # Base start date for the program; used if individual day.date is absent
-  date: 2023-12-06
+  date: 2025-12-10           # CHANGE: Conference start date
   
   # Local flip time (HH:MM) to auto-select active day in live view
   # (e.g., after this time on a given day, display next day's schedule)
@@ -39,8 +46,8 @@ schedule:
   # Default durations (minutes) for computing end times
   # Used when papers are assigned but no explicit duration given
   durations:
-    paper: 20       # Typically 20 min per paper (+ Q&A built-in)
-    keynote: 60     # Typically 1 hour for keynote talks
+    paper: 20                # Typically 20 min per paper (+ Q&A built-in)
+    keynote: 60              # Typically 1 hour for keynote talks
   
   # Labels for common item types (used in schedule when not explicitly set)
   labels:
@@ -49,164 +56,159 @@ schedule:
     business: "Business meeting"
     opening: "Opening"
     closing: "Closing"
+  
   days:
     # Each day references a calendar date; items hold the detailed slots in order
-    - date: 2023-12-06
-      label: "Wed Dec 6"
+    # Day 1
+    - date: 2025-12-10       # CHANGE: Day 1 date
+      label: "Wed Dec 10"    # CHANGE: Day label
       items:
         - time: "08:30"
           type: "registration"
+        
         - time: "09:00"
           type: "opening"
+        
         - time: "09:10"
           type: "keynote"
           number: 1
-          chair: "Xavier Défago"
+          chair: "TBD"       # CHANGE: Session chair
+        
         - type: "break"
+        
         - time: "10:35"
           type: "session"
           number: 1
-          title: "Agreement I"
-          chair: "Junya Nakamura"
-          papers:
-            - number: 21
-              award: "best paper"
-            - number: 19
-            - number: 9
-          duration: 70
-        - time: "11:45"
+          title: "TBD"       # CHANGE: Session title
+          chair: "TBD"       # CHANGE: Session chair
+          papers: []         # Will populate after paper acceptance
+          duration: 90
+        
+        - time: "12:05"
           label: "LUNCH"
           type: "break"
+        
         - time: "13:30"
           type: "session"
           number: 2
-          title: "Blockchains and Security"
-          chair: "Roy Friedman"
-          papers:
-            - number: 8
-            - number: 12
-            - number: 31
-            - number: 23
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 95
+        
         - type: "break"
+        
         - time: "15:30"
           type: "session"
           number: 3
-          title: "Mobile computing I"
-          chair: "Sébastien Tixeuil"
-          papers:
-            - number: 25
-            - number: 5
-            - number: 28
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 70
+        
         - type: "business"
-          duration: 
+          duration: 30
+        
         - time: "17:30"
           label: "End of Day 1"
           type: "info"
-
-    - date: 2023-12-07
-      label: "Thu Dec 7"
+    
+    # Day 2
+    - date: 2025-12-11       # CHANGE: Day 2 date
+      label: "Thu Dec 11"    # CHANGE: Day label
       items:
         - time: "08:50"
           type: "registration"
+        
         - time: "09:10"
           type: "keynote"
           number: 2
-          chair: "Koichi Wada"
+          chair: "TBD"
+        
         - type: "break"
+        
         - time: "10:35"
           type: "session"
           number: 4
-          title: "Storage and Machine Learning"
-          chair: "Jennifer L. Welch"
-          papers:
-            - number: 20
-              award: "best student paper"
-            - number: 4
-            - number: 35
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 70
+        
         - time: "11:45"
           label: "LUNCH"
           type: "break"
+        
         - time: "13:30"
           type: "session"
           number: 5
-          title: "Distributed Graphs I"
-          chair: "Fukuhito Ooshita"
-          papers:
-            - number: 10
-            - number: 11
-            - number: 13
-            - number: 27
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 95
+        
         - type: "break"
+        
         - time: "15:30"
           type: "session"
           number: 6
-          title: "Concurrent programming"
-          chair: "Achour Mostéfaoui"
-          papers:
-            - number: 15
-            - number: 17
-            - number: 34
-            - number: 24
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 95
-        - label: "Move to banquet"
-          type: "info"
+        
         - time: "19:00"
           label: "Banquet (until 21:30)"
           type: "social"
-          location: "Meguro Gajoen"
-          location_url: "https://www.hotelgajoen-tokyo.com/en/access/"
-
-    - date: 2023-12-08
-      label: "Fri Dec 8"
+          location: "TBD"
+          location_url: ""
+    
+    # Day 3
+    - date: 2025-12-12       # CHANGE: Day 3 date
+      label: "Fri Dec 12"    # CHANGE: Day label
       items:
         - time: "08:50"
           type: "registration"
+        
         - time: "09:10"
           type: "keynote"
           number: 3
-          chair: "Alysson Bessani"
+          chair: "TBD"
+        
         - type: "break"
+        
         - time: "10:35"
           type: "session"
           number: 7
-          title: "Mobile computing II"
-          chair: "Toshimitsu Masuzawa"
-          papers:
-            - number: 7
-            - number: 33
-            - number: 18
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 70
+        
         - time: "11:45"
           label: "LUNCH"
           type: "break"
+        
         - time: "13:30"
           type: "session"
           number: 8
-          title: "Agreement II"
-          chair: "Gregory Chockler"
-          papers:
-            - number: 14
-            - number: 32
-            - number: 29
-            - number: 6
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 95
+        
         - type: "break"
+        
         - time: "15:30"
           type: "session"
           number: 9
-          title: "Distributed Graphs II"
-          chair: "Taisuke Izumi"
-          papers:
-            - number: 16
-            - number: 22
-            - number: 26
-            - number: 30
+          title: "TBD"
+          chair: "TBD"
+          papers: []
           duration: 95
+        
         - type: "closing"
           duration: 10
-        - label: "End of OPODIS 2023"
+        
+        - label: "End of Conference"
           type: "info"

@@ -1,29 +1,45 @@
+# Venue Configuration
+#
+# Structure:
+#   building: Specific venue information
+#   maps: Links to campus/building maps
+#   access: How to reach the venue
+#   practical: WiFi, power, facilities info
+#
+# TEMPLATE INSTRUCTIONS:
+#   1. Update building and room information
+#   2. Add Google Maps link
+#   3. Include practical details (wifi, power, accessibility)
+#
+# For reference, see sample-opodis23 branch (Tokyo Tech example)
+#
+# See CONFIG.md for detailed guidance.
+
 show_on_site: true
 
-venue:
-  name: "Tokyo Institute of Technology"
-  building: "West 9, Multi-Purpose Digital Hall"
-  address:
-    - "Ookayama 2-12-1"
-    - "152-8550 Meguro-ku, Tokyo"
-    - "Japan"
-  address_localized:
-    - "東京都目黒区大岡山2-12-1, 東京工業大学, 西９号館・ディジタル多目的ホール"
-  map_url: "https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6"
-  map_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.898883396107!2d139.68112196548776!3d35.60556078021212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f88b899cc553%3A0x5d0763367373fca5!2sTokyo%20Institute%20of%20Technology!5e0!3m2!1sen!2sjp!4v1676869249403!5m2!1sen!2sjp"
-  campus_map_image: "img/campus_map.jpg"
-  description:
-    - "OPODIS 23 takes place in West Area, Building 9, Multi-Purpose Digital Hall. The reception (Dec. 5) is at Tokyo Tech Front, Royal Blue Hall. MAC 23 (Dec. 9-10) is organized in West Area, Building 8E, 10th floor, Conference Hall."
-    - "Most attendants will arrive from Ookayama station (Meguro line, Oimachi line) and enter the campus via the Main Gate. Those coming from Midorigaoka station (Oimachi line) will come via South exit, through the bicycle parking and enter the campus via the Midorigaoka Gate."
-  practical:
-    - "Wifi: eduroam is available throughout the Tokyo Tech campus. Guest accounts can be created on site."
-    - "Power plugs: Japanese power plugs are type A (2 flat pins; similar to USA). Voltage is 100V."
-    - "Display: the conference room uses HDMI connectors. USB-C adapters will also be available."
-    - "IC card: public transport uses any card of the Suica/PASMO family (interoperable). iPhone users can add a card in the wallet app. Otherwise, buy a Welcome Suica card at the airport. The card works as an electronic wallet in many shops and vending machines."
-travel:
-  reception:
-    time: "Dec. 5, 18:00-20:00 (registration from 17:30)"
-    place: "Tokyo Tech Front, room Royal Blue Hall"
-    map_url: "https://maps.app.goo.gl/CHrAWxR8ZZuxZfXk6"
-  notes: []
-hotels: []
+title: "Venue"
+
+building:
+  name: "TBD"                   # CHANGE: Building name
+  room: "TBD"                   # CHANGE: Room/hall
+  address: |
+    TBD - Update with your venue address
+    Street Address
+    Postal Code, City
+    Country
+
+maps:
+  google_maps_url: ""           # CHANGE: Google Maps link
+  campus_map: ""                # OPTIONAL: Campus map URL
+  floor_plan: ""                # OPTIONAL: Floor plan
+
+access:
+  overview: |
+    TBD - How to reach the venue.
+  from_station: |
+    TBD - Directions from nearest station.
+
+practical:
+  wifi: "TBD"                   # CHANGE: WiFi details
+  power: "TBD"                  # CHANGE: Power outlet info
+  facilities: "TBD"             # CHANGE: Other facilities

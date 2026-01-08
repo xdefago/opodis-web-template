@@ -1,19 +1,19 @@
+# Sponsors Configuration
+#
+# TEMPLATE INSTRUCTIONS:
+#   1. Leave empty until sponsors are confirmed
+#   2. Add sponsor logos to docs/img/supporters/
+#   3. Add sponsors with logo, name, URL, optional notes
+#
+# For reference, see sample-opodis23 branch (3 sponsors example)
+
 show_on_site: true
 
-blurb: "We are grateful to our sponsors for their support to {ACRONYM}'{YEAR:02}."
+items: []  # Empty until sponsors are confirmed
 
-tiers:
-  - name: "Supporters"
-    sponsors:
-      - name: "NICT"
-        url: "https://www.nict.go.jp/en/index.html"
-        logo: "img/supporters/NICTfig.png"
-        note: "Supported by International Exchange Program of National Institute of Information and Communications Technology (NICT)."
-      - name: "IEICE"
-        url: "https://www.ieice.org/eng_r/index.html"
-        logo: "img/supporters/EiC_logo.png"
-        note: "Sponsored by the Institute of Electronics, Information and Communication Engineers (IEICE), Japan."
-      - name: "IPSJ"
-        url: "https://www.ipsj.or.jp/english/index.html"
-        logo: "img/supporters/IPSJ_logoC_L.gif"
-        note: "Sponsored by Information Processing Society of Japan (IPSJ)."
+# Example format (uncomment when you have sponsors):
+# items:
+#   - logo: "img/supporters/sponsor-logo.png"
+#     name: "Sponsor Name"
+#     url: "https://sponsor-website.com"
+#     notes: ""  # Optional description

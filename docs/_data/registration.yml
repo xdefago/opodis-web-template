@@ -1,60 +1,44 @@
 # Registration Configuration
 #
-# Visibility: Controlled by show_on_site (set false to hide registration)
+# TEMPLATE INSTRUCTIONS:
+# - Use the fees structure with a single early_limit date.
+# - Numeric prices only; currency displayed separately.
+# - Keep what's included and terms updated.
 #
-# Structure:
-#   title: Section heading
-#   status: "closed", "opens_soon", "open", "deadline_approaching"
-#   registration_link: URL to registration system (Google Forms, Eventbrite, etc.)
-#   pricing: Early bird and standard periods with prices
-#   what_is_included: List of perks
-#   terms: Registration policies and terms
-#
-# See CONFIG.md for detailed guidance.
+# Status options: "closed", "opens_soon", "open", "deadline_approaching"
 
-enabled: true
 show_on_site: true
 
 title: "Registration"
 
-# Registration status
-status: "closed"  # Options: "closed", "opens_soon", "open", "deadline_approaching"
+status: "closed"
+registration_link: ""
 
-# Link to registration system
-registration_link: null  # Set when system is ready
+fees:
+  currency: "EUR"               # CHANGE: EUR, USD, GBP, JPY, etc.
+  early_limit: "2025-11-15"     # CHANGE: the last day when the early bird price still applies (YYYY-MM-DD)
 
-# Early bird and standard periods
-pricing:
-  early_bird:
-    deadline: "2024-10-31"
-    student: "100 EUR"
-    regular: "300 EUR"
-    description: "Early bird registration"
-  
-  standard:
-    deadline: "2024-11-30"
-    student: "150 EUR"
-    regular: "400 EUR"
-    description: "Standard registration"
-  
-  on_site:
-    student: "200 EUR"
-    regular: "500 EUR"
-    description: "On-site registration"
+  student:
+    early_bird: 100              # Numeric price
+    late: 150                    # Numeric price
+    on_site: 200                 # Numeric price
 
-# What's included
+  regular:
+    early_bird: 300
+    late: 400
+    on_site: 500
+
 what_is_included:
   - "Conference materials and program"
   - "Coffee and snacks"
-  - "Lunch (Days 1-3)"
+  - "Lunches"
   - "Welcome reception"
-  - "Conference proceedings"
+  - "Conference proceedings (LIPIcs)"
+  - "Conference banquet"
 
-# Terms
 terms: |
   ## Registration Terms
-  
-  - At least one author of each accepted paper must register (regular) and present on-site
-  - Registrations are non-refundable after [date]
-  - Change of registration type is allowed until [date]
-  - Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration
+  - At least one author of each accepted paper must register and present
+  - Registrations are non-refundable after [DATE - CHANGE]
+  - Change of registration type allowed until [DATE - CHANGE]
+  - Attendees requiring visa invitation letters may request one after registering

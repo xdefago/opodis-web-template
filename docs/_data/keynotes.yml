@@ -1,11 +1,16 @@
-# OPODIS Keynote Speakers Configuration
-# 
-show_on_site: true
-
+# Keynote Speakers Configuration
+#
 # Progression/Maturity:
 #   - Stage 1 (Early): Speaker names only (or "TBD")
 #   - Stage 2 (Mid): Add affiliation and speaker photo
 #   - Stage 3 (Late): Add bio, abstract, links
+#
+# TEMPLATE INSTRUCTIONS:
+#   1. Add keynote speakers as they are confirmed
+#   2. Use "TBA" or "To be announced" for unconfirmed details
+#   3. Photos should be added to docs/img/speakers/
+#
+# For reference, see sample-opodis23 branch (OPODIS 2023 with 3 keynotes)
 #
 # Appearance: Conference home page "Keynotes" section
 #
@@ -14,61 +19,58 @@ show_on_site: true
 #   - Location: docs/img/speakers/
 #   - Optional: not required for site to work
 #
+# TBA/Draft Support:
+#   - name: "TBA" or "TBD" triggers draft badge display
+#   - title can also be "TBA" initially
+#   - Fill in details as they become available
+#
 # Fields:
+#   - id: Keynote number (referenced in program.yml)
+#   - name: Full name of speaker (use "TBA" if not yet confirmed)
+#   - affiliation: Organization/university (optional)
 #   - title: Talk title (can be "TBA" or null if not confirmed)
-#   - speaker.name: Full name of speaker (required)
-#   - speaker.affiliation: Organization/university (optional)
-#   - speaker.photo: Path to speaker image (optional)
-#   - speaker.bio: Biographical paragraph (optional, added late)
-#   - speaker.links: Optional website/social links
+#   - photo: Path to speaker image (optional)
+#   - bio: Biographical paragraph (optional, added late)
 #   - abstract: Talk abstract (optional, added late)
+#   - details_page: Link to dedicated speaker page (optional)
 #
 # See CONFIG.md for typical timelines and examples.
 
-## Keynotes for the year (numbered by array position; program.yml references numbers)
-welcome: "We will host the following outstanding speakers."
-items:
+show_on_site: true
 
-  ## Keynote number: 1
-  - title: "From Consensus Research to Redbelly Network Pty Ltd"
-    speaker:
-      name: "Vincent Gramoli"
-      affiliation: "University of Sydney and Redbelly Network"
-      photo: "img/speakers/gramoli-640x480.jpg"
-      bio: |
-        Vincent Gramoli is the Founder and CTO of Redbelly Network. He received a Future Fellowship from the Australian Research Council and leads the Concurrent Systems Research Group at the University of Sydney. He reported vulnerabilities in Ethereum and developed the Redbelly Blockchain that encapsulates DBFT, the first model-checked blockchain consensus protocol. He has been affiliated with INRIA, Cornell, CSIRO and EPFL, and received best paper awards at ICDCS'21, IPDPDS'22 and ICDCS'22. He teaches Blockchain Scalability on Coursera and authored a textbook published by Springer.
-      links:
-        - icon: "fa-university"
-          url: "https://gramoli.github.io"
-        - icon: "fa-industry"
-          url: "https://gramoli.github.io"
+speakers:
+  # Keynote 1
+  - id: 1
+    name: "TBA"                 # CHANGE: Speaker name (use "TBA" until confirmed)
+    affiliation: "TBA"          # CHANGE: Institution
+    title: "TBA"                # CHANGE: Talk title (use "TBA" until confirmed)
     abstract: |
-      In this talk, Vincent Gramoli presents his journey from a student doing research on the consensus problem to an executive director commercialising a blockchain software. The talk covers challenges and successes while integrating innovations published at OPODIS, DISC, PODC, DSN, NDSS, S&P, EuroSys, CACM, and more into a practical solution that improves the security and performance of blockchain systems.
+      TBA - Update when abstract is available.
+    bio: |
+      TBA - Update with speaker bio.
+    photo: "img/speakers/placeholder.jpg"    # CHANGE: Add speaker photo
+    details_page: ""            # OPTIONAL: Link to dedicated speaker page
 
-  ## Keynote number: 2
-  - title: "Quantum distributed computing: potential and limitations"
-    speaker:
-      name: "François Le Gall"
-      affiliation: "Nagoya University"
-      photo: "img/speakers/legall-640x480.jpg"
-      bio: |
-        François Le Gall received his PhD from the University of Tokyo in 2006. He worked at the University of Tokyo and Kyoto University, and joined Nagoya University in 2019. His research focuses on algorithms, complexity, and quantum computation, with active work on quantum distributed computing.
-      links:
-        - icon: "fa-university"
-          url: "http://www.francoislegall.com"
+  # Keynote 2
+  - id: 2
+    name: "TBA"
+    affiliation: "TBA"
+    title: "TBA"
     abstract: |
-      The talk surveys recent results showing the power of quantum distributed algorithms, then highlights work showing no distributed quantum advantage for approximate graph coloring (arXiv:2307.09444). It concludes with key open questions in quantum distributed computing.
+      TBA
+    bio: |
+      TBA
+    photo: "img/speakers/placeholder.jpg"
+    details_page: ""
 
-  ## Keynote number: 3
-  - title: "Distributed Algorithms as a Gateway to Deductive Learning"
-    speaker:
-      name: "Roger Wattenhofer"
-      affiliation: "ETH Zurich"
-      photo: "img/speakers/wattenhofer-640x480.jpg"
-      bio: |
-        Roger Wattenhofer is a full professor in the Information Technology and Electrical Engineering Department at ETH Zurich. He received his doctorate from ETH Zurich and has worked at Microsoft Research, Brown University, and Macquarie University. His interests span distributed systems, positioning systems, wireless networks, mobile systems, social and financial networks, and deep neural networks, with publications across distributed computing, networking/systems, theory, and machine learning venues. He received the Prize for Innovation in Distributed Computing for work in distributed approximation and authored the book "Blockchain Science: Distributed Ledger Technology."
-      links:
-        - icon: "fa-university"
-          url: "https://en.wikipedia.org/wiki/Roger_Wattenhofer"
+  # Keynote 3
+  - id: 3
+    name: "TBA"
+    affiliation: "TBA"
+    title: "TBA"
     abstract: |
-      The talk discusses how distributed algorithms can help understand deductive reasoning. While machine learning excels at fast pattern recognition, deductive, multi-step reasoning remains elusive. Distributed algorithms break problems into learnable steps, offering a bridge toward reasoning, extrapolation, and other capabilities needed to "think slow." Case studies range from graph generation to origami folding.
+      TBA
+    bio: |
+      TBA
+    photo: "img/speakers/placeholder.jpg"
+    details_page: ""

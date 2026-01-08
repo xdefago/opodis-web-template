@@ -15,41 +15,46 @@
       {% endif %}
     </div>
 
-    {% if reg.pricing %}
+    {% if reg.fees %}
+    {% assign currency = reg.fees.currency | default: "EUR" %}
     <div class="row">
-      {% if reg.pricing.early_bird %}
+      {% if reg.fees.student and reg.fees.regular %}
       <div class="col-md-4">
         <div class="card mb-5 mb-lg-0">
           <div class="card-body">
             <h5 class="card-title text-muted text-uppercase text-center">Early Bird</h5>
-            <h6 class="card-price text-center">Until {{ reg.pricing.early_bird.deadline | date: "%B %-d, %Y" }}</h6>
+            {% if reg.fees.early_limit %}
+            <h6 class="card-price text-center">Until {{ reg.fees.early_limit | date: "%B %-d, %Y" }}</h6>
+            {% else %}
+            <h6 class="card-price text-center">&nbsp;</h6>
+            {% endif %}
             <hr>
             <ul class="fa-ul">
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.early_bird.student }}</strong></li>
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.early_bird.regular }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.fees.student.early_bird }} {{ currency }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.fees.regular.early_bird }} {{ currency }}</strong></li>
             </ul>
           </div>
         </div>
       </div>
       {% endif %}
-      
-      {% if reg.pricing.standard %}
+
+      {% if reg.fees.student and reg.fees.regular %}
       <div class="col-md-4">
         <div class="card mb-5 mb-lg-0">
           <div class="card-body">
-            <h5 class="card-title text-muted text-uppercase text-center">Standard</h5>
-            <h6 class="card-price text-center">Until {{ reg.pricing.standard.deadline | date: "%B %-d, %Y" }}</h6>
+            <h5 class="card-title text-muted text-uppercase text-center">Late</h5>
+            <h6 class="card-price text-center">After Early Bird</h6>
             <hr>
             <ul class="fa-ul">
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.standard.student }}</strong></li>
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.standard.regular }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.fees.student.late }} {{ currency }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.fees.regular.late }} {{ currency }}</strong></li>
             </ul>
           </div>
         </div>
       </div>
       {% endif %}
-      
-      {% if reg.pricing.on_site %}
+
+      {% if reg.fees.student and reg.fees.regular %}
       <div class="col-md-4">
         <div class="card mb-5 mb-lg-0">
           <div class="card-body">
@@ -57,8 +62,8 @@
             <h6 class="card-price text-center">&nbsp;</h6>
             <hr>
             <ul class="fa-ul">
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.on_site.student }}</strong></li>
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.on_site.regular }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.fees.student.on_site }} {{ currency }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.fees.regular.on_site }} {{ currency }}</strong></li>
             </ul>
           </div>
         </div>

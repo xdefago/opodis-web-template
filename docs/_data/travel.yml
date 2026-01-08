@@ -1,59 +1,47 @@
 # Travel & Accommodation Configuration
 #
-# Visibility: Controlled by show_on_site (set false to hide until ready)
+# TEMPLATE INSTRUCTIONS:
+#   1. List main airports with distances
+#   2. Provide public transport guidance
+#   3. Add directions to venue
+#   4. Include visa information if applicable
 #
-# Structure:
-#   title: Section heading
-#   airports: List of main airports with codes and descriptions
-#   public_transport: How to reach the city/venue
-#   to_venue: Specific directions to conference venue
-#   visa_info: Visa requirements and invitation letter policy
-#
-# See CONFIG.md for detailed guidance.
+# For reference, see sample-opodis23 branch (Tokyo travel info)
 
 show_on_site: true
 
 title: "Travel Information"
 
-# Main airports
 airports:
-  - code: "NRT"
-    name: "Narita International Airport (NRT)"
-    distance: "About 60 km east of Tokyo"
-    travel_time: "60-90 minutes by train"
+  - code: "TBD"
+    name: "TBD Airport"
+    distance: "TBD"
+    travel_time: "TBD"
     info: |
-      Narita is Tokyo's primary international airport. Farther away but served by the Narita Express to Musashi-Kosugi, and Keikyu lines to Shinagawa. Most flights from North America land here.
-  
-  - code: "HND"
-    name: "Haneda Airport (HND)"
-    distance: "About 14 km south of Tokyo"
-    travel_time: "30 minutes by train"
-    info: |
-      Haneda is closer to central Tokyo and preferred by many. Larger and better connected for local transport (e.g., Keikyū line). Most domestic flights and many flights to Europe and Asia land here.
+      TBD - Information about this airport
 
-# Public transportation
 public_transport: |
-  ## Getting Around Tokyo
+  ## Getting Around
   
-  Tokyo has an excellent public transportation system:
-  
-  - **Trains (Most common):** JR Yamanote Line, Metro lines
-  - **Subway:** Clean, efficient, English signage
-  - **Buses:** Useful for some routes
-  - **Taxis:** Expensive but convenient
-  
-  Consider getting a prepaid IC card (Suica/Pasmo) for easy travel. From within Japan, it is easy to reach Tokyo by shinkansen. Google Maps provides reasonably good advice for connections.
+  TBD - Update with local transportation information:
+  - Metro/subway system
+  - Bus network
+  - Taxis
+  - Ride-sharing apps
+  - Transit cards or passes
 
-# Getting to venue
 to_venue: |
-  ## Getting to Tokyo Institute of Technology
+  ## Getting to the Venue
   
-  - **By Train:** Take Meguro or Oimachi line to Ookayama Station, about 10 minutes walk
-  - **From Shinkansen:** Coming from Western Japan, the most convenient is to leave the shinkansen at Shin-Yokohama Station and change to the newly opened Tōkyū Shin-yokohama Line
-  - **Maps:** See venue section for detailed map links
+  TBD - Specific directions to conference venue:
+  - From main train/metro station
+  - Walking directions
+  - Estimated travel time
 
-# Visa information
 visa_info: |
   ## Visa Requirements
   
-  Check [MOFA Japan](https://www.mofa.go.jp/) for visa requirements for your country. EU/US citizens typically get 90-day visitor status. Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration.
+  TBD - Update with visa information:
+  - Which countries require visas
+  - Link to official immigration website
+  - Invitation letter policy (e.g., "available after registration")
