@@ -25,3 +25,11 @@ Desktop.ini
 *.iml
 # Ignore node modules
 node_modules/
+
+# Ruby env/manager files (not required for this template)
+.ruby-gemset
+.rvmrc
+
+# Optional local env files
+.env
+.env.*

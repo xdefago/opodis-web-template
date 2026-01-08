@@ -31,6 +31,12 @@ Re-run the generator after any change in `docs/_data/program.yml` (times, types,
 
 ## Build
 
+### Version control tips
+
+- Commit: `Gemfile`, `Gemfile.lock`, `.ruby-version` (pins runtime and dependencies for deterministic builds)
+- Do NOT commit: `docs/_site/`, `.bundle/`, `vendor/`, `.jekyll-cache/`, `.sass-cache/` (already ignored)
+- Generated but committed: `docs/_data/outline_grid.json` (the site reads this JSON; GitHub Pages will not run the Ruby generator)
+
 ### Build locally
 
 ```bash
