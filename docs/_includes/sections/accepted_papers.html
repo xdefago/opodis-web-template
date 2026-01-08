@@ -1,14 +1,43 @@
-<section id="accepted">
-  <div class="container">
-    <div class="section-header">
-      <br>
-      <h2>Accepted Papers</h2>
+{% assign papers_data = site.data.papers %}
+{% assign papers_enabled = papers_data.enabled | default: true %}
+{% assign papers_show = papers_data.show_on_site | default: true %}
+{% if papers_enabled and papers_show %}
+  {% assign papers = papers_data.items | default: site.data.papers %}
+  {% assign show_affiliations = papers_data.show_affiliations_in_list | default: false %}
+  <section id="accepted">
+    <div class="container">
+      <div class="section-header">
+        <br>
+        <h2>Accepted Papers</h2>
+      </div>
+      <ul class="fa-ul">
+        {% for paper in papers %}
+          {% assign authors = paper.authors %}
+          {% assign authors_inspect = authors | inspect %}
+          {% assign authors_is_array = authors_inspect | slice: 0, 1 | contains: '[' %}
+          <li><span class="fa-li"><i class="fa fa-file"></i></span>
+            <span class="title"><strong>{{ paper.title }}</strong></span>
+            {% if authors %}
+              <div class="authors">
+                {% if authors_is_array %}
+                  {% assign first_author = authors | first %}
+                  {% if first_author.name %}
+                    {% for a in authors %}
+                      {{ a.name }}{% if show_affiliations and a.affiliation %} ({{ a.affiliation }}){% endif %}{% unless forloop.last %}; {% endunless %}
+                    {% endfor %}
+                  {% else %}
+                    {% for a in authors %}
+                      {{ a }}{% unless forloop.last %}; {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+                {% else %}
+                  {{ authors }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-    <ul class="fa-ul">
-      {% for paper in site.data.papers %}
-      <li><span class="fa-li"><i class="fa fa-file"></i></span>{{ paper.authors }}.
-        <span class="title"><strong>{{ paper.title }}</strong></span></li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
+  </section>
+{% endif %}

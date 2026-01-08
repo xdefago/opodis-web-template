@@ -1,3 +1,5 @@
+show_on_site: true
+
 general:
   acronym: "OPODIS"
   series_url: "https://www.opodis.net"

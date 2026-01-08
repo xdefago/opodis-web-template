@@ -29,12 +29,12 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
-  <link href="{{ site.data.site.assets.favicon }}" rel="icon">
-  <link href="{{ site.data.site.assets.apple_touch_icon }}" rel="apple-touch-icon">
+  <link href="{{ site.data.siteconfig.assets.favicon }}" rel="icon">
+  <link href="{{ site.data.siteconfig.assets.apple_touch_icon }}" rel="apple-touch-icon">
 
-  <link href="{{ site.data.site.fonts.google }}" rel="stylesheet">
+  <link href="{{ site.data.siteconfig.fonts.google }}" rel="stylesheet">
 
-  {% for css in site.data.site.assets.stylesheets %}
+  {% for css in site.data.siteconfig.assets.stylesheets %}
     <link href="{{ css }}" rel="stylesheet">
   {% endfor %}
 </head>
@@ -50,7 +50,7 @@
 
   {% include footer.html %}
 
-  {% for script in site.data.site.assets.scripts %}
+  {% for script in site.data.siteconfig.assets.scripts %}
     <script src="{{ script }}"></script>
   {% endfor %}
 </body>

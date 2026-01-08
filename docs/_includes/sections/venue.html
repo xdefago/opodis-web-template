@@ -1,4 +1,8 @@
-{% assign venue = site.data.venue.venue %}
+{% assign venue_data = site.data.venue %}
+{% assign enabled = venue_data.enabled | default: true %}
+{% assign show = venue_data.show_on_site | default: true %}
+{% if enabled and show %}
+{% assign venue = venue_data.venue %}
 <section id="venue" class="wow fadeInUp">
   <div class="container-fluid">
     <div class="section-header">
@@ -42,3 +46,4 @@
   <div class="container-fluid venue-gallery-container">
   </div>
 </section>
+{% endif %}

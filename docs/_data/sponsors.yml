@@ -1,3 +1,5 @@
+show_on_site: true
+
 blurb: "We are grateful to our sponsors for their support to {ACRONYM}'{YEAR:02}."
 
 tiers:

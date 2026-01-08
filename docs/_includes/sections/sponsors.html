@@ -1,4 +1,7 @@
 {% assign sponsors = site.data.sponsors %}
+{% assign enabled = sponsors.enabled | default: true %}
+{% assign show = sponsors.show_on_site | default: true %}
+{% if enabled and show %}
 {% assign tiers = sponsors.tiers %}
 {% assign sponsor_blurb_raw = sponsors.blurb | default: 'We are grateful to our sponsors.' %}
 {% capture sponsor_blurb %}{% include utils/apply_placeholders.html text=sponsor_blurb_raw %}{% endcapture %}
@@ -35,3 +38,4 @@
 
   </div>
 </section>
+{% endif %}

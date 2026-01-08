@@ -1,28 +1,50 @@
 {% assign travel = site.data.travel %}
+{% assign enabled = travel.enabled | default: true %}
+{% assign show = travel.show_on_site | default: true %}
+{% if enabled and show %}
 <section id="travel" class="wow fadeInUp">
   <div class="container-fluid">
     <div class="section-header">
-      <h2>Travel</h2>
+      <h2>{{ travel.title | default: 'Travel' }}</h2>
       <p>Travel and accommodation information for conference attendees.</p>
     </div>
 
-    <div>
-      <h3><i class="fa fa-train"></i> By train</h3>
-      <p>{{ travel.by_train }}</p>
-    </div>
-
+    {% if travel.airports %}
     <div>
       <h3><i class="fa fa-plane"></i> By plane</h3>
       <ul>
-        {% for airport in travel.by_plane %}
-        <li><strong>{{ airport.name }}:</strong> {{ airport.description }}</li>
+        {% for airport in travel.airports %}
+        <li>
+          <strong>{{ airport.name | default: airport.code }}:</strong>
+          {% if airport.distance %}{{ airport.distance }}{% endif %}
+          {% if airport.travel_time %}({{ airport.travel_time }}){% endif %}
+          {% if airport.info %}<br>{{ airport.info }}{% elsif airport.description %}<br>{{ airport.description }}{% endif %}
+        </li>
         {% endfor %}
       </ul>
     </div>
+    {% endif %}
 
+    {% if travel.public_transport %}
     <div>
-      <h3><i class="fa fa-angle-right"></i> Hotels</h3>
-      <p>{{ travel.hotels }}</p>
+      <h3><i class="fa fa-train"></i> Public transportation</h3>
+      {{ travel.public_transport | markdownify }}
     </div>
+    {% endif %}
+
+    {% if travel.to_venue %}
+    <div>
+      <h3><i class="fa fa-map-marker"></i> Getting to the venue</h3>
+      {{ travel.to_venue | markdownify }}
+    </div>
+    {% endif %}
+
+    {% if travel.visa_info %}
+    <div>
+      <h3><i class="fa fa-id-card"></i> Visa information</h3>
+      {{ travel.visa_info | markdownify }}
+    </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}

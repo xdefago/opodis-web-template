@@ -1,71 +1,92 @@
 {% assign reg = site.data.registration %}
-{% assign conf_data = site.data.conference %}
-{% assign general = conf_data.general %}
-{% assign current = conf_data.year %}
-{% assign acronym = current.acronym | default: general.acronym %}
-{% assign year_full = current.year | default: general.year %}
-{% if year_full %}
-  {% assign year_two = year_full | append: '-01-01' | date: '%y' %}
-{% else %}
-  {% assign year_two = '' %}
-{% endif %}
-{% assign status_label = reg.status_label | default: reg.status %}
-{% assign mac_link = reg.mac_registration_link | default: '/mac23/MAC-registration.html' %}
-
-{% capture intro_text %}{% include utils/apply_placeholders.html text=reg.copy.intro status=status_label mac_link=mac_link %}{% endcapture %}
-{% capture early_label %}{% include utils/apply_placeholders.html text=reg.pricing_labels.early status=status_label mac_link=mac_link %}{% endcapture %}
-{% capture late_label %}{% include utils/apply_placeholders.html text=reg.pricing_labels.late status=status_label mac_link=mac_link %}{% endcapture %}
+{% assign enabled = reg.enabled | default: true %}
+{% assign show = reg.show_on_site | default: true %}
+{% if enabled and show %}
+  {% assign conf_data = site.data.conference %}
+  {% assign general = conf_data.general %}
+  {% assign current = conf_data.year %}
 <section id="subscribe">
   <div class="container wow fadeInUp">
     <div class="section-header">
-      <h2>Registration</h2>
-      <p>{{ intro_text }}</p>
-      {% if reg.copy.steps %}
-      <div class="row">
-        <div class="col">
-          <div class="card mb-5 mb-lg-0">
-            <ol>
-              {% for step in reg.copy.steps %}
-                {% capture step_text %}{% include utils/apply_placeholders.html text=step status=status_label mac_link=mac_link %}{% endcapture %}
-                <li>{{ step_text }}</li>
-              {% endfor %}
-            </ol>
-            {% if reg.copy.mac_note %}
-            {% capture mac_note %}{% include utils/apply_placeholders.html text=reg.copy.mac_note status=status_label mac_link=mac_link %}{% endcapture %}
-            <small><em>{{ mac_note }}</em></small>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if reg.copy.visa %}
-      {% capture visa_note %}{% include utils/apply_placeholders.html text=reg.copy.visa status=status_label mac_link=mac_link %}{% endcapture %}
-      <p>{{ visa_note }}</p>
+      <h2>{{ reg.title | default: 'Registration' }}</h2>
+      {% if reg.status %}<p>Status: <strong>{{ reg.status | upcase }}</strong></p>{% endif %}
+      {% if reg.registration_link %}
+      <p><a href="{{ reg.registration_link }}" class="btn btn-primary" target="_blank">Register Now</a></p>
       {% endif %}
     </div>
 
+    {% if reg.pricing %}
     <div class="row">
-      {% for cat in reg.categories %}
-      <div class="col">
+      {% if reg.pricing.early_bird %}
+      <div class="col-md-4">
         <div class="card mb-5 mb-lg-0">
           <div class="card-body">
-            <h5 class="card-title text-muted text-uppercase text-center">{{ cat.name }}</h5>
-            {% if cat.subtitle %}<h6 class="card-price text-center"><it><small>{{ cat.subtitle }}</small></it></h6>{% endif %}
-            {% if cat.prices %}
-            <h6 class="card-price text-center">{{ early_label }}: <strong>{{ cat.prices.early }}</strong><br><it><small>{{ cat.prices.currency_hint }}</small></it></h6>
-            <h6 class="card-price text-center">{{ late_label }}: <strong>{{ cat.prices.late }}</strong><br><it><small>&nbsp;</small></it></h6>
-            <h6 class="card-price text-center"><it><small>({{ cat.prices.timezone_note }})</small></it></h6>
-            {% endif %}
+            <h5 class="card-title text-muted text-uppercase text-center">Early Bird</h5>
+            <h6 class="card-price text-center">Until {{ reg.pricing.early_bird.deadline | date: "%B %-d, %Y" }}</h6>
             <hr>
-            <ul class="fa-ul" style="font-size: small;">
-              {% for perk in cat.perks %}
-              <li><span class="fa-li"><i class="fa fa-check"></i></span>{{ perk }}</li>
-              {% endfor %}
+            <ul class="fa-ul">
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.early_bird.student }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.early_bird.regular }}</strong></li>
             </ul>
           </div>
         </div>
       </div>
-      {% endfor %}
+      {% endif %}
+      
+      {% if reg.pricing.standard %}
+      <div class="col-md-4">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">Standard</h5>
+            <h6 class="card-price text-center">Until {{ reg.pricing.standard.deadline | date: "%B %-d, %Y" }}</h6>
+            <hr>
+            <ul class="fa-ul">
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.standard.student }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.standard.regular }}</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if reg.pricing.on_site %}
+      <div class="col-md-4">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">On-site</h5>
+            <h6 class="card-price text-center">&nbsp;</h6>
+            <hr>
+            <ul class="fa-ul">
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Student: <strong>{{ reg.pricing.on_site.student }}</strong></li>
+              <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular: <strong>{{ reg.pricing.on_site.regular }}</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
+    {% endif %}
+
+    {% if reg.what_is_included %}
+    <div class="row" style="margin-top: 2em;">
+      <div class="col-lg-12">
+        <h4>What's Included</h4>
+        <ul class="fa-ul">
+          {% for item in reg.what_is_included %}
+          <li><span class="fa-li"><i class="fa fa-check-circle"></i></span>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if reg.terms %}
+    <div class="row" style="margin-top: 2em;">
+      <div class="col-lg-12">
+        {{ reg.terms | markdownify }}
+      </div>
+    </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}

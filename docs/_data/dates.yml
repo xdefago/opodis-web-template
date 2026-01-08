@@ -1,20 +1,68 @@
+# Important Dates Configuration
+#
+# Visibility: Controlled by show_on_site (set false to hide dates section)
+#
+# Date Format:
+#   - Single date: "2024-03-31"
+#   - Updated date: ["2024-03-31", "2024-04-07"] (original, latest)
+#   - With time: "2024-03-31T23:59:59Z"
+#
+# Optional fields for each date:
+#   - status: "auto" (auto-detect past/future), "past", "upcoming"
+#   - label: Custom label override
+#
+# Timezone: All dates interpreted in this timezone unless specified
+#
+# See CONFIG.md for detailed guidance.
+
+show_on_site: true
+
+# Timezone for deadline display
 timezone_label: "Anywhere on Earth (AoE)"
 timezone: "Etc/GMT+12"
-items:
-  - label: "Abstract registration"
-    date_iso: "2023-08-28"
-    updated_iso: "2023-09-04"
+
+# Call for Papers dates
+cfp:
+  announcement:
+    date: "2023-08-28"
+    label: "CFP announcement"
+  
+  abstract_registration:
+    date: ["2023-08-28", "2023-09-04"]
+    label: "Abstract registration"
     status: "auto"
-  - label: "Submission deadline"
-    date_iso: "2023-09-01"
-    updated_iso: "2023-09-08"
+  
+  submission_deadline:
+    date: ["2023-09-01", "2023-09-08"]
+    label: "Submission deadline"
     status: "auto"
-  - label: "Acceptance notification"
-    date_iso: "2023-10-29"
+  
+  notification_deadline:
+    date: "2023-10-29"
+    label: "Acceptance notification"
     status: "auto"
-  - label: "Final version due"
-    date_iso: "2023-11-09"
+  
+  camera_ready_deadline:
+    date: "2023-11-09"
+    label: "Final version due"
     status: "auto"
-  - label: "Conference"
-    date_iso: "2023-12-08"
-    status: "auto"
+
+# Registration dates
+registration:
+  opens:
+    date: "2023-09-15"
+    label: "Registration opens"
+  
+  early_bird_deadline:
+    date: "2023-11-12"
+    label: "Early bird deadline"
+  
+  standard_deadline:
+    date: "2023-11-30"
+    label: "Standard registration deadline"
+  
+  on_site:
+    date: "2023-12-06T08:30:00+09:00"
+    label: "On-site registration"
+
+# Conference dates (start/end in conference.yml year section)

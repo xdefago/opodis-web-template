@@ -1,50 +1,38 @@
-{% assign call = site.data.cfp.call %}
+{% assign cfp = site.data.cfp %}
+{% assign enabled = cfp.enabled | default: true %}
+{% assign show = cfp.show_on_site | default: true %}
+{% if enabled and show %}
 <section id="cfp">
   <div class="container">
     <div class="section-header">
       <br>
-      <h2>{{ call.title }}</h2>
+      <h2>{{ cfp.title | default: 'Call for Papers' }}</h2>
+      {% if cfp.status %}<p><span class="badge badge-{{ cfp.status }}">{{ cfp.status | upcase }}</span></p>{% endif %}
     </div>
 
     <div class="row">
       <div class="col-lg-12">
-        <p>{{ call.description }}</p>
-        <p>Topics of interest include, but are not limited to:</p>
+        {% if cfp.text %}
+          {{ cfp.text | markdownify }}
+        {% endif %}
       </div>
-      {% assign topics_per_col = call.topics | size | plus: 2 | divided_by: 3 %}
-      {% for col in (0..2) %}
-      <div class="col-lg-4">
-        <ul class="fa-ul">
-          {% assign start_index = col | times: topics_per_col %}
-          {% for topic in call.topics offset:start_index limit:topics_per_col %}
-          <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ topic }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endfor %}
     </div>
 
-    <h4>Double-blind review</h4>
-    <p>{{ call.double_blind }}</p>
-
-    <h4>Submissions</h4>
-    <p>Papers are to be submitted electronically through <a href="{{ call.submission.url }}">{{ call.submission.url }}</a>.</p>
-    <div>
-      <ul class="fa-ul">
-        {% for req in call.submission.requirements %}
-        <li><span class="fa-li"><i class="fa fa-check-circle"></i></span>{{ req }}</li>
-        {% endfor %}
-      </ul>
+    {% if cfp.submission_link %}
+    <div class="row">
+      <div class="col-lg-12">
+        <p><strong>Submit your paper:</strong> <a href="{{ cfp.submission_link }}" target="_blank">{{ cfp.submission_link }}</a></p>
+      </div>
     </div>
-    <p>{{ call.submission.notes }}</p>
+    {% endif %}
 
-    <h4>Publication</h4>
-    <p>{{ call.publication }}</p>
-
-    <h4>Awards</h4>
-    <p>{{ call.awards }}</p>
-
-    <h4>Registration and presentation</h4>
-    <p>{{ call.registration_policy }}</p>
+    {% if cfp.external_cfp_url %}
+    <div class="row">
+      <div class="col-lg-12">
+        <p><a href="{{ cfp.external_cfp_url }}" target="_blank">View full CFP →</a></p>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}

@@ -1,3 +1,5 @@
+show_on_site: true
+
 venue:
   name: "Tokyo Institute of Technology"
   building: "West 9, Multi-Purpose Digital Hall"

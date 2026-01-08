@@ -1,3 +1,30 @@
+# OPODIS Keynote Speakers Configuration
+# 
+show_on_site: true
+
+# Progression/Maturity:
+#   - Stage 1 (Early): Speaker names only (or "TBD")
+#   - Stage 2 (Mid): Add affiliation and speaker photo
+#   - Stage 3 (Late): Add bio, abstract, links
+#
+# Appearance: Conference home page "Keynotes" section
+#
+# Photo Requirements:
+#   - Recommended: square format (640x480 or similar)
+#   - Location: docs/img/speakers/
+#   - Optional: not required for site to work
+#
+# Fields:
+#   - title: Talk title (can be "TBA" or null if not confirmed)
+#   - speaker.name: Full name of speaker (required)
+#   - speaker.affiliation: Organization/university (optional)
+#   - speaker.photo: Path to speaker image (optional)
+#   - speaker.bio: Biographical paragraph (optional, added late)
+#   - speaker.links: Optional website/social links
+#   - abstract: Talk abstract (optional, added late)
+#
+# See CONFIG.md for typical timelines and examples.
+
 ## Keynotes for the year (numbered by array position; program.yml references numbers)
 welcome: "We will host the following outstanding speakers."
 items:

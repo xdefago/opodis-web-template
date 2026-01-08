@@ -1,3 +1,7 @@
+{% assign committees = site.data.committees %}
+{% assign enabled = committees.enabled | default: true %}
+{% assign show = committees.show_on_site | default: true %}
+{% if enabled and show %}
 <section id="committees">
   <div class="container">
     <div class="section-header">
@@ -7,75 +11,94 @@
     <div class="row">
       <div class="col-lg-6">
         <h2>Organizing Committee</h2>
+        {% if committees.organizing.general_chairs.enabled != false %}
         <ul class="fa-ul">
           <li>General Chairs:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.organizing.general_chairs %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% assign gc_items = committees.organizing.general_chairs.items | default: committees.organizing.general_chairs %}
+              {% for person in gc_items %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
 
+        {% if committees.organizing.publication_chair.enabled != false %}
         <ul class="fa-ul">
           <li>Publication Chair:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.organizing.publication_chair %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% assign pub_items = committees.organizing.publication_chair.items | default: committees.organizing.publication_chair %}
+              {% for person in pub_items %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
 
+        {% if committees.organizing.organizing_team.enabled != false %}
         <ul class="fa-ul">
           <li>Organizing Team:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.organizing.organizing_team %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% assign org_team = committees.organizing.organizing_team.items | default: committees.organizing.organizing_team %}
+              {% for person in org_team %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
 
+        {% if committees.steering.enabled != false %}
         <ul class="fa-ul">
           <li>Steering Committee:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.steering %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }}){% if person.role %} - {{ person.role }}{% endif %}</li>
+              {% assign steering_items = committees.steering.items | default: committees.steering %}
+              {% for person in steering_items %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}{% if person.role %} - {{ person.role }}{% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
       </div>
 
       <div class="col-lg-6">
         <h2>Program Committee</h2>
+        {% if committees.program_chairs.enabled != false %}
         <ul class="fa-ul">
           <li>Program Committee Chairs:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.program_chairs %}
-              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% assign pc_chairs = committees.program_chairs.items | default: committees.program_chairs %}
+              {% for person in pc_chairs %}
+              <li><span class="fa-li"><i class="fa fa-location-arrow"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
 
+        {% if committees.program_committee.enabled != false %}
         <ul class="fa-ul">
           <li>Program Committee:</li>
           <li>
             <ul class="fa-ul">
-              {% for person in site.data.committees.program_committee %}
-              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }} ({{ person.affiliation }})</li>
+              {% assign pc_items = committees.program_committee.items | default: committees.program_committee %}
+              {% for person in pc_items %}
+              <li><span class="fa-li"><i class="fa fa-university"></i></span>{{ person.name }}{% if person.affiliation %} ({{ person.affiliation }}){% endif %}</li>
               {% endfor %}
             </ul>
           </li>
         </ul>
+        {% endif %}
       </div>
     </div>
   </div>
 </section>
+{% endif %}

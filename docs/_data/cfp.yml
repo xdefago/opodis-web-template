@@ -1,39 +1,84 @@
-call:
-  title: "Call for Papers"
-  description: |
-    OPODIS is an open forum for the exchange of state-of-the-art knowledge on distributed computing and distributed computer systems. OPODIS aims at having a balanced program that combines theory and practice of distributed systems. OPODIS 2023 solicits papers in all aspects of distributed systems, including theory, specification, design, system building, and performance.
-  topics:
-    - "Fault tolerance and consistency, impossibility results"
-    - "Blockchain, theory and practice"
-    - "Cloud, grid, edge computing, IoT, data centers"
-    - "Communication and mobile networks"
-    - "Parallelism, concurrency, multicore systems"
-    - "Shared and transactional memory, memory management"
-    - "Dependable and secure systems"
-    - "Distributed graph algorithms"
-    - "Middleware and operating systems"
-    - "File and storage systems; distributed storage, databases"
-    - "Distributed ML; systems for machine learning"
-    - "Distributed data analytics; big data analytics"
-    - "Mobile agents and robots"
-    - "Self-stabilizing, self-organizing, autonomous systems"
-    - "Game-theory in distributed computing"
-  double_blind: |
-    We use double-blind peer review. Submissions must be anonymous. Authors may disseminate preprints (e.g., arXiv) and present their work, but the submission itself must avoid self-identifying references. For policy questions, contact the PC chairs at opodis_pc_chairs@coord.c.titech.ac.jp.
-  submission:
-    url: "https://opodis2023.hotcrp.com/"
-    requirements:
-      - "English, PDF format"
-      - "LIPIcs LaTeX style (A4)"
-      - "Length: max 15 pages excluding references; unlimited references"
-      - "First-page metadata: title, keywords, abstract, best student paper eligibility"
-      - "Optional clearly marked appendix (reviewer discretion)"
-      - "Ready for double-blind review"
-    notes: |
-      The submission must clearly present the merits, importance, prior work, and key technical ideas. Submissions must report original research not published or under review elsewhere; overlap must be indicated. Program Chairs may desk-reject out-of-scope or guideline-violating submissions.
-  publication: |
-    Post-proceedings are published in LIPIcs (gold open access). Proceedings available online after the conference; preliminary versions available to participants. Camera-ready must match submission format and length.
-  awards: |
-    Awards will be given to the best paper and the best student paper (primarily written by a student). Eligibility for the best student paper award should be indicated on the first page.
-  registration_policy: |
-    At least one author of every accepted paper must register (regular) and present on-site at the conference.
+# Call for Papers Configuration
+#
+# Visibility: Controlled by show_on_site (set false to hide CFP)
+#
+# Structure:
+#   title: CFP heading
+#   status: "open", "closed", "announcement" (displays as badge)
+#   text: Main CFP content in markdown (topics, submission guidelines, all policies)
+#   submission_link: URL to submission system (EasyChair, HotCRP, etc.)
+#   external_cfp_url: Optional link to full external CFP page
+#
+# See CONFIG.md for detailed guidance.
+
+show_on_site: true
+
+title: "Call for Papers"
+
+# Status: "open", "closed", "announcement"
+status: "open"
+
+# Main CFP text (markdown supported)
+text: |
+  # OPODIS 2024: Call for Papers
+  
+  OPODIS is an open forum for the exchange of state-of-the-art knowledge on distributed computing and distributed computer systems. OPODIS aims at having a balanced program that combines theory and practice of distributed systems. OPODIS 2024 solicits papers in all aspects of distributed systems, including theory, specification, design, system building, and performance.
+  
+  ## Topics of Interest
+  
+  Topics include, but are not limited to:
+  
+  - Fault tolerance and consistency, impossibility results
+  - Blockchain, theory and practice
+  - Cloud, grid, edge computing, IoT, data centers
+  - Communication and mobile networks
+  - Parallelism, concurrency, multicore systems
+  - Shared and transactional memory, memory management
+  - Dependable and secure systems
+  - Distributed graph algorithms
+  - Middleware and operating systems
+  - File and storage systems; distributed storage, databases
+  - Distributed ML; systems for machine learning
+  - Distributed data analytics; big data analytics
+  - Mobile agents and robots
+  - Self-stabilizing, self-organizing, autonomous systems
+  - Game-theory in distributed computing
+  
+  ## Important Dates
+  See the [Dates](#dates) section for submission deadlines.
+  
+  ## Submission Guidelines
+  
+  Papers are to be submitted electronically.
+  
+  **Requirements:**
+  - English, PDF format
+  - LIPIcs LaTeX style (A4)
+  - Length: max 15 pages excluding references; unlimited references
+  - First-page metadata: title, keywords, abstract, best student paper eligibility
+  - Optional clearly marked appendix (reviewer discretion)
+  - Ready for double-blind review
+  
+  The submission must clearly present the merits, importance, prior work, and key technical ideas. Submissions must report original research not published or under review elsewhere; overlap must be indicated. Program Chairs may desk-reject out-of-scope or guideline-violating submissions.
+  
+  ## Double-blind Review
+  
+  We use double-blind peer review. Submissions must be anonymous. Authors may disseminate preprints (e.g., arXiv) and present their work, but the submission itself must avoid self-identifying references.
+  
+  ## Publication
+  
+  Post-proceedings are published in LIPIcs (gold open access). Proceedings available online after the conference; preliminary versions available to participants. Camera-ready must match submission format and length.
+  
+  ## Awards
+  
+  Awards will be given to the best paper and the best student paper (primarily written by a student). Eligibility for the best student paper award should be indicated on the first page.
+  
+  ## Registration and Presentation
+  
+  At least one author of every accepted paper must register (regular) and present on-site at the conference.
+
+# Where to submit papers
+submission_link: "https://opodis2024.hotcrp.com/"
+
+# Link to detailed CFP (if external)
+external_cfp_url: null

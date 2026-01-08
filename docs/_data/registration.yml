@@ -1,63 +1,60 @@
-status: "closed"
-link: ""
-notes:
-  - "At least one author of each accepted paper must register (regular) and present on-site."
-status_label: "closed"
-copy:
-  intro: "The conference has ended and registration is now {STATUS}. Details below are left for reference:"
-  steps:
-    - "Complete {ACRONYM}'{YEAR:02} registration form (Google form; closed)"
-    - "Open payment link (Stripe) provided on Google form (2nd page)"
-    - "Pay via stripe link"
-    - "Submit google form"
-    - "Contact us for any other requests: ..."
-    - "Proceed to register to MAC'{YEAR:02} (if applicable)"
-  mac_note: "for MAC-only registrations skip the above steps and read instructions on the <a href=\"{MAC_LINK}\">MAC registration page</a>"
-  visa: "Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration (...)"
+# Registration Configuration
+#
+# Visibility: Controlled by show_on_site (set false to hide registration)
+#
+# Structure:
+#   title: Section heading
+#   status: "closed", "opens_soon", "open", "deadline_approaching"
+#   registration_link: URL to registration system (Google Forms, Eventbrite, etc.)
+#   pricing: Early bird and standard periods with prices
+#   what_is_included: List of perks
+#   terms: Registration policies and terms
+#
+# See CONFIG.md for detailed guidance.
 
-pricing_labels:
-  early: "Until 12 Nov {YEAR}"
-  late: "From 13 Nov {YEAR}"
+enabled: true
+show_on_site: true
 
-mac_registration_link: "/mac23/MAC-registration.html"
-categories:
-  - name: "Student"
-    subtitle: "(proof of enrollment required)"
-    prices:
-      early: "JPY 25,000.-"
-      late: "JPY 50,000.-"
-      currency_hint: "(ca.US$170/€160 early)"
-      timezone_note: "dates in Japan timezone"
-    perks:
-      - "Conference attendance"
-      - "Conference Kit"
-      - "Proceedings (electr.)"
-      - "Coffee breaks (6-8 Dec)"
-      - "Welcome reception (5 Dec)"
-      - "Banquet (7 Dec)"
-  - name: "Regular"
-    prices:
-      early: "JPY 75,000.-"
-      late: "JPY 95,000.-"
-      currency_hint: "(ca.US$500/€480 early)"
-      timezone_note: "dates in Japan timezone"
-    perks:
-      - "Conference attendance"
-      - "Conference Kit"
-      - "Proceedings (electr.)"
-      - "Coffee breaks (6-8 Dec)"
-      - "Welcome reception (5 Dec)"
-      - "Banquet (7 Dec)"
-  - name: "Author"
-    prices:
-      early: "JPY 75,000.-"
-      late: "N/A"
-      currency_hint: "(ca.US$500/€480 early)"
-      timezone_note: "dates in Japan timezone"
-    perks:
-      - "Conference attendance"
-      - "Conference Kit"
-      - "Proceedings (electr.)"
-      - "Coffee breaks (6-8 Dec)"
-      - "Welcome reception (5 Dec)"
-      - "Banquet (7 Dec)"
+title: "Registration"
+
+# Registration status
+status: "closed"  # Options: "closed", "opens_soon", "open", "deadline_approaching"
+
+# Link to registration system
+registration_link: null  # Set when system is ready
+
+# Early bird and standard periods
+pricing:
+  early_bird:
+    deadline: "2024-10-31"
+    student: "100 EUR"
+    regular: "300 EUR"
+    description: "Early bird registration"
+  
+  standard:
+    deadline: "2024-11-30"
+    student: "150 EUR"
+    regular: "400 EUR"
+    description: "Standard registration"
+  
+  on_site:
+    student: "200 EUR"
+    regular: "500 EUR"
+    description: "On-site registration"
+
+# What's included
+what_is_included:
+  - "Conference materials and program"
+  - "Coffee and snacks"
+  - "Lunch (Days 1-3)"
+  - "Welcome reception"
+  - "Conference proceedings"
+
+# Terms
+terms: |
+  ## Registration Terms
+  
+  - At least one author of each accepted paper must register (regular) and present on-site
+  - Registrations are non-refundable after [date]
+  - Change of registration type is allowed until [date]
+  - Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration

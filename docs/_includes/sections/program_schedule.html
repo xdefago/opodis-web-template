@@ -7,6 +7,9 @@
 {% assign day_label_format = "%a %b %-d" %}
 {% assign base_date = schedule.date | default: current.dates.start | default: general.dates.start %}
 {% assign section_id = include.id | default: 'detailed-program' %}
+{% assign papers_data = site.data.papers %}
+{% assign papers_collection = papers_data.items | default: site.data.papers %}
+{% assign show_affiliations_in_schedule = papers_data.show_affiliations_in_schedule | default: false %}
 <section id="{{ section_id }}" class="section-with-bg schedule-section">
   <div class="container wow fadeInUp">
     {% if include.anchor_name %}<a name="{{ include.anchor_name }}" class="name_adjust"></a>{% endif %}
@@ -64,12 +67,32 @@
               <h4>{{ session_title }}{% if item.chair %} <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
               <ul class="fa-ul session-papers">
                 {% for paper in item.papers %}
-                {% assign paper_data = site.data.papers | where: 'number', paper.number | first %}
+                {% assign paper_data = papers_collection | where: 'number', paper.number | first %}
+                {% assign paper_authors = paper_data.authors | default: paper.authors %}
+                {% assign authors_inspect = paper_authors | inspect %}
+                {% assign authors_is_array = authors_inspect | slice: 0, 1 | contains: '[' %}
                 <li><span class="fa-li"><i class="fa fa-file"></i></span>
                   {% if paper.award %}<em>[**{{ paper.award }}**]</em><br>{% endif %}
                   <div class="paper-number">{{ paper.number }}</div>
                   <strong>{{ paper_data.title | default: paper.title }}</strong>
-                  {{ paper_data.authors | default: paper.authors }}
+                  {% if paper_authors %}
+                    <div class="authors">
+                      {% if authors_is_array %}
+                        {% assign first_author = paper_authors | first %}
+                        {% if first_author.name %}
+                          {% for a in paper_authors %}
+                            {{ a.name }}{% if show_affiliations_in_schedule and a.affiliation %} ({{ a.affiliation }}){% endif %}{% unless forloop.last %}; {% endunless %}
+                          {% endfor %}
+                        {% else %}
+                          {% for a in paper_authors %}
+                            {{ a }}{% unless forloop.last %}; {% endunless %}
+                          {% endfor %}
+                        {% endif %}
+                      {% else %}
+                        {{ paper_authors }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
                 </li>
                 {% endfor %}
               </ul>

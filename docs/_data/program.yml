@@ -1,3 +1,22 @@
+# OPODIS Program Configuration
+# This file defines the conference schedule and program structure.
+#
+# Progression/Maturity:
+#   - Stage 1 (Early): Create skeleton with times, session count, TBD chairs
+#   - Stage 2 (Mid): Add session titles, confirm chairs
+#   - Stage 3 (Late): Assign papers to sessions
+#
+# Key Points:
+#   - Run `bundle exec ruby scripts/generate_outline_grid.rb` after changes
+#   - All times must be HH:MM format (24-hour)
+#   - Each item must have a start time or inherit from previous item's end
+#   - Papers are referenced by number from docs/_data/papers.yml
+#   - Duration can be explicit (minutes) or inferred from papers
+#
+# See CONFIG.md for detailed examples and workflows.
+
+show_on_site: true
+
 outline:
   # Outline is now derived from schedule; legacy structure retained for reference
   social:
@@ -11,12 +30,18 @@ text:
 schedule:
   # Base start date for the program; used if individual day.date is absent
   date: 2023-12-06
-  # Local flip time (HH:MM) to auto-select active day
+  
+  # Local flip time (HH:MM) to auto-select active day in live view
+  # (e.g., after this time on a given day, display next day's schedule)
   flip_time: "22:00"
-  # Default durations (minutes)
+  
+  # Default durations (minutes) for computing end times
+  # Used when papers are assigned but no explicit duration given
   durations:
-    paper: 20
-    keynote: 60
+    paper: 20       # Typically 20 min per paper (+ Q&A built-in)
+    keynote: 60     # Typically 1 hour for keynote talks
+  
+  # Labels for common item types (used in schedule when not explicitly set)
   labels:
     break: "Coffee break"
     registration: "Registration"

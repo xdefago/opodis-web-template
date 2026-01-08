@@ -17,30 +17,72 @@
     <div class="row">
       <div class="col-lg-12">
         <ul class="fa-ul">
-          {% for item in dates.items %}
-          {% assign icon = 'fa-hourglass' %}
-          {% assign is_auto = item.status == 'auto' %}
-          {% if item.status == 'past' %}{% assign icon = 'fa-check-circle' %}{% endif %}
-          {% if item.status == 'upcoming' %}{% assign icon = 'fa-registered' %}{% endif %}
-          {% assign base_iso = item.date_iso %}
-          {% assign updated_iso = item.updated_iso %}
-          {% assign base_text = base_iso | date: date_format %}
-          {% assign updated_text = updated_iso | date: date_format %}
-          <li class="date-item"
-              {% if is_auto %}data-status-auto="true"{% endif %}
-              {% if dates_timezone %}data-timezone="{{ dates_timezone }}"{% endif %}
-              {% if base_iso %}data-date-iso="{{ base_iso }}"{% endif %}
-              {% if updated_iso %}data-updated-iso="{{ updated_iso }}"{% endif %}
-              {% if item.time %}data-time="{{ item.time }}"{% endif %}
-          ><span class="fa-li"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
-            {{ item.label }}:
-            {% if updated_iso %}
-              <i><s>{{ base_text }}</s> {{ updated_text }}</i>
-            {% else %}
-              <i>{{ base_text }}</i>
+          {% if dates.cfp %}
+            {% for item_pair in dates.cfp %}
+              {% assign item_key = item_pair[0] %}
+              {% assign item = item_pair[1] %}
+              {% assign date_value = item.date | default: item %}
+              {% assign label = item.label | default: item_key | replace: "_", " " | capitalize %}
+              {% assign status = item.status | default: 'auto' %}
+              {% assign icon = 'fa-hourglass' %}
+              {% if status == 'past' %}{% assign icon = 'fa-check-circle' %}{% endif %}
+              {% if status == 'upcoming' %}{% assign icon = 'fa-registered' %}{% endif %}
+              
+              {% assign date_inspect = date_value | inspect %}
+              {% assign is_array = date_inspect | slice: 0, 1 | contains: '[' %}
+              
+              <li class="date-item"
+                  {% if status == 'auto' %}data-status-auto="true"{% endif %}
+                  {% if dates_timezone %}data-timezone="{{ dates_timezone }}"{% endif %}>
+                <span class="fa-li"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
+                {{ label }}:
+                {% if is_array %}
+                  {% assign original_date = date_value | first %}
+                  {% assign updated_date = date_value | last %}
+                  <i><s>{{ original_date | date: date_format }}</s> {{ updated_date | date: date_format }}</i>
+                {% else %}
+                  <i>{{ date_value | date: date_format }}</i>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% endif %}
+          
+          {% if dates.registration %}
+            {% for item_pair in dates.registration %}
+              {% assign item_key = item_pair[0] %}
+              {% assign item = item_pair[1] %}
+              {% assign date_value = item.date | default: item %}
+              {% assign label = item.label | default: item_key | replace: "_", " " | capitalize %}
+              {% assign status = item.status | default: 'auto' %}
+              {% assign icon = 'fa-ticket' %}
+              
+              {% assign date_inspect = date_value | inspect %}
+              {% assign is_array = date_inspect | slice: 0, 1 | contains: '[' %}
+              
+              <li class="date-item"
+                  {% if status == 'auto' %}data-status-auto="true"{% endif %}
+                  {% if dates_timezone %}data-timezone="{{ dates_timezone }}"{% endif %}>
+                <span class="fa-li"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
+                {{ label }}:
+                {% if is_array %}
+                  {% assign original_date = date_value | first %}
+                  {% assign updated_date = date_value | last %}
+                  <i><s>{{ original_date | date: date_format }}</s> {{ updated_date | date: date_format }}</i>
+                {% else %}
+                  <i>{{ date_value | date: date_format }}</i>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% endif %}
+          
+          {% if current.dates %}
+            {% if current.dates.start %}
+            <li><span class="fa-li"><i class="fa fa-flag" aria-hidden="true"></i></span>Conference start: <i>{{ current.dates.start | date: date_format }}</i></li>
             {% endif %}
-          </li>
-          {% endfor %}
+            {% if current.dates.end %}
+            <li><span class="fa-li"><i class="fa fa-flag-checkered" aria-hidden="true"></i></span>Conference end: <i>{{ current.dates.end | date: date_format }}</i></li>
+            {% endif %}
+          {% endif %}
         </ul>
       </div>
     </div>

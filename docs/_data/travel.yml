@@ -1,9 +1,59 @@
-by_train: |
-  From within Japan, it is easy to reach Tokyo by shinkansen. Google Maps provides reasonably good advice for connections. Coming from Western Japan, the most convenient is to leave the shinkansen at Shin-Yokohama Station and change to the newly opened Tōkyū Shin-yokohama Line.
-by_plane:
-  - name: "Haneda airport (HND)"
-    description: "Haneda is larger and better connected for local transport (e.g., Keikyū line). Most domestic flights and many flights to Europe and Asia land here."
-  - name: "Narita airport (NRT)"
-    description: "Farther away but served by the Narita Express to Musashi-Kosugi, and Keikyu lines to Shinagawa. Most flights from North America land here."
-hotels: |
-  Tokyo offers a large variety of accommodations for all budgets and preferences. We recommend booking near stops on the Meguro, Oimachi, Ikegami, or Toyoko lines. Convenient areas: Oimachi, Meguro, Jiyugaoka, Musashi-Kosugi, Futako-Tamagawa. Other options: Shibuya, Ebisu, Shinagawa, Gotanda, JR Kamata. Top recommendation: Meguro Station (runs against rush hour and near the banquet venue).
+# Travel & Accommodation Configuration
+#
+# Visibility: Controlled by show_on_site (set false to hide until ready)
+#
+# Structure:
+#   title: Section heading
+#   airports: List of main airports with codes and descriptions
+#   public_transport: How to reach the city/venue
+#   to_venue: Specific directions to conference venue
+#   visa_info: Visa requirements and invitation letter policy
+#
+# See CONFIG.md for detailed guidance.
+
+show_on_site: true
+
+title: "Travel Information"
+
+# Main airports
+airports:
+  - code: "NRT"
+    name: "Narita International Airport (NRT)"
+    distance: "About 60 km east of Tokyo"
+    travel_time: "60-90 minutes by train"
+    info: |
+      Narita is Tokyo's primary international airport. Farther away but served by the Narita Express to Musashi-Kosugi, and Keikyu lines to Shinagawa. Most flights from North America land here.
+  
+  - code: "HND"
+    name: "Haneda Airport (HND)"
+    distance: "About 14 km south of Tokyo"
+    travel_time: "30 minutes by train"
+    info: |
+      Haneda is closer to central Tokyo and preferred by many. Larger and better connected for local transport (e.g., Keikyū line). Most domestic flights and many flights to Europe and Asia land here.
+
+# Public transportation
+public_transport: |
+  ## Getting Around Tokyo
+  
+  Tokyo has an excellent public transportation system:
+  
+  - **Trains (Most common):** JR Yamanote Line, Metro lines
+  - **Subway:** Clean, efficient, English signage
+  - **Buses:** Useful for some routes
+  - **Taxis:** Expensive but convenient
+  
+  Consider getting a prepaid IC card (Suica/Pasmo) for easy travel. From within Japan, it is easy to reach Tokyo by shinkansen. Google Maps provides reasonably good advice for connections.
+
+# Getting to venue
+to_venue: |
+  ## Getting to Tokyo Institute of Technology
+  
+  - **By Train:** Take Meguro or Oimachi line to Ookayama Station, about 10 minutes walk
+  - **From Shinkansen:** Coming from Western Japan, the most convenient is to leave the shinkansen at Shin-Yokohama Station and change to the newly opened Tōkyū Shin-yokohama Line
+  - **Maps:** See venue section for detailed map links
+
+# Visa information
+visa_info: |
+  ## Visa Requirements
+  
+  Check [MOFA Japan](https://www.mofa.go.jp/) for visa requirements for your country. EU/US citizens typically get 90-day visitor status. Attendees requiring an invitation letter for obtaining a visa may request one after completing their registration.

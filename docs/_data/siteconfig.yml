@@ -1,8 +1,8 @@
 default_language: "en"
-
+#
 fonts:
   google: "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
-
+#
 assets:
   favicon: "img/favicon.png"
   apple_touch_icon: "img/apple-touch-icon.png"
@@ -24,7 +24,7 @@ assets:
     - "lib/venobox/venobox.min.js"
     - "lib/owlcarousel/owl.carousel.min.js"
     - "js/main.js"
-
+#
 nav:
   - label: "Home"
     href: "/#intro"
@@ -59,16 +59,3 @@ nav:
   - label: "Sponsors"
     href: "/#supporters"
     key: "sponsors"
-
-sections:
-  intro: true
-  speakers: true
-  cfp: true
-  dates: true
-  committees: true
-  papers: true
-  program: true
-  venue: true
-  travel: true
-  registration: true
-  sponsors: true

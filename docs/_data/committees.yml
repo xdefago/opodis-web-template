@@ -1,114 +1,171 @@
+enabled: true
+show_on_site: true
+
+# OPODIS Committees Configuration
+#
+# Progression/Maturity:
+#   - Stage 1 (Early): Committee structure TBD, not shown on site
+#   - Stage 2 (Mid): Committee lists finalized, shown on site
+#   - Stage 3 (Late): All roles and members confirmed
+#
+# Visibility: Controlled by `enabled` and `show_on_site` in this file.
+#           Set `show_on_site: false` until content is finalized.
+#
+# Structure:
+#   - organizing: Local organizing committee (general chairs, publication chair, team)
+#   - steering: Steering committee (for series-level governance)
+#   - program: Program committee (chairs and members who reviewed papers)
+#
+# Fields:
+#   - name: Full name (required)
+#   - affiliation: Organization/university (optional)
+#   - role: Optional, e.g., "chair", "vice-chair" (defaults to regular member)
+#
+# Typical Timeline:
+#   - Month 8: Steering committee mostly fixed (OPODIS governance)
+#   - Month 6: General chairs, program committee chairs confirmed
+#   - Month 4: Full program committee assembled
+#   - Month 1: All committees finalized and published
+#
+# See CONFIG.md for committee timeline and publication strategy.
+
 organizing:
   general_chairs:
     - name: "Xavier Défago"
       affiliation: "Tokyo Tech., Japan"
     - name: "Koichi Wada"
-      affiliation: "Hosei Univ., Japan"
-  publication_chair:
-    - name: "Junya Nakamura"
-      affiliation: "Toyohashi University of Technology, Japan"
-  organizing_team:
-    - name: "François Bonnet"
-      affiliation: "Tokyo Tech., Japan"
-    - name: "Yuichi Sudo"
-      affiliation: "Hosei University, Japan"
-    - name: "Yasumasa Tamura"
-      affiliation: "Tokyo Tech., Japan"
-    - name: "Mayuko Takano"
-      affiliation: "Tokyo Tech., Japan"
-steering:
-  - name: "Quentin Bramas"
-    affiliation: "University of Strasbourg, France"
-  - name: "Pascal Felber"
-    affiliation: "University of Neuchâtel, Switzerland"
-    role: "chair"
-  - name: "Paola Flocchini"
-    affiliation: "University of Ottawa, Canada"
-  - name: "Vincent Gramoli"
-    affiliation: "University of Sydney, Australia"
-  - name: "Eshcar Hillel"
-    affiliation: "Pliops, Israel"
-  - name: "Yannic Maus"
-    affiliation: "TU Graz, Austria"
-  - name: "Alessia Milani"
-    affiliation: "LIS, Aix-Marseille University, France"
-  - name: "Roberto Palmieri"
-    affiliation: "Lehigh University, USA"
-program_chairs:
-  - name: "Alysson Bessani"
-    affiliation: "FCUL/ULisboa, Portugal"
-  - name: "Yukiko Yamauchi"
-    affiliation: "Kyushu University, Japan"
-program_committee:
-  - name: "Eduardo Alchieri"
-    affiliation: "University of Brasilia, Brazil"
-  - name: "Anish Arora"
-    affiliation: "The Ohio State University, USA"
-  - name: "Hagit Attiya"
-    affiliation: "Technion, Israel"
-  - name: "François Bonnet"
-    affiliation: "Tokyo Institute of Technology, Japan"
-  - name: "Silvia Bonomi"
-    affiliation: "Sapienza University of Rome, Italy"
-  - name: "Shantanu Das"
-    affiliation: "Aix-Marseille University, France"
-  - name: "Joshua J. Daymude"
-    affiliation: "Arizona State University, USA"
-  - name: "Tobias Distler"
-    affiliation: "University of Erlangen-Nuremberg, Germany"
-  - name: "Sisi Duan"
-    affiliation: "Tsinghua University, China"
-  - name: "Yuval Emek"
-    affiliation: "Technion, Israel"
-  - name: "Bernardo Ferreira"
-    affiliation: "FCUL/ULisboa, Portugal"
-  - name: "Paola Flocchini"
-    affiliation: "University of Ottawa, Canada"
-  - name: "Leszek A. Gąsieniec"
-    affiliation: "University of Liverpool, UK"
-  - name: "Seth Gilbert"
-    affiliation: "National University of Singapore, Singapore"
-  - name: "Magnus M. Halldorsson"
-    affiliation: "Reykjavik University, Iceland"
-  - name: "Eshcar Hillel"
-    affiliation: "Pliops, Israel"
-  - name: "Taisuke Izumi"
-    affiliation: "Osaka University, Japan"
-  - name: "Sayaka Kamei"
-    affiliation: "Hiroshima University, Japan"
-  - name: "Yonghwan Kim"
-    affiliation: "Nagoya Institute of Technology, Japan"
-  - name: "Evangelos Kranakis"
-    affiliation: "Carleton University, Canada"
-  - name: "Fabian Kuhn"
-    affiliation: "University of Freiburg, Germany"
-  - name: "Anissa Lamani"
-    affiliation: "University of Strasbourg, France"
-  - name: "Euripides Markou"
-    affiliation: "University of Thessaly, Greece"
-  - name: "Achour Mostéfaoui"
-    affiliation: "University of Nantes, France"
-  - name: "Junya Nakamura"
-    affiliation: "Toyohashi University of Technology, Japan"
-  - name: "Roberto Palmieri"
-    affiliation: "Lehigh University, USA"
-  - name: "Fernando Pedone"
-    affiliation: "University of Lugano, Switzerland"
-  - name: "Maria Potop-Butucaru"
-    affiliation: "Sorbonne University, France"
-  - name: "Nuno Preguiça"
-    affiliation: "University NOVA Lisboa, Portugal"
-  - name: "Vincent Rahli"
-    affiliation: "University of Birmingham, UK"
-  - name: "Étienne Rivière"
-    affiliation: "UCLouvain, Belgium"
-  - name: "Christian Scheideler"
-    affiliation: "Paderborn University, Germany"
-  - name: "Valerio Schiavoni"
-    affiliation: "University of Neuchâtel, Switzerland"
-  - name: "Gregory Schwartzman"
-    affiliation: "Japan Advanced Institute of Science and Technology, Japan"
-  - name: "Jukka Suomela"
-    affiliation: "Aalto University, Finland"
-  - name: "Sébastien Tixeuil"
-    affiliation: "Sorbonne University, France"
+      organizing:
+        general_chairs:
+          enabled: true
+          items:
+            - name: "Xavier Défago"
+              affiliation: "Tokyo Tech., Japan"
+            - name: "Koichi Wada"
+              affiliation: "Hosei Univ., Japan"
+        publication_chair:
+          enabled: true
+          items:
+            - name: "Junya Nakamura"
+              affiliation: "Toyohashi University of Technology, Japan"
+        organizing_team:
+          enabled: true
+          items:
+            - name: "François Bonnet"
+              affiliation: "Tokyo Tech., Japan"
+            - name: "Yuichi Sudo"
+              affiliation: "Hosei University, Japan"
+            - name: "Yasumasa Tamura"
+              affiliation: "Tokyo Tech., Japan"
+            - name: "Mayuko Takano"
+              affiliation: "Tokyo Tech., Japan"
+
+      steering:
+        enabled: true
+        items:
+          - name: "Quentin Bramas"
+            affiliation: "University of Strasbourg, France"
+          - name: "Pascal Felber"
+            affiliation: "University of Neuchâtel, Switzerland"
+            role: "chair"
+          - name: "Paola Flocchini"
+            affiliation: "University of Ottawa, Canada"
+          - name: "Vincent Gramoli"
+            affiliation: "University of Sydney, Australia"
+          - name: "Eshcar Hillel"
+            affiliation: "Pliops, Israel"
+          - name: "Yannic Maus"
+            affiliation: "TU Graz, Austria"
+          - name: "Alessia Milani"
+            affiliation: "LIS, Aix-Marseille University, France"
+          - name: "Roberto Palmieri"
+            affiliation: "Lehigh University, USA"
+          - name: "Maria Potop-Butucaru"
+            affiliation: "Sorbonne University, France"
+          - name: "Maria Potop-Butucaru"
+            affiliation: "Sorbonne University, France"
+          - name: "Roberto Palmieri"
+            affiliation: "Lehigh University, USA"
+
+      program_chairs:
+        enabled: true
+        items:
+          - name: "Alysson Bessani"
+            affiliation: "FCUL/ULisboa, Portugal"
+          - name: "Yukiko Yamauchi"
+            affiliation: "Kyushu University, Japan"
+
+      program_committee:
+        enabled: true
+        items:
+          - name: "Eduardo Alchieri"
+            affiliation: "University of Brasilia, Brazil"
+          - name: "Anish Arora"
+            affiliation: "The Ohio State University, USA"
+          - name: "Hagit Attiya"
+            affiliation: "Technion, Israel"
+          - name: "François Bonnet"
+            affiliation: "Tokyo Institute of Technology, Japan"
+          - name: "Silvia Bonomi"
+            affiliation: "Sapienza University of Rome, Italy"
+          - name: "Shantanu Das"
+            affiliation: "Aix-Marseille University, France"
+          - name: "Joshua J. Daymude"
+            affiliation: "Arizona State University, USA"
+          - name: "Tobias Distler"
+            affiliation: "University of Erlangen-Nuremberg, Germany"
+          - name: "Sisi Duan"
+            affiliation: "Tsinghua University, China"
+          - name: "Yuval Emek"
+            affiliation: "Technion, Israel"
+          - name: "Bernardo Ferreira"
+            affiliation: "FCUL/ULisboa, Portugal"
+          - name: "Paola Flocchini"
+            affiliation: "University of Ottawa, Canada"
+          - name: "Leszek A. Gąsieniec"
+            affiliation: "University of Liverpool, UK"
+          - name: "Seth Gilbert"
+            affiliation: "National University of Singapore, Singapore"
+          - name: "Magnus M. Halldorsson"
+            affiliation: "Reykjavik University, Iceland"
+          - name: "Eshcar Hillel"
+            affiliation: "Pliops, Israel"
+          - name: "Taisuke Izumi"
+            affiliation: "Osaka University, Japan"
+          - name: "Sayaka Kamei"
+            affiliation: "Hiroshima University, Japan"
+          - name: "Yonghwan Kim"
+            affiliation: "Nagoya Institute of Technology, Japan"
+          - name: "Evangelos Kranakis"
+            affiliation: "Carleton University, Canada"
+          - name: "Fabian Kuhn"
+            affiliation: "University of Freiburg, Germany"
+          - name: "Anissa Lamani"
+            affiliation: "University of Strasbourg, France"
+          - name: "Euripides Markou"
+            affiliation: "University of Thessaly, Greece"
+          - name: "Achour Mostéfaoui"
+            affiliation: "University of Nantes, France"
+          - name: "Junya Nakamura"
+            affiliation: "Toyohashi University of Technology, Japan"
+          - name: "Roberto Palmieri"
+            affiliation: "Lehigh University, USA"
+          - name: "Fernando Pedone"
+            affiliation: "University of Lugano, Switzerland"
+          - name: "Maria Potop-Butucaru"
+            affiliation: "Sorbonne University, France"
+          - name: "Nuno Preguiça"
+            affiliation: "University NOVA Lisboa, Portugal"
+          - name: "Vincent Rahli"
+            affiliation: "University of Birmingham, UK"
+          - name: "Étienne Rivière"
+            affiliation: "UCLouvain, Belgium"
+          - name: "Christian Scheideler"
+            affiliation: "Paderborn University, Germany"
+          - name: "Valerio Schiavoni"
+            affiliation: "University of Neuchâtel, Switzerland"
+          - name: "Gregory Schwartzman"
+            affiliation: "Japan Advanced Institute of Science and Technology, Japan"
+          - name: "Jukka Suomela"
+            affiliation: "Aalto University, Finland"
+          - name: "Sébastien Tixeuil"
+            affiliation: "Sorbonne University, France"

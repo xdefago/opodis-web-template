@@ -1,35 +1,36 @@
 ---
 layout: default
 ---
-{% if site.data.site.sections.intro %}
+{% assign intro_show = site.data.conference.show_on_site | default: true %}
+{% if intro_show %}
   {% include sections/intro.html %}
 {% endif %}
 
-{% if site.data.site.sections.speakers %}
+{% if site.data.keynotes.show_on_site != false %}
   {% include sections/keynotes.html %}
 {% endif %}
 
-{% if site.data.site.sections.committees %}
+{% if site.data.committees.show_on_site != false %}
   {% include sections/committees.html %}
 {% endif %}
 
-{% if site.data.site.sections.program %}
+{% if site.data.program.show_on_site != false %}
   {% include sections/program_outline.html %}
 {% endif %}
 
-{% if site.data.site.sections.venue %}
+{% if site.data.venue.show_on_site != false %}
   {% include sections/venue.html %}
 {% endif %}
 
-{% if site.data.site.sections.travel %}
+{% if site.data.travel.show_on_site != false %}
   {% include sections/travel.html %}
 {% endif %}
 
-{% if site.data.site.sections.registration %}
+{% if site.data.registration.show_on_site != false %}
   {% include sections/registration.html %}
 {% endif %}
 
-{% if site.data.site.sections.sponsors %}
+{% if site.data.sponsors.show_on_site != false %}
   {% include sections/sponsors.html %}
 {% endif %}
 
