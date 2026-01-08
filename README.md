@@ -19,6 +19,7 @@ This repository was refactored from the **OPODIS 2023** website to be **reusable
 - **Configuration-driven**: All content in YAML files (`docs/_data/*.yml`)
 - **Modular design**: Liquid includes for reusable components
 - **Automated schedule generation**: `scripts/generate_outline_grid.rb` converts program config to presentation-ready JSON
+- **Explicit or inferred durations**: accepts HH:MM start times, HH:MM-HH:MM ranges, or durations with automatic fallback to papers/next item
 - **Progressive disclosure**: Supports TBD/incomplete information at early planning stages
 - **Validation**: Generator validates consistency (times, papers, chairs)
 - **Style**: Bootstrap-based responsive design
@@ -86,7 +87,7 @@ See **[BUILD.md](config/BUILD.md)** for:
 
 The `generate_outline_grid.rb` script:
 - Reads `docs/_data/program.yml`
-- Infers end times from durations or next items
+- Resolves end times by prioritizing time ranges, then explicit `duration`, then computed (papers/keynote), then next start
 - Validates consistency (no overlaps, all papers fit)
 - Generates `docs/_data/outline_grid.json`
 - Provides helpful error messages

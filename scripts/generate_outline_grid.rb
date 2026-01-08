@@ -55,6 +55,19 @@ def parse_minutes(label)
   h * 60 + m
 end
 
+def parse_time_field(value)
+  return [nil, nil] if value.nil?
+
+  if value.is_a?(String) && value.include?('-')
+    start_str, end_str = value.split('-', 2).map(&:strip)
+    start_min = parse_minutes(start_str)
+    end_min = parse_minutes(end_str)
+    [start_min, end_min]
+  else
+    [parse_minutes(value), nil]
+  end
+end
+
 def fmt_minutes(total)
   hours = total / 60
   mins = total % 60
@@ -83,30 +96,34 @@ def normalize_day(day, paper_duration, keynote_duration, labels_map)
     )
     include_item = include_outline_item?(item)
 
+    time_field = item['time']
+    start_min, explicit_end = parse_time_field(time_field)
+
     if include_item
-      start_min = if item['time']
-                    parse_minutes(item['time'])
-                  else
-                    prev_end
-                  end
+      start_min ||= prev_end
       fatal_error!(
         code: 'missing-start',
         message: 'missing start time for outline item',
         day: day,
         idx: idx,
         item: item,
-        details: 'Provide a time or ensure the previous item has an end time to inherit from.'
+        details: 'Provide a time (HH:MM or HH:MM-HH:MM) or ensure the previous item has an end time to inherit from.'
       ) if start_min.nil?
     else
-      start_min = item['time'] ? parse_minutes(item['time']) : prev_end
+      start_min ||= prev_end
       prev_end = start_min if start_min
       next
     end
 
     next_item = items[idx + 1]
-    next_start = next_item && (next_item['time'] ? parse_minutes(next_item['time']) : nil)
+    next_start = nil
+    if next_item && next_item['time']
+      ns, = parse_time_field(next_item['time'])
+      next_start = ns
+    end
 
-    duration_min = item['duration']
+    duration_raw = item['duration']
+    duration_min = duration_raw.nil? ? nil : duration_raw.to_i
     computed = nil
     computed_kind = nil
 
@@ -120,7 +137,13 @@ def normalize_day(day, paper_duration, keynote_duration, labels_map)
     end
 
     end_min = nil
-    if duration_min
+    # Priority: explicit range > explicit duration > computed > next start
+    if explicit_end
+      end_min = explicit_end
+      if duration_min && start_min + duration_min != end_min
+        warn!("start+duration != explicit end at #{day['label'] || day['date']} item #{idx}")
+      end
+    elsif duration_min
       end_min = start_min + duration_min
     elsif computed
       end_min = start_min + computed
@@ -137,16 +160,25 @@ def normalize_day(day, paper_duration, keynote_duration, labels_map)
       )
     end
 
+    if explicit_end && end_min < start_min
+      fatal_error!(
+        code: 'negative-duration',
+        message: 'end time is before start time',
+        day: day,
+        idx: idx,
+        item: item,
+        details: "Start #{fmt_minutes(start_min)}, end #{fmt_minutes(end_min)}"
+      )
+    end
+
     # Consistency checks
     if duration_min && computed && computed_kind == :papers
       expected_comp = start_min + computed
       warn!("start+duration != papers*paper_duration at #{day['label'] || day['date']} item #{idx}") if end_min != expected_comp
     end
 
-    if duration_min && next_start
-      if end_min < next_start
-        warn!("duration ends before next start at #{day['label'] || day['date']} item #{idx}")
-      elsif end_min > next_start
+    if next_start
+      if end_min > next_start
         fatal_error!(
           code: 'duration-overlap',
           message: 'duration exceeds start of next item',
@@ -155,19 +187,9 @@ def normalize_day(day, paper_duration, keynote_duration, labels_map)
           item: item,
           details: "Ends at #{fmt_minutes(end_min)} but next item starts at #{fmt_minutes(next_start)}."
         )
+      elsif end_min < next_start
+        warn!("gap detected: #{day['label'] || day['date']} item #{idx} ends before next start")
       end
-    end
-
-    if computed && computed_kind == :papers && next_start
-      comp_end = start_min + computed
-      fatal_error!(
-        code: 'papers-overlap',
-        message: 'papers duration exceeds start of next item',
-        day: day,
-        idx: idx,
-        item: item,
-        details: "Papers run until #{fmt_minutes(comp_end)} but next item starts at #{fmt_minutes(next_start)}."
-      ) if comp_end > next_start
     end
 
     resolved_label = item['label'] || labels_map[type]

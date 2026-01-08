@@ -205,16 +205,18 @@ schedule:
       label: "Wed Dec 4"  # Display label
       items:
         # First day skeleton - no papers yet
-        - time: "08:30"
+        - time: "08:30-09:00"  # Explicit range (preferred when known)
           type: "registration"
         
         - time: "09:00"
           type: "opening"
+          duration: 15          # Explicit duration when only start time is known
         
         - time: "09:15"
           type: "keynote"
           number: 1
           chair: "TBD"
+          # Falls back to default keynote duration if none provided
         
         - time: "10:15"
           type: "break"
@@ -256,6 +258,8 @@ schedule:
 **Important Notes:**
 - Skeleton schedule can have empty `papers: []` – papers added in Stage 3
 - `chair: "TBD"` is acceptable – will be filled in Stage 2
+- Times accept `HH:MM` or `HH:MM-HH:MM` plus optional `duration:` (minutes)
+- End times resolve in order: explicit time range → explicit `duration` → computed (papers/keynotes) → next item's start; generator warns on gaps or overlaps
 - Times are crucial – outline grid generation depends on them
 - Session titles can be generic initially
 
@@ -897,22 +901,21 @@ schedule:
 - [ ] Each paper appears in exactly one session
 - [ ] No paper assigned to multiple sessions
 
-#### 3.3 Update Schedule with Explicit Durations (Optional)
+#### 3.3 Update Schedule with Time Ranges or Explicit Durations
 
-If using 2025-style time ranges, add `duration` field:
+Prefer time ranges when you know both start and end. Otherwise, add `duration` (minutes) and let the generator compute end times:
 
 ```yaml
 items:
-  - time: "08:00"
+  - time: "08:00-08:45"  # Explicit range
     type: "registration"
-    duration: 45  # Minutes
   
-  - time: "08:45"
+  - time: "08:45"        # Start time only
     type: "opening"
-    duration: 15
+    duration: 15          # Optional explicit duration
 ```
 
-This allows explicit time ranges without relying on next item's start.
+End times resolve in this order: time range → explicit `duration` → computed (papers/keynotes) → next item's start. The generator validates overlaps and warns about gaps.
 
 #### 3.4 Enable All Sections
 
@@ -1105,6 +1108,8 @@ items:
   - time: "09:10"     # Or ensure next item starts here
     type: "keynote"
 ```
+
+You can also use explicit ranges (`"09:00-09:10"`). End times resolve in order: range → explicit `duration` → computed (papers/keynotes) → next item's start.
 
 ### Papers Don't Show in Schedule
 

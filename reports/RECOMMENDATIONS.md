@@ -16,170 +16,18 @@ The current repository structure is **sound and reusable**. Recommended improvem
 
 ---
 
-## High Priority (Implement Next Sprint)
+## Implemented
 
-### 1. Add Visibility/Activation Toggles
+- Visibility/activation toggles across all data files and templates (`enabled`/`show_on_site`) for staged publishing
+- Committees display template rendering organizing/program/steering sections with per-section toggles
+- Configuration validation in `scripts/generate_outline_grid.rb` (paper references, chairs, time formats, overlaps/gaps) with helpful compiler-style messages
+- Explicit schedule support for time ranges (`HH:MM-HH:MM`) and optional `duration`; end-time resolution order: range → explicit `duration` → computed (papers/keynotes) → next item's start
 
-**Current Issue:** All configured items appear on site regardless of completion status.
+## Backlog
 
-**Recommendation:** Add `enabled` and `show_on_site` flags to control visibility.
+### Enhanced Error Messages (extend to all validators)
 
-**Impact:** Allows early-stage configuration without visual clutter.
-
-**Implementation:**
-
-```yaml
-# docs/_data/committees.yml
-committees:
-  enabled: true                    # Can be set to false until finalized
-  show_on_site: false              # Hidden until Month 6
-  
-  program_committee:
-    enabled: true
-    items:
-      - name: "..."
-        affiliation: "..."
-
-# docs/_data/papers.yml
-papers:
-  enabled: true
-  show_on_site: false              # Hidden until peer review complete
-  items: [...]
-
-# docs/_includes/sections/committees.html
-{% if site.data.committees.show_on_site %}
-  <!-- Render committees -->
-{% endif %}
-```
-
-**Effort:** Low (1-2 hours)  
-**Benefit:** High (supports progressive disclosure)
-
----
-
-### 2. Implement Configuration Validation in Generator
-
-**Current Issue:** Errors are caught late, sometimes after Jekyll build.
-
-**Recommendation:** Add pre-validation to `scripts/generate_outline_grid.rb`.
-
-**Impact:** Faster feedback loop for configuration errors.
-
-**Add Checks For:**
-- [ ] All paper numbers referenced in schedule exist in `papers.yml`
-- [ ] All chairs mentioned in schedule exist (either in keynotes or committees)
-- [ ] No paper appears in multiple sessions
-- [ ] Time formatting is consistent (HH:MM)
-- [ ] Paper count doesn't exceed session time
-- [ ] Paper references have matching entries
-
-**Example Output:**
-```
-warning[paper-404]: Paper #42 referenced in Session 3 but not in papers.yml
-   --> program.yml:day-1, session-3
-    | papers: [40, 41, 42, 43]
-    | note: Add paper #42 to papers.yml or remove from session.
-```
-
-**Effort:** Medium (3-4 hours)  
-**Benefit:** High (catches errors early)
-
----
-
-### 3. Create Program Committee Display Template
-
-**Current Issue:** Committee member list is not currently displayed on site.
-
-**Recommendation:** Create `docs/_includes/sections/committees.html` template.
-
-**Impact:** Enables publication of organizing and program committees.
-
-**Template Features:**
-- [ ] Render organizing committee (general chairs, publication chair, team)
-- [ ] Render steering committee (series-level governance)
-- [ ] Render program committee (PC chair, vice chairs, members)
-- [ ] Role-based styling (chairs in bold/prominent)
-- [ ] Affiliation display
-- [ ] Support for TBA/incomplete entries
-- [ ] Responsive layout for mobile
-
-**Similar To:** 
-```html
-<!-- Like keynotes section but for committee members -->
-<section id="committees">
-  <h2>Committees</h2>
-  
-  <div class="committee-group">
-    <h3>Program Committee</h3>
-    <ul>
-      {% for member in site.data.committees.program_committee.members %}
-        <li>
-          <strong>{{ member.name }}</strong> {% if member.role %}({{ member.role }}){% endif %}
-          <br>{{ member.affiliation }}
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-```
-
-**Effort:** Low (2-3 hours)  
-**Benefit:** Medium (needed feature)
-
----
-
-## Medium Priority (Implement in Following Sprint)
-
-### 4. Add Explicit Duration Support with Time Ranges
-
-**Current Issue:** 2025 instance uses time ranges (08:00 - 08:45), but current system infers durations.
-
-**Recommendation:** Add optional explicit `duration` field to items (already partially done).
-
-**Impact:** Allows explicit time ranges without relying on next item's start time.
-
-**Enhancement:**
-```yaml
-# docs/_data/program.yml
-items:
-  - time: "08:00"
-    type: "registration"
-    duration: 45           # Explicit: 08:00 - 08:45
-  
-  - time: "08:45"
-    type: "opening"
-    duration: 15           # Explicit: 08:45 - 09:00
-  
-  # Or use implicit (current method)
-  - time: "09:00"
-    type: "keynote"
-    # Duration inferred from papers or next item
-```
-
-**Generator Updates:**
-- [ ] Prioritize explicit duration if provided
-- [ ] Fall back to computed duration (papers × 20min)
-- [ ] Fall back to next item's start time
-- [ ] Validate no gaps or overlaps
-
-**Effort:** Low (1-2 hours, mostly testing)  
-**Benefit:** Medium (supports 2025-style configuration)
-
----
-
-### 5. Enhanced Error Messages (Rust Compiler Style)
-
-**Current Status:** Already implemented in generator!
-
-**Observation:** Current error format is excellent:
-```
-error[duration-overlap]: duration exceeds start of next item
-   --> Fri Dec 8 • item 8 • closing
-    | start: 17:50
-    | note: Ends at 18:00 but next item starts at 17:50.
-```
-
-**Recommendation:** Extend to other validators (papers, chairs, etc.).
+**Current Status:** Base formatter is in place; extend to paper/chair/name validation.
 
 **To Add:**
 ```
@@ -187,13 +35,11 @@ error[paper-404]: Paper not found
    --> program.yml:Wed Dec 4, Session 1, paper index 2
     | papers: [3, 5, 12]
     | note: Paper #12 referenced but not in papers.yml
-error[paper-404]
 
 error[chair-unknown]: Session chair not found
    --> program.yml:Wed Dec 4, Session 1
     | chair: "Unknown Person"
     | note: Add "Unknown Person" to committees.yml or update name
-error[chair-unknown]
 ```
 
 **Effort:** Medium (3-4 hours)  
@@ -201,7 +47,7 @@ error[chair-unknown]
 
 ---
 
-### 6. Draft and TBD Content Styling
+### Draft and TBD Content Styling
 
 **Current Issue:** TBA/TBD entries render same as confirmed entries.
 
@@ -244,9 +90,7 @@ keynotes:
 
 ---
 
-## Low Priority (Enhancements)
-
-### 7. Build Interactive Configuration Helper
+### Build Interactive Configuration Helper
 
 **Purpose:** Guide new administrators through configuration process.
 
@@ -282,7 +126,7 @@ Continue? (y/n)
 
 ---
 
-### 8. Previous Years Archive Support
+### Previous Years Archive Support
 
 **Purpose:** Serve and link to previous conference instances.
 
@@ -296,7 +140,7 @@ Continue? (y/n)
 
 ---
 
-### 9. Multi-Language Support Framework
+### Multi-Language Support Framework
 
 **Purpose:** If conference goes international, support translations.
 
@@ -332,7 +176,7 @@ available_languages:
 
 ### Sprint 2 (Weeks 3-4) – Quality Improvements
 
-- [ ] Add configuration validation in generator
+- [x] Add configuration validation in generator
 - [ ] Enhance error messages
 - [ ] Add draft/TBD styling
 - [ ] Test edge cases
@@ -342,9 +186,9 @@ available_languages:
 
 ### Sprint 3 (Weeks 5-6) – Optional Enhancements
 
-- [ ] Explicit duration support (mostly testing)
+- [x] Explicit duration support (mostly testing)
 - [ ] Performance optimizations
-- [ ] Documentation updates
+- [x] Documentation updates
 
 **Time Estimate:** 4-6 hours  
 **Blockers:** None
@@ -395,17 +239,20 @@ After implementing High Priority recommendations:
 
 ## Risk Assessment
 
-### Low Risk Recommendations
+### Low Risk (Implemented)
 
 ✅ Visibility toggles – Purely additive, no breaking changes  
 ✅ Committees display – New section, no impact on existing  
-✅ Error messages – Improvements to feedback, no output changes  
-✅ Draft styling – Optional, default unchanged  
 
-### Medium Risk
+### Medium Risk (Implemented; monitor)
 
-⚠️ Configuration validation – Could reject valid configs (test thoroughly)  
-⚠️ Explicit duration – Changes time calculation logic (validate against all 3 instances)  
+✅ Configuration validation – Could reject valid configs (test thoroughly)  
+✅ Explicit duration – Changes time calculation logic (validate against all 3 instances)  
+
+### Pending
+
+⚠️ Enhanced error messages – Extend to all validators  
+⚠️ Draft/TBD styling – Add visual differentiation  
 
 ### Implementation Safeguards
 

@@ -10,6 +10,12 @@ All YAML configuration files and templates have been updated to:
 3. **Simplify data structures** to match original CONFIG.md patterns (lower granularity, markdown text blocks)
 4. **Support flexible schemas** for papers authors and date updates
 
+## 2026-01-08 — Schedule Durations and Ranges
+
+- Documented explicit time ranges (`HH:MM-HH:MM`) and optional `duration` fields; generator resolves end times in order: range → explicit `duration` → computed (papers/keynotes) → next item's start
+- Generator validation now warns on overlaps and gaps; BUILD instructions call out rerunning the generator after any `program.yml` change
+- QUICKSTART and CONFIG examples updated to show time ranges/durations; troubleshooting guidance clarified
+
 ## Data Files Modified
 
 ### 1. dates.yml

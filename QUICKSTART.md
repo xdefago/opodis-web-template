@@ -84,14 +84,16 @@ schedule:
     - date: 2024-12-04
       label: "Wed Dec 4"
       items:
-        - time: "08:30"
+        - time: "08:30-09:00"    # Explicit range (preferred if known)
           type: "registration"
         - time: "09:00"
           type: "opening"
-        - time: "09:10"
+          duration: 15           # Explicit duration (HH:MM inferred from start + 15)
+        - time: "09:15"
           type: "keynote"
           number: 1
           chair: "Chair Name"
+          # Duration will fall back to keynote default if not provided
         # Continue with sessions, breaks, etc.
 ```
 
@@ -143,7 +145,8 @@ bundle exec ruby scripts/generate_outline_grid.rb
 
 The generator:
 - Reads `docs/_data/program.yml`
-- Validates consistency
+- Resolves end times using this priority: time range → explicit `duration` → computed (papers/keynotes) → next item's start
+- Validates consistency (no overlaps; warns on gaps)
 - Generates `docs/_data/outline_grid.json`
 - **Must be run after any program.yml change**
 

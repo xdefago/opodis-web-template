@@ -26,7 +26,7 @@ If you change `docs/_data/program.yml`, regenerate the outline grid:
 ```bash
 bundle exec ruby scripts/generate_outline_grid.rb
 ```
-Re-run the generator after any change in `docs/_data/program.yml` (times, types, durations, labels, etc.) before building or deploying.
+Re-run the generator after any change in `docs/_data/program.yml` (times, types, durations, labels, etc.) before building or deploying. End times resolve in order: time range → explicit `duration` → computed (papers/keynotes) → next item's start, and the generator validates overlaps/gaps.
 
 
 ## Build
