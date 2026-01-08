@@ -43,15 +43,9 @@ Implement pre-validation in `scripts/generate_outline_grid.rb` to catch configur
    - Tracks seen papers to detect duplicates
    - Output format: "Paper #XX referenced in program.yml:day-label, session N"
 
-   **c) `validate_chairs(days_data, committees_data, keynotes_data)` (Lines 343-390)**
-   - Validates all session chairs exist (in committees or keynotes)
-   - Builds known_people set from:
-     * Keynote speakers (keynotes.yml)
-     * All committee members (committees.yml)
-   - Handles both dict and array structures for backward compatibility
-   - Skips TBA/TBD/empty chairs
-   - Warning code: `chair-unknown`
-   - Output: "Session chair 'Name' not found in program.yml:day-label, session N"
+   **c) `validate_chairs(days_data, committees_data, keynotes_data)`**
+   - No-op by design: session chairs are free-form strings from program.yml
+   - No cross-referencing with committees or keynotes; no warnings emitted
 
 4. **Integration into Main Flow** (Lines 427-430)
    - Loads all data files before processing
@@ -73,11 +67,6 @@ warning[error-code]: Description
 
 Example output:
 ```
-warning[chair-unknown]: Session chair not found
-   --> program.yml:Wed Dec 6, session 1
-    | chair: "Junya Nakamura"
-    | note: Add "Junya Nakamura" to committees.yml or update name.
-
 warning[paper-404]: Paper referenced but not found
    --> program.yml:Thu Dec 7, session 5
     | paper: 42
@@ -213,12 +202,10 @@ Configuration file: docs/_config.yml
 ### Generator Validation Output ✅
 ```bash
 $ bundle exec ruby scripts/generate_outline_grid.rb
-warning[chair-unknown]: Session chair not found
-   --> program.yml:Wed Dec 6, session 1
-    | chair: "Junya Nakamura"
-    | note: Add "Junya Nakamura" to committees.yml or update name.
-
-[... more warnings ...]
+warning[paper-404]: Paper referenced but not found
+   --> program.yml:Thu Dec 7, session 5, paper index 2
+   | papers: [10, 11, 13, 27]
+   | note: Add paper #13 to papers.yml or correct reference.
 
 Wrote outline grid to docs/_data/outline_grid.json
 ```
@@ -253,7 +240,7 @@ The implementation relies on existing data files:
 ### Data Structure Notes
 - **Committees:** Supports both old (dict) and new (array items) structures for backward compatibility
 - **Papers:** Expects `items` array with `number` field
-- **Chairs:** Validates against keynote speakers + all committee members
+- **Chairs:** Not validated; treated as free-form strings in program.yml
 - **Fallback:** Data loaders return empty hash if file missing (graceful degradation)
 
 ---

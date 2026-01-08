@@ -21,7 +21,7 @@ Features Implemented:
   
   ✅ Validation functions:
      - validate_papers() - Paper existence & duplicate checking
-     - validate_chairs() - Chair validation (committee + keynote speakers)
+    - validate_chairs() - No-op; session chairs are free-form (no cross-checks)
      - validate_time_format() - HH:MM format validation
   
   ✅ Integration:
@@ -30,7 +30,7 @@ Features Implemented:
      - Non-fatal warnings don't stop build
 
 Example Validation Output:
-  warning[chair-unknown]: Session chair not found
+  [no chair warnings emitted; chairs are free-form]
      --> program.yml:Wed Dec 6, session 1
       | chair: "Junya Nakamura"
       | note: Add "Junya Nakamura" to committees.yml or update name.
@@ -85,7 +85,7 @@ TESTING & VALIDATION
 ================================================================================
 
 Generator Validation Test:
-  ✅ Successfully detects unknown chairs
+  ✅ Skips chair cross-checks by design (free-form)
   ✅ Provides helpful error messages
   ✅ Generates outline_grid.json
   ✅ Non-fatal warnings don't stop execution

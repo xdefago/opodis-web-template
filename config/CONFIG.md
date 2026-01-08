@@ -379,6 +379,9 @@ items:
     abstract: null
 ```
 
+**Notes:**
+- Use `speaker.name: "TBA"` or `"TBD"` for placeholders; the site shows a "To Be Announced" badge and the generator emits draft warnings so you remember to replace them.
+
 **Note:** Site gracefully handles `null` and "TBD" values in templates.
 
 #### 1.7 Site-wide Configuration
@@ -419,6 +422,7 @@ footer:
 - [ ] `program.yml` has basic 3-day skeleton with times
 - [ ] `cfp.yml` has submission link and open status
 - [ ] `keynotes.yml` has 3 entries (may be TBD)
+- [ ] Generator warnings resolved (missing papers/chairs/keynotes, time format)
 - [ ] Test build: `bundle exec jekyll build --source docs`
 - [ ] Site renders without errors
 
@@ -900,6 +904,7 @@ schedule:
 - [ ] Papers don't exceed session time (e.g., 3 papers × 20 min = 60 min max)
 - [ ] Each paper appears in exactly one session
 - [ ] No paper assigned to multiple sessions
+- [ ] Session chairs are free-form and not validated against committees
 
 #### 3.3 Update Schedule with Time Ranges or Explicit Durations
 

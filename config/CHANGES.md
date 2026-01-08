@@ -16,6 +16,13 @@ All YAML configuration files and templates have been updated to:
 - Generator validation now warns on overlaps and gaps; BUILD instructions call out rerunning the generator after any `program.yml` change
 - QUICKSTART and CONFIG examples updated to show time ranges/durations; troubleshooting guidance clarified
 
+## 2026-01-08 — Validator Diagnostics, Draft Styling, Chairs Policy
+
+- Structured validator output for papers/keynotes/time formats (compiler-style location + context), including draft warnings for TBA/TBD speakers
+- Time-format validation now accepts ranges (`HH:MM-HH:MM`) and reports invalid entries with context
+- Added TBA/TBD badge styling in keynote cards and schedule view; Quickstart/CONFIG note how to mark placeholders
+- Session chairs are treated as free-form text sourced only from `program.yml` (no cross-referencing with committees)
+
 ## Data Files Modified
 
 ### 1. dates.yml

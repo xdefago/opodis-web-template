@@ -12,7 +12,10 @@
       {% if keynotes %}
         {% for keynote in keynotes %}
         <div class="col-lg-4 col-md-6">
-          <div class="speaker">
+          {% assign speaker = keynote.speaker %}
+          {% assign speaker_name = speaker.name | default: 'TBA' %}
+          {% assign is_draft = speaker_name == 'TBA' or speaker_name == 'TBD' or speaker_name == 'To be announced' %}
+          <div class="speaker{% if is_draft %} draft-content{% endif %}">
             {% assign speaker = keynote.speaker %}
             {% assign photo = speaker.photo %}
             {% assign keynote_detail_url = 'keynote' | append: forloop.index | append: '-details.html'  %}
@@ -29,10 +32,13 @@
               </div>
             {% endif %}
             <div class="details">
+              {% if is_draft %}
+                <span class="badge badge-tba">To Be Announced</span>
+              {% endif %}
               {% if keynote_detail_url %}
-                <h3><a href="{{ keynote_detail_url }}">{{ speaker.name }}</a></h3>
+                <h3><a href="{{ keynote_detail_url }}">{{ speaker_name }}</a></h3>
               {% else %}
-                <h3>{{ speaker.name }}</h3>
+                <h3>{{ speaker_name }}</h3>
               {% endif %}
               <h3>{{ speaker.affiliation | default: 'Details coming soon' }}</h3>
               <!--<h4>{{ keynote.title }}</h4>-->

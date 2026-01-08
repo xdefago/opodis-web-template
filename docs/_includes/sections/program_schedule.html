@@ -55,9 +55,15 @@
             {% when 'keynote' %}
               {% assign keynote_idx = item.number | minus: 1 %}
               {% assign keynote = site.data.keynotes.items | slice: keynote_idx, 1 | first %}
-              {% assign speaker = keynote.speaker %}
+              {% assign speaker = keynote.speaker | default: {} %}
+              {% assign speaker_name = speaker.name | default: 'TBA' %}
+              {% assign speaker_affiliation = speaker.affiliation | default: 'Details coming soon' %}
+              {% assign is_draft = speaker_name == 'TBA' or speaker_name == 'TBD' or speaker_name == 'To be announced' %}
               <h4>Keynote {{ item.number }}{% if item.chair %}: <span class="chair">(chair: {{ item.chair }})</span>{% endif %}</h4>
-              <p class="speaker-line">{{ speaker.name }}, <span>{{ speaker.affiliation }}</span></p>
+              <p class="speaker-line{% if is_draft %} draft-content{% endif %}">
+                {% if is_draft %}<span class="badge badge-tba">To Be Announced</span> {% endif %}
+                {{ speaker_name }}, <span>{{ speaker_affiliation }}</span>
+              </p>
               {% if keynote.title %}
               <p>{{ keynote.title }}</p>
               {% endif %}

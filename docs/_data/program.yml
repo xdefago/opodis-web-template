@@ -12,6 +12,7 @@
 #   - Each item must have a start time or inherit from previous item's end
 #   - Papers are referenced by number from docs/_data/papers.yml
 #   - Duration can be explicit (minutes) or inferred from papers
+#   - Session chairs are free-form names here and are NOT cross-validated against committees
 #
 # See CONFIG.md for detailed examples and workflows.
 

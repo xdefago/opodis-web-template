@@ -111,6 +111,8 @@ items:
     # Add photo and abstract when available
 ```
 
+  Placeholders: set `speaker.name` to `"TBA"`/`"TBD"` while finalizing; the site will render a "To Be Announced" badge so draft content is visually distinct.
+
 ### 4. **Build and Test**
 
 ```bash
@@ -147,6 +149,7 @@ The generator:
 - Reads `docs/_data/program.yml`
 - Resolves end times using this priority: time range → explicit `duration` → computed (papers/keynotes) → next item's start
 - Validates consistency (no overlaps; warns on gaps)
+- Emits helpful diagnostics: missing papers, duplicate paper assignments, keynote/speaker placeholders, and invalid time formats (session chairs are free-form; no cross-checks)
 - Generates `docs/_data/outline_grid.json`
 - **Must be run after any program.yml change**
 

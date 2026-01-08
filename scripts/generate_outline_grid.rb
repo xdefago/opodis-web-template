@@ -46,6 +46,31 @@ def warn!(msg)
   $stderr.puts "#{YELLOW}WARNING: #{msg}#{RESET}"
 end
 
+def emit_diagnostic(severity:, code:, message:, day_label:, item:, note:, context: {})
+  context = context.dup
+  color = severity == :error ? RED : YELLOW
+  header = "#{color}#{severity}[#{code}]: #{message}#{RESET}"
+
+  location_parts = ["program.yml:#{day_label}"]
+  if item
+    type_label = [item['type'], item['number']].compact.join(' ').strip
+    location_parts << type_label unless type_label.empty?
+  end
+
+  paper_index = context.delete(:paper_index)
+  location_parts << "paper index #{paper_index}" if paper_index
+
+  lines = [header, "   --> #{location_parts.join(', ')}"]
+  lines << "    | time: #{item['time']}" if item && item['time']
+
+  context.each do |label, value|
+    lines << "    | #{label}: #{value}"
+  end
+
+  lines << "    | note: #{note}" if note
+  $stderr.puts lines.join("\n")
+end
+
 def parse_minutes(label)
   parts = label.to_s.split(':')
   raise "Invalid time format: #{label.inspect}" unless parts.size == 2
@@ -324,8 +349,6 @@ def validate_papers(days_data, papers_data)
   available_papers = items.map { |p| p['number'] }.compact.to_set
 
   seen_papers = Set.new
-  errors = []
-
   days_data.each_with_index do |day, day_idx|
     day_label = day['label'] || day['date']
     items_list = day.fetch('items', [])
@@ -334,87 +357,113 @@ def validate_papers(days_data, papers_data)
       next unless item['type'] == 'session'
       
       papers = item.fetch('papers', [])
-      papers.each do |paper|
+      papers_numbers = papers.map { |p| p.is_a?(Hash) ? p['number'] : p }
+
+      papers.each_with_index do |paper, paper_idx|
         paper_num = paper.is_a?(Hash) ? paper['number'] : paper
-        
+
+        if paper_num.nil?
+          emit_diagnostic(
+            severity: :warning,
+            code: 'paper-missing-number',
+            message: 'paper reference is missing a number',
+            day_label: day_label,
+            item: item,
+            note: 'Provide paper.number to link with papers.yml entries.',
+            context: { 'papers' => papers_numbers.inspect, paper_index: paper_idx }
+          )
+          next
+        end
+
         unless available_papers.include?(paper_num)
-          errors << "#{YELLOW}warning[paper-404]: Paper ##{paper_num} referenced in program but not in papers.yml#{RESET}\n" \
-                    "   --> program.yml:#{day_label}, session #{item['number']}\n" \
-                    "    | papers: #{papers.map { |p| p.is_a?(Hash) ? p['number'] : p }.inspect}\n" \
-                    "    | note: Add paper ##{paper_num} to papers.yml or remove from session."
+          emit_diagnostic(
+            severity: :warning,
+            code: 'paper-404',
+            message: 'paper not found',
+            day_label: day_label,
+            item: item,
+            note: "Paper ##{paper_num} referenced but not in papers.yml.",
+            context: { 'papers' => papers_numbers.inspect, paper_index: paper_idx }
+          )
         end
 
         if seen_papers.include?(paper_num)
-          errors << "#{YELLOW}warning[paper-duplicate]: Paper ##{paper_num} appears in multiple sessions#{RESET}\n" \
-                    "   --> program.yml:#{day_label}, session #{item['number']}\n" \
-                    "    | papers: #{papers.map { |p| p.is_a?(Hash) ? p['number'] : p }.inspect}\n" \
-                    "    | note: Each paper should appear in exactly one session."
+          emit_diagnostic(
+            severity: :warning,
+            code: 'paper-duplicate',
+            message: 'paper appears in multiple sessions',
+            day_label: day_label,
+            item: item,
+            note: 'Each paper should appear in exactly one session.',
+            context: { 'papers' => papers_numbers.inspect, paper_index: paper_idx }
+          )
         end
         
         seen_papers.add(paper_num)
       end
     end
   end
-
-  errors.each { |err| $stderr.puts err }
 end
 
-def validate_chairs(days_data, committees_data, keynotes_data)
-  # Build list of known people
-  known_people = Set.new
-  
-  # Add keynote speakers
-  keynotes_items = keynotes_data.fetch('items', [])
-  keynotes_items.each do |kn|
-    speaker = kn.fetch('speaker', {})
-    known_people.add(speaker['name']) if speaker['name']
-  end
-  
-  # Add committee members
-  committees = committees_data.fetch('organizing', {})
-  %w[general_chairs publication_chair organizing_team].each do |role|
-    role_data = committees.fetch(role, {})
-    items = role_data.is_a?(Hash) ? role_data.fetch('items', []) : role_data
-    items.each { |p| known_people.add(p['name']) if p['name'] }
+def validate_chairs(_days_data, _committees_data, _keynotes_data)
+  # Intentionally no-op: session chairs are free-form strings from program.yml.
+  # They are not validated against committees or keynotes.
+end
+
+def validate_keynotes(days_data, keynotes_data)
+  keynotes_map = {}
+  keynotes_data.fetch('items', []).each do |kn|
+    keynotes_map[kn['number']] = kn
   end
 
-  steering = committees_data.fetch('steering', {})
-  items = steering.is_a?(Hash) ? steering.fetch('items', []) : steering
-  items.each { |p| known_people.add(p['name']) if p['name'] }
-
-  program_chairs = committees_data.fetch('program_chairs', {})
-  items = program_chairs.is_a?(Hash) ? program_chairs.fetch('items', []) : program_chairs
-  items.each { |p| known_people.add(p['name']) if p['name'] }
-
-  program_committee = committees_data.fetch('program_committee', {})
-  items = program_committee.is_a?(Hash) ? program_committee.fetch('items', []) : program_committee
-  items.each { |p| known_people.add(p['name']) if p['name'] }
-
-  errors = []
-
-  days_data.each_with_index do |day, day_idx|
+  days_data.each do |day|
     day_label = day['label'] || day['date']
     items_list = day.fetch('items', [])
 
-    items_list.each_with_index do |item, item_idx|
-      chair = item['chair']
-      next unless chair && chair != 'TBA' && chair != 'TBD' && !chair.empty?
-      
-      unless known_people.include?(chair)
-        errors << "#{YELLOW}warning[chair-unknown]: Session chair not found#{RESET}\n" \
-                  "   --> program.yml:#{day_label}, #{item['type']} #{item['number']}\n" \
-                  "    | chair: \"#{chair}\"\n" \
-                  "    | note: Add \"#{chair}\" to committees.yml or update name."
+    items_list.each do |item|
+      next unless item['type'] == 'keynote'
+
+      keynote = keynotes_map[item['number']]
+      unless keynote
+        emit_diagnostic(
+          severity: :warning,
+          code: 'keynote-404',
+          message: 'keynote not found',
+          day_label: day_label,
+          item: item,
+          note: "Add keynote ##{item['number']} to keynotes.yml.",
+          context: { 'keynote' => item['number'] }
+        )
+        next
+      end
+
+      speaker = keynote['speaker'] || {}
+      speaker_name = speaker['name']&.to_s&.strip
+
+      if speaker_name.nil? || speaker_name.empty?
+        emit_diagnostic(
+          severity: :warning,
+          code: 'speaker-missing',
+          message: 'keynote speaker name missing',
+          day_label: day_label,
+          item: item,
+          note: "Set speaker.name for keynote ##{item['number']} in keynotes.yml."
+        )
+      elsif %w[TBA TBD].include?(speaker_name)
+        emit_diagnostic(
+          severity: :warning,
+          code: 'speaker-draft',
+          message: 'keynote speaker marked as TBA/TBD',
+          day_label: day_label,
+          item: item,
+          note: "Replace placeholder name for keynote ##{item['number']} when confirmed."
+        )
       end
     end
   end
-
-  errors.each { |err| $stderr.puts err }
 end
 
 def validate_time_format(days_data)
-  errors = []
-
   days_data.each_with_index do |day, day_idx|
     day_label = day['label'] || day['date']
     items_list = day.fetch('items', [])
@@ -423,16 +472,20 @@ def validate_time_format(days_data)
       time = item['time']
       next unless time
 
-      unless /^\d{1,2}:\d{2}$/.match?(time.to_s)
-        errors << "#{YELLOW}warning[time-format]: Invalid time format#{RESET}\n" \
-                  "   --> program.yml:#{day_label}, #{item['type']} #{item['number']}\n" \
-                  "    | time: \"#{time}\"\n" \
-                  "    | note: Use HH:MM format (e.g., '09:00' or '9:00')."
+      time_str = time.to_s
+      unless /^\d{1,2}:\d{2}(-\d{1,2}:\d{2})?$/.match?(time_str)
+        emit_diagnostic(
+          severity: :warning,
+          code: 'time-format',
+          message: 'invalid time format',
+          day_label: day_label,
+          item: item,
+          note: "Use HH:MM or HH:MM-HH:MM (e.g., '09:00' or '09:00-09:30').",
+          context: { 'time' => "\"#{time_str}\"" }
+        )
       end
     end
   end
-
-  errors.each { |err| $stderr.puts err }
 end
 
 
@@ -454,6 +507,7 @@ begin
   validate_time_format(days)
   validate_papers(days, papers_data)
   validate_chairs(days, committees_data, keynotes_data)
+  validate_keynotes(days, keynotes_data)
   
   normalized_days = days.map { |day| normalize_day(day, paper_duration, keynote_duration, labels_map) }
 

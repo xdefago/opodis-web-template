@@ -21,74 +21,11 @@ The current repository structure is **sound and reusable**. Recommended improvem
 - Visibility/activation toggles across all data files and templates (`enabled`/`show_on_site`) for staged publishing
 - Committees display template rendering organizing/program/steering sections with per-section toggles
 - Configuration validation in `scripts/generate_outline_grid.rb` (paper references, chairs, time formats, overlaps/gaps) with helpful compiler-style messages
+- Structured diagnostics for papers/keynotes (404/duplicates) with context-rich output and range-friendly time format validation; session chairs are free-form (no cross-checks)
+- Draft/TBA styling with badges in keynote cards and schedule view; placeholders (`TBA`/`TBD`) stay visible but differentiated
 - Explicit schedule support for time ranges (`HH:MM-HH:MM`) and optional `duration`; end-time resolution order: range → explicit `duration` → computed (papers/keynotes) → next item's start
 
 ## Backlog
-
-### Enhanced Error Messages (extend to all validators)
-
-**Current Status:** Base formatter is in place; extend to paper/chair/name validation.
-
-**To Add:**
-```
-error[paper-404]: Paper not found
-   --> program.yml:Wed Dec 4, Session 1, paper index 2
-    | papers: [3, 5, 12]
-    | note: Paper #12 referenced but not in papers.yml
-
-error[chair-unknown]: Session chair not found
-   --> program.yml:Wed Dec 4, Session 1
-    | chair: "Unknown Person"
-    | note: Add "Unknown Person" to committees.yml or update name
-```
-
-**Effort:** Medium (3-4 hours)  
-**Benefit:** High (better user experience)
-
----
-
-### Draft and TBD Content Styling
-
-**Current Issue:** TBA/TBD entries render same as confirmed entries.
-
-**Recommendation:** Add CSS classes and UI indicators for pending content.
-
-**Implementation:**
-```yaml
-# In YAML
-keynotes:
-  items:
-    - number: 1
-      speaker:
-        name: "TBA"        # Triggers draft styling
-        affiliation: null
-      title: null          # Optional if TBA
-```
-
-```html
-<!-- Template -->
-<div class="keynote {% if speaker.name == 'TBA' %}draft-content{% endif %}">
-  <span class="badge badge-warning">To Be Announced</span>
-  {{ speaker.name }}
-</div>
-```
-
-```css
-/* CSS */
-.draft-content {
-  opacity: 0.6;
-  border-left: 3px solid #ffc107;
-}
-.badge-tba {
-  background-color: #ffc107;
-  color: #333;
-}
-```
-
-**Effort:** Low (2 hours)  
-**Benefit:** Medium (better clarity on pending items)
-
----
 
 ### Build Interactive Configuration Helper
 
