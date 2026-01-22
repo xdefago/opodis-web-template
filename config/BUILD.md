@@ -28,6 +28,11 @@ bundle exec ruby scripts/validate_and_generate.rb
 ```
 Re-run the generator after any change in `docs/_data/program.yml` (times, types, durations, labels, etc.) before building or deploying. End times resolve in order: time range → explicit `duration` → computed (papers/keynotes) → next item's start, and the generator validates overlaps/gaps. Diagnostics include paper references (404/duplicates), keynote/speaker placeholders, and time format issues. Session chairs are treated as free-form text.
 
+If you're updating to the latest GitHub Pages dependency set (and want to refresh `Gemfile.lock`), run:
+```bash
+bundle update github-pages
+```
+
 
 ## Build
 
