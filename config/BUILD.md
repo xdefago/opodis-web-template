@@ -5,11 +5,11 @@
 ### Install Ruby with rbenv (one-time)
 
 ```bash
-brew install rbenv ruby-build
+brew install rbenv
 rbenv init - zsh >> ~/.zshrc
 source ~/.zshrc
-rbenv install 3.1.4
-rbenv local 3.1.4
+rbenv install 3.3.4
+rbenv local 3.3.4
 gem install bundler
 bundle install
 ```
@@ -17,8 +17,8 @@ bundle install
 ### Project prep after cloning / pulling
 
 ```bash
-rbenv install 3.1.4
-rbenv local 3.1.4
+rbenv install 3.3.4
+rbenv local 3.3.4
 bundle install
 ```
 
